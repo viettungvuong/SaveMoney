@@ -59,10 +59,11 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   final List<String> currencies=["VNĐ","USD"];
-  int selectedIndex=0;
+  String? selectedItem;
 
   @override
   Widget build(BuildContext context) {
+    selectedItem=currencies[0]; //dat mac dinh selectedItem la VND
     // This method is rerun every time setState is called, for instance as done
     // by the _incrementCounter method above.
     //
@@ -103,7 +104,8 @@ class _MyHomePageState extends State<MyHomePage> {
               style: Theme.of(context).textTheme.headlineMedium,
             ),
             DropdownButton2(
-              value: currencies[selectedIndex], //index cua vat duoc chon
+              value: selectedItem, //vat duoc chon
+
               items: currencies.map((currency) => DropdownMenuItem<String>( //doi list<string> thanh list dropdownmenuitem
                 value: currency, //tham so dropdownmenuitem
                 child:  Text(
@@ -113,6 +115,13 @@ class _MyHomePageState extends State<MyHomePage> {
                   )
                 ),
               )).toList(),
+
+              onChanged: (value) {
+                setState(() {
+                  selectedItem = value as String; //no se dat selectedItem la vat vua duoc chon
+                  //roi chinh value cua dropdownbutton2
+                });
+              },
             )
           ],
         ),
