@@ -100,7 +100,7 @@ class _MyHomePageState extends State<MyHomePage> {
               'Số dư hiện tại là',
             ),
             Text(
-              '$balance', //xuat ra bien balance
+              '$balance $selectedItem', //xuat ra bien balance (so tien hien co)
               style: Theme.of(context).textTheme.headlineMedium,
             ),
             DropdownButton2(
