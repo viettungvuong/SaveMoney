@@ -1,3 +1,4 @@
+import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -57,6 +58,9 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  final List<String> currencies=["VNĐ","USD"];
+  int? selectedIndex;
+
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
@@ -98,10 +102,20 @@ class _MyHomePageState extends State<MyHomePage> {
               '$balance', //xuat ra bien balance
               style: Theme.of(context).textTheme.headlineMedium,
             ),
+            DropdownButton2(
+              items: currencies.map((currency) => DropdownMenuItem<String>(
+                value: currency,
+                child:  Text(
+                  currency,
+                  style: TextStyle(
+                    fontSize: 15,
+                  )
+                ),
+              )).toList(),
+            )
           ],
         ),
       ),
-
     );
   }
 }
