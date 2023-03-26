@@ -63,7 +63,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    selectedItem=currencies[0]; //dat mac dinh selectedItem la VND
     // This method is rerun every time setState is called, for instance as done
     // by the _incrementCounter method above.
     //
