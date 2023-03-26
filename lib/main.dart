@@ -59,7 +59,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   final List<String> currencies=["VNĐ","USD"];
-  int? selectedIndex;
+  int selectedIndex=0;
 
   @override
   Widget build(BuildContext context) {
@@ -103,8 +103,9 @@ class _MyHomePageState extends State<MyHomePage> {
               style: Theme.of(context).textTheme.headlineMedium,
             ),
             DropdownButton2(
-              items: currencies.map((currency) => DropdownMenuItem<String>(
-                value: currency,
+              value: currencies[selectedIndex], //index cua vat duoc chon
+              items: currencies.map((currency) => DropdownMenuItem<String>( //doi list<string> thanh list dropdownmenuitem
+                value: currency, //tham so dropdownmenuitem
                 child:  Text(
                   currency,
                   style: TextStyle(
