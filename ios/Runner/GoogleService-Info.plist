@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>619244865141-q3h3jhbeqvmdfv7vmra08mp8unftbv6g.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.619244865141-q3h3jhbeqvmdfv7vmra08mp8unftbv6g</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBqh0erWd1DYQvfFZiKBwfLsIUDAVVUATo</string>
+	<key>GCM_SENDER_ID</key>
+	<string>619244865141</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.tung.savemoney.saveMoney</string>
+	<key>PROJECT_ID</key>
+	<string>moneysave-59001</string>
+	<key>STORAGE_BUCKET</key>
+	<string>moneysave-59001.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:619244865141:ios:30cda7f5f7d3e791249a3c</string>
+</dict>
+</plist>
