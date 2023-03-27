@@ -1,14 +1,14 @@
 class Spending{
-  int? spentMoney;
+  double? spentMoney;
 
   String? typeOfSpending;
 
-  Spending(int spentMoney, String typeOfSpending){
+  Spending(double spentMoney, {String typeOfSpending='Normal'}){
     this.spentMoney=spentMoney;
     this.typeOfSpending=typeOfSpending;
   }
 
-  int? getMoney(){
+  double? getMoney(){
     return spentMoney;
   }
 }

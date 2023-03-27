@@ -63,6 +63,8 @@ class _MyHomePageState extends State<MyHomePage> {
   void addToBalance(double money){
     setState(() {
       balance+=money;
+
+      spendings.add(Spending(money)); //them vao list danh sach cac spending
     });
   }
 
