@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 
+import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
+
 import 'spending.dart';
 
 void main() {
@@ -75,9 +77,16 @@ class _MyHomePageState extends State<MyHomePage> {
 
   final List<String> currencies=["VNĐ","USD"];
   String? selectedItem;
+  PersistentTabController? _controller;
+
+  void init(){
+    _controller = PersistentTabController(initialIndex: 0);
+
+  }
 
   @override
   Widget build(BuildContext context) {
+    init();
     // This method is rerun every time setState is called, for instance as done
     // by the _incrementCounter method above.
     //
