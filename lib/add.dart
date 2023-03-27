@@ -34,6 +34,7 @@ class _AddPageState extends State<AddSpending>{
                   );
                   break;
                 }
+                
               case 1:{
                 //neu bam add
                 Navigator.push(
