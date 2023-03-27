@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 
+import 'spending.dart';
+
 void main() {
   Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
@@ -56,12 +58,17 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   double balance=0;
-
+  List<Spending> spendings=[]; //danh sach cac khoan chi tieu
 
   void addToBalance(double money){
     setState(() {
       balance+=money;
     });
+  }
+
+  void SortSpending(){
+    //quick sort
+
   }
 
   final List<String> currencies=["VNĐ","USD"];
