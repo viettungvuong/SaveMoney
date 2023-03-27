@@ -35,13 +35,13 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.red,
       ),
-      home: const MyHomePage(title: 'Save Money'),
+      home: const MyHomePage(),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
+  const MyHomePage({super.key});
 
   // This widget is the home page of your application. It is stateful, meaning
   // that it has a State object (defined below) that contains fields that affect
@@ -52,11 +52,11 @@ class MyHomePage extends StatefulWidget {
   // used by the build method of the State. Fields in a Widget subclass are
   // always marked "final".
 
-  final String title;
-
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
+
+int selectedIndex=0; //index tren bottom menu bar
 
 class _MyHomePageState extends State<MyHomePage> {
   double balance=0;
@@ -77,7 +77,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   final List<String> currencies=["VNĐ","USD"];
   String selectedItem='VNĐ';
-  int selectedIndex=0; //index tren bottom menu bar
+
 
   @override
   Widget build(BuildContext context) {
@@ -138,6 +138,8 @@ class _MyHomePageState extends State<MyHomePage> {
         ],
 
       ),
+
+
       body: Center(
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.
