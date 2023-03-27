@@ -2,6 +2,7 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 
 import 'package:firebase_core/firebase_core.dart';
+import 'package:save_money/add.dart';
 import 'firebase_options.dart';
 
 
@@ -100,6 +101,22 @@ class _MyHomePageState extends State<MyHomePage> {
         onTap: (value){
           setState(() {
             selectedIndex=value;
+
+            switch (selectedIndex){
+              case 0:
+                {
+                  //neu bam home
+                  break;
+                }
+              case 1:{
+                //neu bam add
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const AddSpending()),
+                );
+                break;
+              }
+            }
           });
         },
         //value la gia tri ma onTap se tra ve, ta dung value nay de chinh selectedIndex
@@ -116,7 +133,7 @@ class _MyHomePageState extends State<MyHomePage> {
           BottomNavigationBarItem(
             icon: Icon(Icons.add),
             label: 'Add',
-            backgroundColor: Colors.red,
+            backgroundColor: Colors.pink,
           ),
         ],
 

@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 
 List<String> categories=['Eating','Drinking','Shopping','Fines','Mandatory Fees','Others']; //danh sach cac loai tieu tien
 
-class AddTransaction extends StatelessWidget{
+class AddSpending extends StatelessWidget{
+  const AddSpending({super.key}); //nho luon them cai nay
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
