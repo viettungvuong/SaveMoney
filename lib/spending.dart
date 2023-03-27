@@ -7,4 +7,8 @@ class Spending{
     this.spentMoney=spentMoney;
     this.typeOfSpending=typeOfSpending;
   }
+
+  int? getMoney(){
+    return spentMoney;
+  }
 }
