@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 
-import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
 import 'spending.dart';
 
@@ -77,16 +76,11 @@ class _MyHomePageState extends State<MyHomePage> {
 
   final List<String> currencies=["VNĐ","USD"];
   String selectedItem='VNĐ';
-  PersistentTabController? _controller;
-
-  void init(){
-    _controller = PersistentTabController(initialIndex: 0);
-
-  }
+  int selectedIndex=0; //index tren bottom menu bar
 
   @override
   Widget build(BuildContext context) {
-    init();
+
     // This method is rerun every time setState is called, for instance as done
     // by the _incrementCounter method above.
     //
@@ -98,6 +92,34 @@ class _MyHomePageState extends State<MyHomePage> {
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: selectedIndex,
+        selectedItemColor: Colors.pink,
+
+        onTap: (value){
+          setState(() {
+            selectedIndex=value;
+          });
+        },
+        //value la gia tri ma onTap se tra ve, ta dung value nay de chinh selectedIndex
+        //{} la de dung ham truc tiep tai dong ma khong can khai bao ham rieng
+        //nho phai co setState
+
+        items: <BottomNavigationBarItem>[
+        BottomNavigationBarItem(
+          icon: Icon(Icons.home),
+          label: 'Home',
+          backgroundColor: Colors.pink,
+        ),
+
+          BottomNavigationBarItem(
+            icon: Icon(Icons.add),
+            label: 'Add',
+            backgroundColor: Colors.red,
+          ),
+        ],
+
       ),
       body: Center(
         // Center is a layout widget. It takes a single child and positions it
@@ -143,7 +165,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 setState(() {
                   selectedItem = value as String; //no se dat selectedItem la vat vua duoc chon
                   //roi chinh value cua dropdownbutton2
-                });
+                }
+                );
               },
             )
           ],
