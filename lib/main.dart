@@ -76,7 +76,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   final List<String> currencies=["VNĐ","USD"];
-  String? selectedItem;
+  String selectedItem='VNĐ';
   PersistentTabController? _controller;
 
   void init(){
