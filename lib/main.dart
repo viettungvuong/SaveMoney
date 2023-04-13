@@ -213,8 +213,9 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             FloatingActionButton(
                onPressed: (){
-                    // nút này để thêm balance
-                 },
+                    // nút này để thêm spending
+
+               },
 
               child: Icon(Icons.add),
 
