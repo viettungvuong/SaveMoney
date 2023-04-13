@@ -211,6 +211,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 fontSize: 18,
               ),
             ),
+            SizedBox(height: 100,),
             FloatingActionButton(
                onPressed: (){
                     // nút này để thêm spending
@@ -218,8 +219,6 @@ class _MyHomePageState extends State<MyHomePage> {
                },
 
               child: Icon(Icons.add),
-
-
 
             ),
           ],
