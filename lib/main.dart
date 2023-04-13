@@ -61,6 +61,9 @@ int selectedIndex=0; //index tren bottom menu bar
 class _MyHomePageState extends State<MyHomePage> {
   double balance=0;
   List<Spending> spendings=[]; //danh sach cac khoan chi tieu
+  final List<String> currencies=["VNĐ","USD"];
+  String selectedItem='VNĐ';
+  double target=0;
 
   void addToBalance(double money){
     setState(() {
@@ -70,17 +73,23 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  void setBalance(double money){
+    setState(() {
+      target=money;
+    });
+  }
+
   void SortSpending(){
     //quick sort
 
   }
 
-  final List<String> currencies=["VNĐ","USD"];
-  String selectedItem='VNĐ';
-
   int getCurrentMonth(){
     return DateTime.now().month;
   }
+
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -190,9 +199,26 @@ class _MyHomePageState extends State<MyHomePage> {
                 );
               },
             ),
+
             SizedBox(height: 100), // thêm khoảng trăng giữa 2 widget
             Text(
               'Mục tiêu tháng ${getCurrentMonth()} là',
+
+            ),
+            Text(
+              '$target $selectedItem',
+              style: TextStyle(
+                fontSize: 18,
+              ),
+            ),
+            FloatingActionButton(
+               onPressed: (){
+                    // nút này để thêm balance
+                 },
+
+              child: Icon(Icons.add),
+
+
 
             ),
           ],
