@@ -78,6 +78,9 @@ class _MyHomePageState extends State<MyHomePage> {
   final List<String> currencies=["VNĐ","USD"];
   String selectedItem='VNĐ';
 
+  int getCurrentMonth(){
+    return DateTime.now().month;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -186,7 +189,11 @@ class _MyHomePageState extends State<MyHomePage> {
                 }
                 );
               },
-            )
+            ),
+            Text(
+              'Mục tiêu tháng ${getCurrentMonth()} là',
+
+            ),
           ],
         ),
       ),
