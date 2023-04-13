@@ -56,7 +56,56 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
-int selectedIndex=0; //index tren bottom menu bar
+int selectedIndex=0; //index tren bottom menu bar currency
+
+class MyDialog extends StatefulWidget {
+  @override
+  _MyDialogState createState() => _MyDialogState();
+}
+
+class _MyDialogState extends State<MyDialog> {
+  final _textController = TextEditingController();
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      title: Text('Add Something'),
+      content: TextField(
+        controller: _textController,
+        decoration: InputDecoration(hintText: 'Enter text here'),
+      ),
+      actions: [
+        TextButton(
+          child: Text('Cancel'),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
+        TextButton(
+          child: Text('Add'),
+          onPressed: () {
+            // Save the text input and close the dialog
+            final text = _textController.text;
+            Navigator.of(context).pop(text);
+          },
+        ),
+      ],
+    );
+  }
+}
+
+// Show the dialog
+void _showAddDialog(BuildContext context) async {
+  final result = await showDialog(
+    context: context,
+    builder: (context) => MyDialog(),
+  );
+
+  // Handle the result returned by the dialog
+  if (result != null) {
+    // Do something with the text input
+  }
+}
 
 class _MyHomePageState extends State<MyHomePage> {
   double balance=0;
@@ -87,9 +136,6 @@ class _MyHomePageState extends State<MyHomePage> {
   int getCurrentMonth(){
     return DateTime.now().month;
   }
-
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -215,7 +261,6 @@ class _MyHomePageState extends State<MyHomePage> {
             FloatingActionButton(
                onPressed: (){
                     // nút này để thêm spending
-
                },
 
               child: Icon(Icons.add),
