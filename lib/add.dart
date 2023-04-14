@@ -83,6 +83,31 @@ class _AddPageState extends State<AddSpending>{
               },
               itemBuilder: (BuildContext context, String item, OnItemTapped onItemTapped)
               { // trả về thứ gì
+                if (item=='Eating'){
+                  return Icon(
+                    Icons.fastfood,
+                  );
+                }
+                else if (item=='Drinking'){
+                  return Icon(
+                    Icons.emoji_food_beverage,
+                  );
+                }
+                else if (item=='Shopping'){
+                  return Icon(
+                    Icons.shopping_cart,
+                  );
+                }
+                else if (item=='Fines'){
+                  return Icon(
+                    Icons.local_police,
+                  );
+                }
+                else if (item=='Mandatory Fees'){
+                  return Icon(
+                    Icons.electrical_services,
+                  );
+                }
                 return Icon(
                   Icons.add,
                 );
