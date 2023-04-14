@@ -75,41 +75,68 @@ class _AddPageState extends State<AddSpending>{
         child: Column(
           children: <Widget>[
             SizedBox(height: 100),
+
             SelectionMenu<String>(
               itemsList: categories,
+
               onItemSelected: (String selectedItem) // truyền argument
               { // khi select một item
                 print(selectedItem);
               },
+
               itemBuilder: (BuildContext context, String item, OnItemTapped onItemTapped)
               { // trả về thứ gì
                 if (item=='Eating'){
-                  return Icon(
-                    Icons.fastfood,
+                  return Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Icon(Icons.fastfood),
+                      Text('$item'),
+                    ],
                   );
                 }
                 else if (item=='Drinking'){
-                  return Icon(
-                    Icons.emoji_food_beverage,
+                  return Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Icon(Icons.emoji_food_beverage),
+                      Text('$item'),
+                    ],
                   );
                 }
                 else if (item=='Shopping'){
-                  return Icon(
-                    Icons.shopping_cart,
+                  return Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Icon(Icons.shopping_cart),
+                      Text('$item'),
+                    ],
                   );
                 }
                 else if (item=='Fines'){
-                  return Icon(
-                    Icons.local_police,
+                  return Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Icon(Icons.local_police),
+                      Text('$item'),
+                    ],
                   );
                 }
                 else if (item=='Mandatory Fees'){
-                  return Icon(
-                    Icons.electrical_services,
+                  return Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Icon(Icons.electrical_services),
+                      Text('$item'),
+                    ],
                   );
                 }
-                return Icon(
-                  Icons.add,
+                return Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(Icons.add),
+                    Text('$item'),
+                  ],
                 );
               },
             )
