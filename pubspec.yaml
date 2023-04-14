@@ -39,6 +39,7 @@ dependencies:
   firebase_core: ^2.8.0
   firebase_database: ^10.0.16
   persistent_bottom_nav_bar: ^5.0.2
+  selection_menu: ^2.0.2
 
 dev_dependencies:
   flutter_test:
