@@ -4,8 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:save_money/add.dart';
 import 'firebase_options.dart';
-
-
 import 'spending.dart';
 
 void main() {
@@ -258,14 +256,6 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ),
             SizedBox(height: 100,),
-            FloatingActionButton(
-               onPressed: (){
-                    // nút này để thêm spending
-               },
-
-              child: Icon(Icons.add),
-
-            ),
           ],
         ),
       ),
