@@ -1,5 +1,6 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
+import 'package:selection_menu/selection_menu.dart';
 import 'main.dart';
 
 List<String> categories=['Eating','Drinking','Shopping','Fines','Mandatory Fees','Others']; //danh sach cac loai tieu tien
@@ -68,6 +69,27 @@ class _AddPageState extends State<AddSpending>{
           ),
         ],
 
+      ),
+
+      body: Center(
+        child: Column(
+          children: <Widget>[
+            SizedBox(height: 100),
+            SelectionMenu<String>(
+              itemsList: categories,
+              onItemSelected: (String selectedItem) // truyền argument
+              { // khi select một item
+                print(selectedItem);
+              },
+              itemBuilder: (BuildContext context, String item, OnItemTapped onItemTapped)
+              { // trả về thứ gì
+                return Icon(
+                  Icons.add,
+                );
+              },
+            )
+          ],
+        ),
       ),
     );
   }
