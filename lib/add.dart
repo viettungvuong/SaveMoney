@@ -1,4 +1,5 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
+import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:selection_menu/components_configurations.dart';
 import 'package:selection_menu/selection_menu.dart';
@@ -14,7 +15,7 @@ class AddSpending extends StatefulWidget{
 }
 
 class _AddPageState extends State<AddSpending>{
-
+  String? selectedCategory;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -77,105 +78,28 @@ class _AddPageState extends State<AddSpending>{
           children: <Widget>[
             SizedBox(height: 100),
 
-            SelectionMenu<String>(
-              menuSizeConfiguration: const MenuSizeConfiguration(
-                // min, max Width and min, max Height, all must be provided in
-                // either fractions, pixels or mixed.
+            DropdownButton2(
+              value: selectedCategory, //vat duoc chon
 
-                maxHeightFraction: 0.1,
-                // Maximum Fraction of screen height that the menu should take.
-                //
-                // Fractions mean the percentage of the screen width or height.
-                //
-                // Defaults to null.
-                //
-                // maxWidthFraction, minWidthFraction, minHeightFraction are similar.
-                maxWidthFraction: 0.1,
+              items: categories.map((category) => DropdownMenuItem<String>( //doi list<string> thanh list dropdownmenuitem
+                value: category, //tham so dropdownmenuitem
+                child:  Text(
+                    category,
+                    style: TextStyle(
+                      fontSize: 15,
+                    )
+                ),
+              )).toList(),
 
-                minWidth: 10,
-                // Defaults to null. These are flutter's logical pixel values.
-                //
-                // maxWidth, minHeight, maxHeight are similar.
-                // These values take preference over the fraction based counterparts,
-                // when size is calculated.
-                minHeight: 5,
-
-                width: 10,
-                height: 5,
-
-                enforceMinWidthToMatchTrigger: true,
-                // Defaults to false,
-                // enforceMaxWidthToMatchButton is similar.
-
-                requestConstantHeight: true,
-
-                // There are many other important properties, see the main.dart
-                // file or the API docs.
-              ),
-
-              itemsList: categories,
-
-              onItemSelected: (String selectedItem) // truyền argument
-              { // khi select một item
-                print(selectedItem);
-              },
-
-              itemBuilder: (BuildContext context, String item, OnItemTapped onItemTapped)
-              { // trả về thứ gì
-                if (item=='Eating'){
-                  return Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Icon(Icons.fastfood),
-                      Text('$item'),
-                    ],
-                  );
+              onChanged: (value) {
+                setState(() {
+                  selectedCategory = value as String; //no se dat selectedItem la vat vua duoc chon
+                  //roi chinh value cua dropdownbutton2
                 }
-                else if (item=='Drinking'){
-                  return Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Icon(Icons.emoji_food_beverage),
-                      Text('$item'),
-                    ],
-                  );
-                }
-                else if (item=='Shopping'){
-                  return Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Icon(Icons.shopping_cart),
-                      Text('$item'),
-                    ],
-                  );
-                }
-                else if (item=='Fines'){
-                  return Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Icon(Icons.local_police),
-                      Text('$item'),
-                    ],
-                  );
-                }
-                else if (item=='Mandatory Fees'){
-                  return Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Icon(Icons.electrical_services),
-                      Text('$item'),
-                    ],
-                  );
-                }
-                return Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Icon(Icons.add),
-                    Text('$item'),
-                  ],
                 );
               },
-            )
+            ),
+
           ],
         ),
       ),
