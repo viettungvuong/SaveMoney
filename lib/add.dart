@@ -1,5 +1,6 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
+import 'package:selection_menu/components_configurations.dart';
 import 'package:selection_menu/selection_menu.dart';
 import 'main.dart';
 
@@ -77,6 +78,41 @@ class _AddPageState extends State<AddSpending>{
             SizedBox(height: 100),
 
             SelectionMenu<String>(
+              menuSizeConfiguration: const MenuSizeConfiguration(
+                // min, max Width and min, max Height, all must be provided in
+                // either fractions, pixels or mixed.
+
+                maxHeightFraction: 0.1,
+                // Maximum Fraction of screen height that the menu should take.
+                //
+                // Fractions mean the percentage of the screen width or height.
+                //
+                // Defaults to null.
+                //
+                // maxWidthFraction, minWidthFraction, minHeightFraction are similar.
+                maxWidthFraction: 0.1,
+
+                minWidth: 10,
+                // Defaults to null. These are flutter's logical pixel values.
+                //
+                // maxWidth, minHeight, maxHeight are similar.
+                // These values take preference over the fraction based counterparts,
+                // when size is calculated.
+                minHeight: 5,
+
+                width: 10,
+                height: 5,
+
+                enforceMinWidthToMatchTrigger: true,
+                // Defaults to false,
+                // enforceMaxWidthToMatchButton is similar.
+
+                requestConstantHeight: true,
+
+                // There are many other important properties, see the main.dart
+                // file or the API docs.
+              ),
+
               itemsList: categories,
 
               onItemSelected: (String selectedItem) // truyền argument
