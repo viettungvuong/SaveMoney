@@ -109,7 +109,7 @@ class _MyHomePageState extends State<MyHomePage> {
   double balance=0;
   List<Spending> spendings=[]; //danh sach cac khoan chi tieu
   final List<String> currencies=["VNĐ","USD"];
-  String selectedItem='VNĐ';
+  String selectedCurrency='VNĐ';
   double target=0;
 
   void addToBalance(double money){
@@ -218,11 +218,11 @@ class _MyHomePageState extends State<MyHomePage> {
               'Số dư hiện tại là',
             ),
             Text(
-              '$balance $selectedItem', //xuat ra bien balance (so tien hien co)
+              '$balance $selectedCurrency', //xuat ra bien balance (so tien hien co)
               style: Theme.of(context).textTheme.headlineMedium,
             ),
             DropdownButton2(
-              value: selectedItem, //vat duoc chon
+              value: selectedCurrency, //vat duoc chon
 
               items: currencies.map((currency) => DropdownMenuItem<String>( //doi list<string> thanh list dropdownmenuitem
                 value: currency, //tham so dropdownmenuitem
@@ -236,7 +236,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
               onChanged: (value) {
                 setState(() {
-                  selectedItem = value as String; //no se dat selectedItem la vat vua duoc chon
+                  selectedCurrency = value as String; //no se dat selectedCurrency la vat vua duoc chon
                   //roi chinh value cua dropdownbutton2
                 }
                 );
@@ -249,7 +249,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
             ),
             Text(
-              '$target $selectedItem',
+              '$target $selectedCurrency',
               style: TextStyle(
                 fontSize: 18,
               ),
