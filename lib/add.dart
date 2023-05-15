@@ -107,6 +107,13 @@ class _AddPageState extends State<AddSpending>{
                 setState(() {
                   selectedCategory = value as String; //no se dat selectedItem la vat vua duoc chon
                   //roi chinh value cua dropdownbutton2
+
+                  if (selectedCategory=='Tiền học phí'){
+                    secondaryTextField=true; //xuat hien textfield thu 2 de nhap tien lai
+                  }
+                  else{
+                    secondaryTextField=false;
+                  }
                 }
                 );
               },
