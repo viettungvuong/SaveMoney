@@ -245,6 +245,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
 
             SizedBox(height: 100), // thêm khoảng trăng giữa 2 widget
+
             Text(
               'Mục tiêu tháng ${getCurrentMonth()} là',
 

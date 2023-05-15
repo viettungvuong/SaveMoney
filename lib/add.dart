@@ -111,22 +111,26 @@ class _AddPageState extends State<AddSpending>{
               },
             ),
 
+            Container( //wrap trong container
+              width: 200,
+              child: TextField(
+                keyboardType: TextInputType.number,
+                inputFormatters: <TextInputFormatter>[
+                  FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+                ],
+                onChanged: (value){
+                  setState(() {
+                    spentMoney=value as double;
+                  });
+                },
+            )),
+
+
+            SizedBox(height: 100), // thêm khoảng trăng giữa 2 widget//number-
+
             IconButton(onPressed: () {
               addSpending(spentMoney, selectedCategory, spendings); //lamda functikon
-            }, icon: Icon(Icons.add)), //them button de add spending
-
-            TextField(
-              keyboardType: TextInputType.number,
-              inputFormatters: <TextInputFormatter>[
-                FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
-              ],
-              onChanged: (value){
-                setState(() {
-                  spentMoney=value as double;
-                });
-              },
-              // Other properties for decoration, controller, etc.
-            ) //number-only text box
+            }, icon: Icon(Icons.add)), //them button de add spending// only text box
 
           ],
         ),
