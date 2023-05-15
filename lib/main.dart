@@ -108,9 +108,6 @@ void _showAddDialog(BuildContext context) async {
 List<Spending> spendings=[]; //danh sach cac khoan chi tieu
 class _MyHomePageState extends State<MyHomePage> {
   double balance=0;
-
-  final List<String> currencies=["VNĐ","USD"];
-  String selectedCurrency='VNĐ';
   double target=0;
 
   void addToBalance(double money){
@@ -219,30 +216,10 @@ class _MyHomePageState extends State<MyHomePage> {
               'Số dư hiện tại là',
             ),
             Text(
-              '$balance $selectedCurrency', //xuat ra bien balance (so tien hien co)
+              '$balance VND', //xuat ra bien balance (so tien hien co)
               style: Theme.of(context).textTheme.headlineMedium,
             ),
-            DropdownButton2(
-              value: selectedCurrency, //vat duoc chon
 
-              items: currencies.map((currency) => DropdownMenuItem<String>( //doi list<string> thanh list dropdownmenuitem
-                value: currency, //tham so dropdownmenuitem
-                child:  Text(
-                  currency,
-                  style: TextStyle(
-                    fontSize: 15,
-                  )
-                ),
-              )).toList(),
-
-              onChanged: (value) {
-                setState(() {
-                  selectedCurrency = value as String; //no se dat selectedCurrency la vat vua duoc chon
-                  //roi chinh value cua dropdownbutton2
-                }
-                );
-              },
-            ),
 
             SizedBox(height: 100), // thêm khoảng trăng giữa 2 widget
 
@@ -251,7 +228,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
             ),
             Text(
-              '$target $selectedCurrency',
+              '$target VND',
               style: TextStyle(
                 fontSize: 18,
               ),
