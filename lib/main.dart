@@ -105,10 +105,10 @@ void _showAddDialog(BuildContext context) async {
     // Do something with the text input
   }
 }
-
+List<Spending> spendings=[]; //danh sach cac khoan chi tieu
 class _MyHomePageState extends State<MyHomePage> {
   double balance=0;
-  List<Spending> spendings=[]; //danh sach cac khoan chi tieu
+
   final List<String> currencies=["VNĐ","USD"];
   String selectedCurrency='VNĐ';
   double target=0;

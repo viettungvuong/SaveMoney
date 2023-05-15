@@ -11,7 +11,6 @@ List<String> categories=['Eating','Drinking','Shopping','Fines','Mandatory Fees'
 void addSpending(double spentMoney, String selectedCategory, List<Spending> spendings){ //them chi tieu
   Spending newSpending = Spending(spentMoney,typeOfSpending: selectedCategory); //day la cach dung optional parameter
   spendings.add(newSpending);
-
 }
 
 class AddSpending extends StatefulWidget{
@@ -87,7 +86,6 @@ class _AddPageState extends State<AddSpending>{
 
             DropdownButton2(
               value: selectedCategory, //vat duoc chon
-
               items: categories.map((category) => DropdownMenuItem<String>( //doi list<string> thanh list dropdownmenuitem
                 value: category, //tham so dropdownmenuitem
                 child:  Text(
@@ -106,6 +104,10 @@ class _AddPageState extends State<AddSpending>{
                 );
               },
             ),
+
+            IconButton(onPressed: () {
+              addSpending(spentMoney, selectedCategory, spendings); //lamda functikon
+            }, Icon: icon), //them button de add spending
 
           ],
         ),
