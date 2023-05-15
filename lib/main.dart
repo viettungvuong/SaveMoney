@@ -6,6 +6,7 @@ import 'package:save_money/add.dart';
 import 'firebase_options.dart';
 import 'spending.dart';
 
+
 void main() {
   Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,

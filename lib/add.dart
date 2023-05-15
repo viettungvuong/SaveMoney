@@ -8,8 +8,10 @@ import 'main.dart';
 
 List<String> categories=['Eating','Drinking','Shopping','Fines','Mandatory Fees','Others']; //danh sach cac loai tieu tien
 
-void addSpending(double spentMoney){ //them chi tieu
-  Spending newSpending = Spending(spentMoney);
+void addSpending(double spentMoney, String selectedCategory, List<Spending> spendings){ //them chi tieu
+  Spending newSpending = Spending(spentMoney,typeOfSpending: selectedCategory); //day la cach dung optional parameter
+  spendings.add(newSpending);
+
 }
 
 class AddSpending extends StatefulWidget{
