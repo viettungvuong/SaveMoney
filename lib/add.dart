@@ -9,8 +9,12 @@ import 'main.dart';
 
 List<String> categories=['Eating','Drinking','Shopping','Fines','Mandatory Fees','Others']; //danh sach cac loai tieu tien
 
-void addSpending(double spentMoney, String selectedCategory, List<Spending> spendings){ //them chi tieu
-  Spending newSpending = Spending(spentMoney,typeOfSpending: selectedCategory); //day la cach dung optional parameter
+void addSpending(double spentMoney, String? selectedCategory, List<Spending> spendings){ //them chi tieu
+  Spending newSpending;
+  if (selectedCategory!=null)
+       newSpending = Spending(spentMoney,typeOfSpending: selectedCategory); //day la cach dung optional parameter
+  else
+       newSpending = Spending(spentMoney);
   spendings.add(newSpending);
 }
 
@@ -22,6 +26,7 @@ class AddSpending extends StatefulWidget{
 }
 
 class _AddPageState extends State<AddSpending>{
+  double spentMoney=0;
   String? selectedCategory;
   @override
   Widget build(BuildContext context) {
@@ -108,13 +113,18 @@ class _AddPageState extends State<AddSpending>{
 
             IconButton(onPressed: () {
               addSpending(spentMoney, selectedCategory, spendings); //lamda functikon
-            }, Icon: icon), //them button de add spending
+            }, icon: Icon(Icons.add)), //them button de add spending
 
             TextField(
               keyboardType: TextInputType.number,
               inputFormatters: <TextInputFormatter>[
                 FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
               ],
+              onChanged: (value){
+                setState(() {
+                  spentMoney=value as double;
+                });
+              },
               // Other properties for decoration, controller, etc.
             ) //number-only text box
 
