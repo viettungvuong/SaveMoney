@@ -7,7 +7,7 @@ import 'package:selection_menu/components_configurations.dart';
 import 'package:selection_menu/selection_menu.dart';
 import 'main.dart';
 
-List<String> categories=['Eating','Drinking','Shopping','Fines','Mandatory Fees','Others']; //danh sach cac loai tieu tien
+List<String> spendingCategories=['Ăn uống','Mua sắm','Tiền thuê nhà','Tiền học phí','Trả tiền vay','Đóng phạt','Du lịch','Khác']; //danh sach cac loai tieu tien
 
 void addSpending(double spentMoney, String? selectedCategory, List<Spending> spendings){ //them chi tieu
   Spending newSpending;
@@ -92,7 +92,7 @@ class _AddPageState extends State<AddSpending>{
 
             DropdownButton2(
               value: selectedCategory, //vat duoc chon
-              items: categories.map((category) => DropdownMenuItem<String>( //doi list<string> thanh list dropdownmenuitem
+              items: spendingCategories.map((category) => DropdownMenuItem<String>( //doi list<string> thanh list dropdownmenuitem
                 value: category, //tham so dropdownmenuitem
                 child:  Text(
                     category,
