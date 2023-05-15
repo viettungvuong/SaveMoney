@@ -1,11 +1,16 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
+import 'package:save_money/spending.dart';
 import 'package:selection_menu/components_configurations.dart';
 import 'package:selection_menu/selection_menu.dart';
 import 'main.dart';
 
 List<String> categories=['Eating','Drinking','Shopping','Fines','Mandatory Fees','Others']; //danh sach cac loai tieu tien
+
+void addSpending(double spentMoney){ //them chi tieu
+  Spending newSpending = Spending(spentMoney);
+}
 
 class AddSpending extends StatefulWidget{
   const AddSpending({super.key});
