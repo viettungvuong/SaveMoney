@@ -121,6 +121,7 @@ class _AddPageState extends State<AddSpending>{
               },
             ),
 
+            
             Container( //wrap trong container
               width: 200,
               child: TextField(
