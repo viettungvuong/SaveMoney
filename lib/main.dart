@@ -1,4 +1,5 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 
 import 'package:firebase_core/firebase_core.dart';
@@ -6,8 +7,10 @@ import 'package:save_money/add.dart';
 import 'firebase_options.dart';
 import 'spending.dart';
 
-
+DatabaseReference? database; //dung firebase database
 void main() {
+  database = FirebaseDatabase.instance.reference();
+
   Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
