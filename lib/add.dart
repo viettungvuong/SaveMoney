@@ -16,6 +16,8 @@ void addSpending(double spentMoney, String? selectedCategory, List<Spending> spe
   else
        newSpending = Spending(spentMoney);
   spendings.add(newSpending);
+
+  //bay gio ta phai ket noi voi firebase o day
 }
 
 class AddSpending extends StatefulWidget{
