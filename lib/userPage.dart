@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -32,50 +33,6 @@ class _LoginPageState extends State<LoginPage> {
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: selectedIndex,
-        selectedItemColor: Colors.pink,
-
-        onTap: (value){
-          setState(() {
-            selectedIndex=value;
-
-            switch (selectedIndex){
-              case 0:
-                {
-                  //neu bam home
-                  break;
-                }
-              case 1:{
-                //neu bam add
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const AddSpending()),
-                );
-                break;
-              }
-            }
-          });
-        },
-        //value la gia tri ma onTap se tra ve, ta dung value nay de chinh selectedIndex
-        //{} la de dung ham truc tiep tai dong ma khong can khai bao ham rieng
-        //nho phai co setState
-
-        items: <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-            backgroundColor: Colors.pink,
-          ),
-
-          BottomNavigationBarItem(
-            icon: Icon(Icons.add),
-            label: 'Add',
-            backgroundColor: Colors.pink,
-          ),
-        ],
-
-      ),
 
       body: Center(
         // Center is a layout widget. It takes a single child and positions it
@@ -97,28 +54,23 @@ class _LoginPageState extends State<LoginPage> {
           // horizontal).
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Text(
-              'Số dư hiện tại là',
-            ),
-            Text(
-              '$balance VND', //xuat ra bien balance (so tien hien co)
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
 
-
-            SizedBox(height: 100), // thêm khoảng trăng giữa 2 widget
-
-            Text(
-              'Mục tiêu tháng ${getCurrentMonth()} là',
-
-            ),
-            Text(
-              '$target VND',
-              style: TextStyle(
-                fontSize: 18,
+            TextField(
+              decoration: InputDecoration(
+                hintText: 'SĐT',
               ),
+              keyboardType: TextInputType.number,
+              inputFormatters: <TextInputFormatter>[
+                FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+              ],
+            ), //chua sdt
+
+            TextField(
+              decoration: InputDecoration(
+                hintText: 'Mật khẩu',
+              ),
+              obscureText: true,
             ),
-            SizedBox(height: 100,),
           ],
         ),
       ),
