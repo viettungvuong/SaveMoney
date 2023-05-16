@@ -10,8 +10,16 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 DatabaseReference? database; //dung firebase database
 User? currentUser; //user dang dang nhap
-void main() {
+
+Future<void> main() async {
   database = FirebaseDatabase.instance.reference();
+
+  /*final credential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+    email: 'viettungvuong@gmail.com',
+    password: 'tung2003',
+  );
+
+  currentUser=credential.user; //cach dung credential*/
 
   Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
