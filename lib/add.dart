@@ -133,7 +133,20 @@ class _AddPageState extends State<AddSpending>{
                 ],
                 onChanged: (value){
                   setState(() {
-                    spentMoney=value as double;
+                    if (double.tryParse(value) == null) {
+                      // xoa text field neu nhu khong phai la so
+                      _textEditingController.clear();
+                    }
+                    else {
+                      double intValue = double.parse(value);
+                      if (intValue < 0) {
+                        // Limit the value to the range of 0-100
+                        _textEditingController.text = 0.toString();
+                      }
+                      else{
+                        spentMoney=value as double;
+                      }
+                    }
                   });
                 },
             )),
@@ -153,14 +166,17 @@ class _AddPageState extends State<AddSpending>{
                     ],
                     onChanged: (value){
                       setState(() {
-                          if (int.tryParse(value) == null) {
+                          if (double.tryParse(value) == null) {
                             // xoa text field neu nhu khong phai la so
                             _textEditingController.clear();
-                          } else {
-                            int intValue = int.parse(value);
+                          }
+                          else {
+                            double intValue = double.parse(value);
                             if (intValue < 0 || intValue > 100) {
                               // Limit the value to the range of 0-100
                               _textEditingController.text = intValue.clamp(0, 100).toString();
+                            }
+                            else{
                               optionalFee=value as double;
                             }
                           }
