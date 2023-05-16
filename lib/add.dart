@@ -120,7 +120,7 @@ class _AddPageState extends State<AddSpending>{
                 );
               },
             ),
-            
+
             Container( //wrap trong container
               width: 200,
               child: TextField(
@@ -172,7 +172,9 @@ class _AddPageState extends State<AddSpending>{
 
             IconButton(onPressed: () {
               addSpending(spentMoney, selectedCategory, spendings); //lamda functikon
-            }, icon: Icon(Icons.add)), //them button de add spending// only text box
+            }, icon: Icon(Icons.add),
+              color: Colors.red,
+            ), //them button de add spending// only text box
 
           ],
         ),
