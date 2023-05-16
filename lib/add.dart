@@ -145,6 +145,7 @@ class _AddPageState extends State<AddSpending>{
                     controller: _textEditingController,
                     decoration: InputDecoration(
                       hintText: 'Lãi (%)',
+                      suffixText: '%',
                     ),
                     keyboardType: TextInputType.number,
                     inputFormatters: <TextInputFormatter>[
