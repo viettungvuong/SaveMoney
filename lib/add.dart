@@ -30,6 +30,8 @@ class _AddPageState extends State<AddSpending>{
   String? selectedCategory;
   bool secondaryTextField = false;
 
+  final TextEditingController _textEditingController = TextEditingController(); //textcontroller de dieu khien data tu textfield
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -122,6 +124,9 @@ class _AddPageState extends State<AddSpending>{
             Container( //wrap trong container
               width: 200,
               child: TextField(
+                decoration: InputDecoration(
+                  hintText: 'Số tiền đã chi',
+                ),
                 keyboardType: TextInputType.number,
                 inputFormatters: <TextInputFormatter>[
                   FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
@@ -137,13 +142,27 @@ class _AddPageState extends State<AddSpending>{
               Container( //wrap trong container
                   width: 200,
                   child: TextField(
+                    controller: _textEditingController,
+                    decoration: InputDecoration(
+                      hintText: 'Lãi (%)',
+                    ),
                     keyboardType: TextInputType.number,
                     inputFormatters: <TextInputFormatter>[
                       FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
                     ],
                     onChanged: (value){
                       setState(() {
-                        optionalFee=value as double;
+                          if (int.tryParse(value) == null) {
+                            // xoa text field neu nhu khong phai la so
+                            _textEditingController.clear();
+                          } else {
+                            int intValue = int.parse(value);
+                            if (intValue < 0 || intValue > 100) {
+                              // Limit the value to the range of 0-100
+                              _textEditingController.text = intValue.clamp(0, 100).toString();
+                              optionalFee=value as double;
+                            }
+                          }
                       });
                     },
                   )),
