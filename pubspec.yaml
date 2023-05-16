@@ -42,6 +42,7 @@ dependencies:
   selection_menu: ^2.0.2
   searchfield: ^0.7.5
   dropdown_search: ^5.0.6
+  firebase_auth: ^4.6.0
 
 dev_dependencies:
   flutter_test:

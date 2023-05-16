@@ -6,6 +6,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:save_money/add.dart';
 import 'firebase_options.dart';
 import 'spending.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 DatabaseReference? database; //dung firebase database
 void main() {
