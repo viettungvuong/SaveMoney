@@ -9,6 +9,7 @@ import 'spending.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 DatabaseReference? database; //dung firebase database
+User? currentUser; //user dang dang nhap
 void main() {
   database = FirebaseDatabase.instance.reference();
 
