@@ -1,9 +1,33 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 String userName="";
 String password="";
+
+Future<bool> accountExists(String name, String password) async {
+  FirebaseAuth _auth = FirebaseAuth.instance;
+
+  try {
+    List<String> signInMethods = await _auth.fetchSignInMethodsForEmail(email);
+
+    if (signInMethods.isNotEmpty) {
+      return true;
+      // ton tai tai khoan
+    } else {
+      return false;
+      // Account does not exist, you can proceed with signing up or displaying an error message
+    }
+  } catch (e) {
+    return false;
+    // Handle error scenario
+  }
+}
+
+void login(){
+
+}
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -60,15 +84,13 @@ class _LoginPageState extends State<LoginPage> {
 
             TextField(
               decoration: InputDecoration(
-                hintText: 'SĐT',
+                hintText: 'Email',
               ),
               keyboardType: TextInputType.number,
-              inputFormatters: <TextInputFormatter>[
-                FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
-              ],
               onChanged: (value){
                 setState(() {
-                  userName=value as String;
+                  if (value.contains('@')) //phai co ki tu email
+                       userName=value as String;
                 });
               },
             ), //chua sdt
@@ -84,6 +106,14 @@ class _LoginPageState extends State<LoginPage> {
                 });
               },
             ),
+
+            ElevatedButton(
+              onPressed: () {
+                // Add your button click logic here
+              },
+              child: Text('Đăng nhập / Đăng ký'),
+            ),
+
           ],
         ),
       ),
