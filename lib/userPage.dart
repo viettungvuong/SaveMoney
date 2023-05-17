@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:save_money/main.dart';
 
 String userName = "";
 String password = "";
@@ -116,7 +117,7 @@ class _LoginPageState extends State<LoginPage> {
                           credential=signup(userName,password) as UserCredential?;
                         }
                         if (credential!=null){ //neu co credential thi co the vao
-                          User user = credential.user as User;
+                          currentUser = credential.user as User;
                         }
                       },
                       child: Text(accountExists ? 'Đăng nhập' : 'Đăng ký'),
