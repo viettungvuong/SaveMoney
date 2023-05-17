@@ -60,12 +60,6 @@ Future<UserCredential?> signup(String email, String password) async {
   }
 }
 
-void saveUserData(User user) async { //luu du lieu nguoi dung hien tai de lan sau dang nhap
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  prefs.setString('uid', user.uid);
-  prefs.setString('email', user.email as String);
-}
-
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
 
@@ -125,7 +119,7 @@ class _LoginPageState extends State<LoginPage> {
                         }
                         if (credential!=null){ //neu co credential thi co the vao
                           currentUser = credential.user as User;
-                          saveUserData(currentUser as User);
+                          runApp(const MyApp()); //mo man hinh chinh
                         }
                       },
                       child: Text(accountExists ? 'Đăng nhập' : 'Đăng ký'),

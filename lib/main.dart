@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:save_money/add.dart';
 import 'package:save_money/userPage.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'firebase_options.dart';
 import 'spending.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -14,17 +15,33 @@ User? currentUser; //user dang dang nhap
 Future<void> main() async {
   database = FirebaseDatabase.instance.reference();
 
-  /*final credential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
-    email: 'viettungvuong@gmail.com',
-    password: 'tung2003',
-  );
-
-  currentUser=credential.user; //cach dung credential*/
-
+  WidgetsFlutterBinding.ensureInitialized();
   Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(const LoginPage());
+
+  FirebaseAuth auth = FirebaseAuth.instance;
+  User? user = auth.currentUser;
+
+  if (user != null) { //session chua expire
+    try {
+      //kiem tra co id token khong
+      IdTokenResult tokenResult = await user.getIdTokenResult();
+
+      if (tokenResult.token != null) {
+       //neu co id token thi tien hanh auto login vao man hinh chinh luon
+        runApp(const MyApp());
+        return;
+      }
+      else{
+        runApp(const LoginPage());
+        return;
+      }
+    } catch (e) {
+
+    }
+  }
+
 }
 
 class MyApp extends StatelessWidget {
