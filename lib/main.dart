@@ -3,6 +3,7 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:save_money/add.dart';
+import 'package:save_money/userPage.dart';
 import 'firebase_options.dart';
 import 'spending.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -23,7 +24,7 @@ Future<void> main() async {
   Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(const MyApp());
+  runApp(const LoginPage());
 }
 
 class MyApp extends StatelessWidget {
@@ -50,8 +51,6 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-
 
 int selectedIndex=0; //index tren bottom menu bar currency
 
