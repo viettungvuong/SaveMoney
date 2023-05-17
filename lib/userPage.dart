@@ -35,7 +35,6 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -74,11 +73,10 @@ class _LoginPageState extends State<LoginPage> {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return CircularProgressIndicator();
                 } else {
+                  bool accountExists = snapshot.data!;
                   if (snapshot.hasData) {
-                    bool accountExists = snapshot.data!;
                     return ElevatedButton(
-                      onPressed: () {
-                        // Perform login or signup based on account existence
+                      onPressed: () async {
                         if (accountExists) {
                           login();
                         } else {
