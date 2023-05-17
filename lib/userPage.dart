@@ -2,6 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+String userName="";
+String password="";
+
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
@@ -63,6 +66,11 @@ class _LoginPageState extends State<LoginPage> {
               inputFormatters: <TextInputFormatter>[
                 FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
               ],
+              onChanged: (value){
+                setState(() {
+                  userName=value as String;
+                });
+              },
             ), //chua sdt
 
             TextField(
@@ -70,6 +78,11 @@ class _LoginPageState extends State<LoginPage> {
                 hintText: 'Mật khẩu',
               ),
               obscureText: true,
+              onChanged: (value){
+                setState(() {
+                  password=value as String;
+                });
+              },
             ),
           ],
         ),
