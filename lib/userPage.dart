@@ -34,13 +34,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  late Future<bool> _accountExistsFuture;
 
-  @override
-  void initState() {
-    super.initState();
-    _accountExistsFuture = Future<bool>.value(false);
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -75,7 +69,7 @@ class _LoginPageState extends State<LoginPage> {
             ),
 
             FutureBuilder<bool>(
-              future: _accountExistsFuture,
+              future: accountExists(userName, password),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return CircularProgressIndicator();
@@ -93,9 +87,11 @@ class _LoginPageState extends State<LoginPage> {
                       },
                       child: Text(accountExists ? 'Đăng nhập' : 'Đăng ký'),
                     );
-                  } else if (snapshot.hasError) {
+                  }
+                  else if (snapshot.hasError) {
                     return Text('Error: ${snapshot.error}');
-                  } else {
+                  }
+                  else {
                     return Container(); // Handle other cases as desired
                   }
                 }
