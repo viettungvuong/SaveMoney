@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:save_money/add.dart';
 import 'package:save_money/userPage.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'firebase_options.dart';
 import 'spending.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -38,7 +37,7 @@ Future<void> main() async {
         return;
       }
     } catch (e) {
-
+       //exception
     }
   }
 

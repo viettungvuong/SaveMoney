@@ -3,7 +3,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:save_money/main.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 String userName = "";
 String password = "";
