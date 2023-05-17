@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:save_money/main.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 String userName = "";
 String password = "";
@@ -57,6 +58,12 @@ Future<UserCredential?> signup(String email, String password) async {
   } catch (e) {
     print(e);
   }
+}
+
+void saveUserData(User user) async { //luu du lieu nguoi dung hien tai de lan sau dang nhap
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  prefs.setString('uid', user.uid);
+  prefs.setString('email', user.email as String);
 }
 
 class LoginPage extends StatefulWidget {
@@ -118,6 +125,7 @@ class _LoginPageState extends State<LoginPage> {
                         }
                         if (credential!=null){ //neu co credential thi co the vao
                           currentUser = credential.user as User;
+                          saveUserData(currentUser as User);
                         }
                       },
                       child: Text(accountExists ? 'Đăng nhập' : 'Đăng ký'),
