@@ -114,13 +114,15 @@ class _LoginPageState extends State<LoginPage> {
                       return ElevatedButton(
                         onPressed: () async {
                           //ktra textfield1 co dau @ hay kh
-                          Future<UserCredential?> credential;
+                         UserCredential? credential;
                           if (accountExists) {
-                            credential = login(userName, password);
+                            credential = await login(userName, password); //do login la future
+                            //nen ta dung await de gan vao bien bth
                           } else {
-                            credential = signup(userName, password);
+                            credential = await signup(userName, password);
                           }
                           if (credential != null) {
+                            currentUser=credential.user as User;
                             Navigator.push(
                               context,
                               MaterialPageRoute(builder: (context) => const MyApp()),
