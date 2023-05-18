@@ -113,6 +113,23 @@ class _LoginPageState extends State<LoginPage> {
                     if (snapshot.hasData) {
                       return ElevatedButton(
                         onPressed: () async {
+                          if (!txt.text.contains('@')){
+                            showDialog( //day la cach show dialog
+                              context: context,
+                              builder: (context) => AlertDialog(
+                                title: Text('Email không hợp lệ'),
+                                content: Text('Email không hợp lệ, bạn hãy kiểm tra lại'),
+                                actions: [
+                                  ElevatedButton(
+                                      onPressed: () {
+                                        Navigator.pop(context);
+                                      },
+                                      child: Text('OK'))
+                                ],
+                              ),
+                            );
+                            return;
+                          }
                           //ktra textfield1 co dau @ hay kh
                          UserCredential? credential;
                           if (accountExists) {
