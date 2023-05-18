@@ -23,7 +23,9 @@ Future<void> main() async {
   FirebaseAuth auth = FirebaseAuth.instance;
   User? user = auth.currentUser;
 
-  if (user != null) { //session chua expire
+  runApp(LoginPage());
+
+  /*if (user != null) { //session chua expire
     try {
       //kiem tra co id token khong
       IdTokenResult tokenResult = await user.getIdTokenResult();
@@ -42,7 +44,7 @@ Future<void> main() async {
       print('Error');
        //exception
     }
-  }
+  }*/
 
 
 }

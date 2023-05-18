@@ -67,6 +67,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  var txt=new TextEditingController();
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -77,6 +78,7 @@ class _LoginPageState extends State<LoginPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               TextField(
+                controller: txt,
                 decoration: InputDecoration(
                   hintText: 'Email',
                 ),
@@ -84,8 +86,10 @@ class _LoginPageState extends State<LoginPage> {
                 onChanged: (value) {
                   setState(() {
                     if (value.contains('@')) userName = value as String;
+                    //o nut login ta check email co dau @
                   });
                 },
+                textInputAction: TextInputAction.next, // Moves focus to next.
               ),
               TextField(
                 decoration: InputDecoration(
@@ -97,6 +101,7 @@ class _LoginPageState extends State<LoginPage> {
                     password = value as String;
                   });
                 },
+                textInputAction: TextInputAction.done,
               ),
               FutureBuilder<bool>(
                 future: accountExists(userName, password),
@@ -108,6 +113,7 @@ class _LoginPageState extends State<LoginPage> {
                     if (snapshot.hasData) {
                       return ElevatedButton(
                         onPressed: () async {
+                          //ktra textfield1 co dau @ hay kh
                           UserCredential? credential;
                           if (accountExists) {
                             credential = login(userName, password) as UserCredential?;
@@ -117,6 +123,9 @@ class _LoginPageState extends State<LoginPage> {
                           if (credential != null&&credential.user!=null) {
                             currentUser = credential.user as User;
                             runApp(const MyApp());
+                          }
+                          else{
+                            print("Error!");
                           }
                         },
                         child: Text(accountExists ? 'Đăng nhập' : 'Đăng ký'),
