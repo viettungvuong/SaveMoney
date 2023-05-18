@@ -23,9 +23,8 @@ Future<void> main() async {
   FirebaseAuth auth = FirebaseAuth.instance;
   User? user = auth.currentUser;
 
-  runApp(LoginPage());
 
-  /*if (user != null) { //session chua expire
+  if (user != null) { //session chua expire
     try {
       //kiem tra co id token khong
       IdTokenResult tokenResult = await user.getIdTokenResult();
@@ -34,17 +33,15 @@ Future<void> main() async {
        //neu co id token thi tien hanh auto login vao man hinh chinh luon
         currentUser=user;
         runApp(const MyApp());
-        return;
       }
       else{
         runApp(const LoginPage());
-        return;
       }
     } catch (e) {
       print('Error');
        //exception
     }
-  }*/
+  }
 
 
 }
