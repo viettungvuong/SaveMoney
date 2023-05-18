@@ -116,8 +116,8 @@ class _LoginPageState extends State<LoginPage> {
                           //ktra textfield1 co dau @ hay kh
                          UserCredential? credential;
                           if (accountExists) {
-                            //de coi accountExists ra cai gi
-                            credential = await login(userName, password); //do login la future
+                            credential = await login(userName, password);
+                            //do login la future
                             //nen ta dung await de gan vao bien bth
                           } else {
                             credential = await signup(userName, password);
