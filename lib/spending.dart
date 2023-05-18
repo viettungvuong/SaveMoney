@@ -12,3 +12,4 @@ class Spending{
     return spentMoney;
   }
 }
+
