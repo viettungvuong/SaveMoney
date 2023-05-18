@@ -23,7 +23,7 @@ Future<bool> accountExists(String email, String password) async {
   }
 }
 
-Future<UserCredential?> login(String email, String password) async { //nullable function
+Future<UserCredential?> login(String email, String password) async {
   try {
     final credential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
       email: email,
@@ -67,74 +67,70 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            TextField(
-              decoration: InputDecoration(
-                hintText: 'Email',
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(),
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              TextField(
+                decoration: InputDecoration(
+                  hintText: 'Email',
+                ),
+                keyboardType: TextInputType.number,
+                onChanged: (value) {
+                  setState(() {
+                    if (value.contains('@')) userName = value as String;
+                  });
+                },
               ),
-              keyboardType: TextInputType.number,
-              onChanged: (value) {
-                setState(() {
-                  if (value.contains('@')) userName = value as String;
-                });
-              },
-            ),
-
-            TextField(
-              decoration: InputDecoration(
-                hintText: 'Mật khẩu',
+              TextField(
+                decoration: InputDecoration(
+                  hintText: 'Mật khẩu',
+                ),
+                obscureText: true,
+                onChanged: (value) {
+                  setState(() {
+                    password = value as String;
+                  });
+                },
               ),
-              obscureText: true,
-              onChanged: (value) {
-                setState(() {
-                  password = value as String;
-                });
-              },
-            ),
-
-            FutureBuilder<bool>(
-              future: accountExists(userName, password),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return CircularProgressIndicator();
-                } else {
-                  bool accountExists = snapshot.data!;
-                  if (snapshot.hasData) {
-                    return ElevatedButton(
-                      onPressed: () async {
-                        UserCredential? credential;
-                        if (accountExists) {
-                          credential=login(userName,password) as UserCredential?; //cai nay se tra ve userCredential
-                        } else {
-                          credential=signup(userName,password) as UserCredential?;
-                        }
-                        if (credential!=null){ //neu co credential thi co the vao
-                          currentUser = credential.user as User;
-                          runApp(const MyApp()); //mo man hinh chinh
-                        }
-                      },
-                      child: Text(accountExists ? 'Đăng nhập' : 'Đăng ký'),
-                    );
+              FutureBuilder<bool>(
+                future: accountExists(userName, password),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return CircularProgressIndicator();
+                  } else {
+                    bool accountExists = snapshot.data ?? false;
+                    if (snapshot.hasData) {
+                      return ElevatedButton(
+                        onPressed: () async {
+                          UserCredential? credential;
+                          if (accountExists) {
+                            credential = login(userName, password) as UserCredential?;
+                          } else {
+                            credential = signup(userName, password) as UserCredential?;
+                          }
+                          if (credential != null&&credential.user!=null) {
+                            currentUser = credential.user as User;
+                            runApp(const MyApp());
+                          }
+                        },
+                        child: Text(accountExists ? 'Đăng nhập' : 'Đăng ký'),
+                      );
+                    } else if (snapshot.hasError) {
+                      return Text('Error: ${snapshot.error}');
+                    } else {
+                      return Container();
+                    }
                   }
-                  else if (snapshot.hasError) {
-                    return Text('Error: ${snapshot.error}');
-                  }
-                  else {
-                    return Container(); // Handle other cases as desired
-                  }
-                }
-              },
-            ),
-
-          ],
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );

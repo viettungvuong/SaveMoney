@@ -12,7 +12,7 @@ DatabaseReference? database; //dung firebase database
 User? currentUser; //user dang dang nhap
 
 Future<void> main() async {
-  database = FirebaseDatabase.instance.reference();
+  /*database = FirebaseDatabase.instance.reference();
 
   WidgetsFlutterBinding.ensureInitialized();
   Firebase.initializeApp(
@@ -29,6 +29,7 @@ Future<void> main() async {
 
       if (tokenResult.token != null) {
        //neu co id token thi tien hanh auto login vao man hinh chinh luon
+        currentUser=user;
         runApp(const MyApp());
         return;
       }
@@ -39,7 +40,9 @@ Future<void> main() async {
     } catch (e) {
        //exception
     }
-  }
+  }*/
+
+  runApp(const LoginPage());
 
 }
 
