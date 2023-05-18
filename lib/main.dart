@@ -12,12 +12,13 @@ DatabaseReference? database; //dung firebase database
 User? currentUser; //user dang dang nhap
 
 Future<void> main() async {
-  /*database = FirebaseDatabase.instance.reference();
 
   WidgetsFlutterBinding.ensureInitialized();
-  Firebase.initializeApp(
+  await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  database = FirebaseDatabase.instance.reference();
+
 
   FirebaseAuth auth = FirebaseAuth.instance;
   User? user = auth.currentUser;
@@ -38,11 +39,11 @@ Future<void> main() async {
         return;
       }
     } catch (e) {
+      print('Error');
        //exception
     }
-  }*/
+  }
 
-  runApp(const LoginPage());
 
 }
 
