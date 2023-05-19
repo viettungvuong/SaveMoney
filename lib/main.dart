@@ -10,6 +10,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 DatabaseReference? database; //dung firebase database
 User? currentUser; //user dang dang nhap
+String? userId; //id nay quan trong de luu database
 
 Future<void> main() async {
 
@@ -33,6 +34,7 @@ Future<void> main() async {
       if (tokenResult.token != null) {
        //neu co id token thi tien hanh auto login vao man hinh chinh luon
         currentUser=user;
+        userId=user.uid;
         runApp(const MyApp());
       }
       else{
