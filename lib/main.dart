@@ -29,6 +29,7 @@ Future<void> main() async {
       //kiem tra co id token khong
       IdTokenResult tokenResult = await user.getIdTokenResult();
 
+      //session nay chua expire
       if (tokenResult.token != null) {
        //neu co id token thi tien hanh auto login vao man hinh chinh luon
         currentUser=user;
