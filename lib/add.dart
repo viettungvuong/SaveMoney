@@ -18,7 +18,7 @@ void addSpending(double spentMoney, String? selectedCategory, List<Spending> spe
   else
        newSpending = Spending(spentMoney);
   spendings.add(newSpending);
-
+  addToDatabase(newSpending, database!); //dau ! o cuoi la null check
   //bay gio ta phai ket noi voi firebase o day
 }
 
@@ -31,6 +31,7 @@ void addToDatabase(Spending spending, FirebaseFirestore db){
   db
       .collection(userId??"")
       .add(spendingString); //them vao firestore database
+  //dung add de no dat ten doc la mot random id
 }
 
 class AddSpending extends StatefulWidget{
