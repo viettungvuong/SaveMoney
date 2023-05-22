@@ -23,7 +23,7 @@ void addSpending(double spentMoney, String? selectedCategory, List<Spending> spe
 }
 
 void addToDatabase(Spending spending, FirebaseFirestore db){
-  final spending = <String, String>{
+  final spendingString = <String, String>{
     "amount": spending.spentMoney.toString(),
     "type": spending.typeOfSpending.toString(),
   };
@@ -31,7 +31,7 @@ void addToDatabase(Spending spending, FirebaseFirestore db){
   db
       .collection(userId??"")
       .doc("Spending")
-      .set(spending)
+      .set(spendingString)
       .onError((e, _) => print("Error writing document: $e"));
 }
 
