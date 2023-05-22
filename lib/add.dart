@@ -30,9 +30,7 @@ void addToDatabase(Spending spending, FirebaseFirestore db){
 
   db
       .collection(userId??"")
-      .doc("Spending")
-      .set(spendingString)
-      .onError((e, _) => print("Error writing document: $e"));
+      .add(spendingString);
 }
 
 class AddSpending extends StatefulWidget{
