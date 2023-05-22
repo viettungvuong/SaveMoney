@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
@@ -8,7 +9,7 @@ import 'firebase_options.dart';
 import 'spending.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-DatabaseReference? database; //dung firebase database
+FirebaseFirestore? database; //dung firebase database
 User? currentUser; //user dang dang nhap
 String? userId; //id nay quan trong de luu database
 
@@ -18,7 +19,7 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  database = FirebaseDatabase.instance.reference();
+  database = FirebaseFirestore.instance;
 
 
   FirebaseAuth auth = FirebaseAuth.instance;

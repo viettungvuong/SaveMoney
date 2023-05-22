@@ -1,5 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:dropdown_search/dropdown_search.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:save_money/spending.dart';
@@ -18,6 +20,19 @@ void addSpending(double spentMoney, String? selectedCategory, List<Spending> spe
   spendings.add(newSpending);
 
   //bay gio ta phai ket noi voi firebase o day
+}
+
+void addToDatabase(Spending spending, FirebaseFirestore db){
+  final city = <String, String>{
+    "amount": spending.spentMoney.toString(),
+    "type": spending.typeOfSpending.toString(),
+  };
+
+  db
+      .collection(currentUser?.uid.toString())
+      .doc("LA")
+      .set(city)
+      .onError((e, _) => print("Error writing document: $e"));
 }
 
 class AddSpending extends StatefulWidget{
