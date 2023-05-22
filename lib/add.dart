@@ -30,7 +30,7 @@ void addToDatabase(Spending spending, FirebaseFirestore db){
 
   db
       .collection(userId??"")
-      .add(spendingString);
+      .add(spendingString); //them vao firestore database
 }
 
 class AddSpending extends StatefulWidget{
