@@ -44,6 +44,7 @@ dependencies:
   dropdown_search: ^5.0.6
   firebase_auth: ^4.6.0
   cloud_firestore: ^4.7.1
+  searchable_listview: ^2.4.0
 
 
 dev_dependencies:

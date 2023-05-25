@@ -247,6 +247,13 @@
             </list>
           </value>
         </entry>
+        <entry key="searchable_listview">
+          <value>
+            <list>
+              <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/searchable_listview-2.4.0/lib" />
+            </list>
+          </value>
+        </entry>
         <entry key="searchfield">
           <value>
             <list>
@@ -359,6 +366,7 @@
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/path-1.8.2/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/persistent_bottom_nav_bar-5.0.2/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/plugin_platform_interface-2.1.4/lib" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/searchable_listview-2.4.0/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/searchfield-0.7.5/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/selection_menu-2.0.2/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/source_span-1.9.1/lib" />
