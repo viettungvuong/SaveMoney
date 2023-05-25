@@ -41,8 +41,9 @@ class AddSpending extends StatefulWidget{
   State<AddSpending> createState() => _AddPageState();
 }
 
-class _AddPageState extends State<AddSpending>{
-  double spentMoney=0, optionalFee=0;
+class _AddPageState extends State<AddSpending> {
+  double spentMoney = 0,
+      optionalFee = 0;
   String? selectedCategory;
   bool secondaryTextField = false;
 
@@ -59,11 +60,11 @@ class _AddPageState extends State<AddSpending>{
         currentIndex: selectedIndex,
         selectedItemColor: Colors.pink,
 
-        onTap: (value){
+        onTap: (value) {
           setState(() {
-            selectedIndex=value;
+            selectedIndex = value;
 
-            switch (selectedIndex){
+            switch (selectedIndex) {
               case 0:
                 {
                   //neu bam home
@@ -73,15 +74,17 @@ class _AddPageState extends State<AddSpending>{
                   );
                   break;
                 }
-                
-              case 1:{
-                //neu bam add
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const AddSpending()),
-                );
-                break;
-              }
+
+              case 1:
+                {
+                  //neu bam add
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const AddSpending()),
+                  );
+                  break;
+                }
             }
           });
         },
@@ -112,25 +115,29 @@ class _AddPageState extends State<AddSpending>{
 
             DropdownButton2(
               value: selectedCategory, //vat duoc chon
-              items: spendingCategories.map((category) => DropdownMenuItem<String>( //doi list<string> thanh list dropdownmenuitem
-                value: category, //tham so dropdownmenuitem
-                child:  Text(
-                    category,
-                    style: TextStyle(
-                      fontSize: 15,
-                    )
-                ),
-              )).toList(),
+              items: spendingCategories.map((category) =>
+                  DropdownMenuItem<
+                      String>( //doi list<string> thanh list dropdownmenuitem
+                    value: category, //tham so dropdownmenuitem
+                    child: Text(
+                        category,
+                        style: TextStyle(
+                          fontSize: 15,
+                        )
+                    ),
+                  )).toList(),
               onChanged: (value) {
                 setState(() {
-                  selectedCategory = value as String; //no se dat selectedItem la vat vua duoc chon
+                  selectedCategory =
+                  value as String; //no se dat selectedItem la vat vua duoc chon
                   //roi chinh value cua dropdownbutton2
 
-                  if (selectedCategory=='Trả tiền vay'){
-                    secondaryTextField=true; //xuat hien textfield thu 2 de nhap tien lai
+                  if (selectedCategory == 'Trả tiền vay') {
+                    secondaryTextField =
+                    true; //xuat hien textfield thu 2 de nhap tien lai
                   }
-                  else{
-                    secondaryTextField=false;
+                  else {
+                    secondaryTextField = false;
                   }
                 }
                 );
@@ -138,34 +145,34 @@ class _AddPageState extends State<AddSpending>{
             ),
 
             Container( //wrap trong container
-              width: 200,
-              child: TextField(
-                decoration: InputDecoration(
-                  hintText: 'Số tiền đã chi',
-                ),
-                keyboardType: TextInputType.number,
-                inputFormatters: <TextInputFormatter>[
-                  FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
-                ],
-                onChanged: (value){
-                  setState(() {
-                    if (double.tryParse(value) == null) {
-                      // xoa text field neu nhu khong phai la so
-                      _textEditingController.clear();
-                    }
-                    else {
-                      double intValue = double.parse(value);
-                      if (intValue < 0) {
-                        // Limit the value to the range of 0-100
-                        _textEditingController.text = 0.toString();
+                width: 200,
+                child: TextField(
+                  decoration: InputDecoration(
+                    hintText: 'Số tiền đã chi',
+                  ),
+                  keyboardType: TextInputType.number,
+                  inputFormatters: <TextInputFormatter>[
+                    FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+                  ],
+                  onChanged: (value) {
+                    setState(() {
+                      if (double.tryParse(value) == null) {
+                        // xoa text field neu nhu khong phai la so
+                        _textEditingController.clear();
                       }
-                      else{
-                        spentMoney=value as double;
+                      else {
+                        double intValue = double.parse(value);
+                        if (intValue < 0) {
+                          // Limit the value to the range of 0-100
+                          _textEditingController.text = 0.toString();
+                        }
+                        else {
+                          spentMoney = value as double;
+                        }
                       }
-                    }
-                  });
-                },
-            )),
+                    });
+                  },
+                )),
 
             if (secondaryTextField) //neu bool secondary text field la dung thi moi hien textfield
               Container( //wrap trong container
@@ -180,22 +187,23 @@ class _AddPageState extends State<AddSpending>{
                     inputFormatters: <TextInputFormatter>[
                       FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
                     ],
-                    onChanged: (value){
+                    onChanged: (value) {
                       setState(() {
-                          if (double.tryParse(value) == null) {
-                            // xoa text field neu nhu khong phai la so
-                            _textEditingController.clear();
+                        if (double.tryParse(value) == null) {
+                          // xoa text field neu nhu khong phai la so
+                          _textEditingController.clear();
+                        }
+                        else {
+                          double intValue = double.parse(value);
+                          if (intValue < 0 || intValue > 100) {
+                            // Limit the value to the range of 0-100
+                            _textEditingController.text = intValue.clamp(0, 100)
+                                .toString();
                           }
                           else {
-                            double intValue = double.parse(value);
-                            if (intValue < 0 || intValue > 100) {
-                              // Limit the value to the range of 0-100
-                              _textEditingController.text = intValue.clamp(0, 100).toString();
-                            }
-                            else{
-                              optionalFee=value as double;
-                            }
+                            optionalFee = value as double;
                           }
+                        }
                       });
                     },
                   )),
@@ -203,7 +211,8 @@ class _AddPageState extends State<AddSpending>{
             SizedBox(height: 300), // thêm khoảng trăng giữa 2 widget//number-
 
             IconButton(onPressed: () {
-              addSpending(spentMoney, selectedCategory, spendings); //lamda functikon
+              addSpending(
+                  spentMoney, selectedCategory, spendings); //lamda functikon
             }, icon: Icon(Icons.add),
               color: Colors.red,
             ), //them button de add spending// only text box
