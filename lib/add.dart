@@ -11,7 +11,7 @@ import 'main.dart';
 
 List<String> spendingCategories=['Ăn uống','Mua sắm','Tiền thuê nhà','Tiền học phí','Trả tiền vay','Đóng phạt','Du lịch','Khác']; //danh sach cac loai tieu tien
 
-void addSpending(double spentMoney, String? selectedCategory, List<Spending> spendings){ //them chi tieu
+void addSpending(double spentMoney, String? selectedCategory, List<Spending> spendings, BuildContext context){ //them chi tieu
   Spending newSpending;
   if (selectedCategory!=null)
        newSpending = Spending(spentMoney,typeOfSpending: selectedCategory); //day la cach dung optional parameter
@@ -20,6 +20,9 @@ void addSpending(double spentMoney, String? selectedCategory, List<Spending> spe
   spendings.add(newSpending);
   addToDatabase(newSpending, database!); //dau ! o cuoi la null check
   //bay gio ta phai ket noi voi firebase o day
+  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+    content: Text("Thêm thành công"),
+  ));
 }
 
 void addToDatabase(Spending spending, FirebaseFirestore db){
@@ -212,7 +215,7 @@ class _AddPageState extends State<AddSpending> {
 
             IconButton(onPressed: () {
               addSpending(
-                  spentMoney, selectedCategory, spendings); //lamda functikon
+                  spentMoney, selectedCategory, spendings, context); //lamda functikon
             }, icon: Icon(Icons.add),
               color: Colors.red,
             ), //them button de add spending// only text box
