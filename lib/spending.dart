@@ -28,7 +28,28 @@ IconData getIcon(Spending spending){
   if (spending.typeOfSpending==spendingCategories[0]){
     return Icons.fastfood;
   }
-  return Icons.star;
+  else if (spending.typeOfSpending==spendingCategories[1]){
+    return Icons.shopping_cart;
+  }
+  else if (spending.typeOfSpending==spendingCategories[2]){
+    return Icons.house;
+  }
+  else if (spending.typeOfSpending==spendingCategories[3]){
+    return Icons.school;
+  }
+  else if (spending.typeOfSpending==spendingCategories[4]){
+    return Icons.attach_money;
+  }
+  else if (spending.typeOfSpending==spendingCategories[5]){
+    return Icons.policy;
+  }
+  else if (spending.typeOfSpending==spendingCategories[6]){
+    return Icons.travel_explore;
+  }
+  else{
+    return Icons.money;
+  }
+
 }
 
 class SpendingItem extends StatelessWidget {

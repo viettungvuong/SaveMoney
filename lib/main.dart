@@ -275,7 +275,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
             SearchableList<Spending>(
               initialList: spendings,
-              builder: (Spending spending)=>,
+              builder: (Spending spending)=>SpendingItem(spending: spending),),
           ],
         ),
       ),
