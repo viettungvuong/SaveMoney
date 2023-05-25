@@ -222,9 +222,8 @@ class _AddPageState extends State<AddSpending> {
             SizedBox(height: 300), // thêm khoảng trăng giữa 2 widget//number-
 
             IconButton(onPressed: () {
-              addSpending(
-                  spentMoney, selectedCategory, spendings, context); //lamda functikon
-              reset(_textEditingController,_textEditingController2);
+              addSpending(spentMoney, selectedCategory, spendings, context); //lamda functikon
+              reset(_textEditingController,_textEditingController2); //reset lai cac o so sau khi bam add
             }, icon: Icon(Icons.add),
               color: Colors.red,
             ), //them button de add spending// only text box
