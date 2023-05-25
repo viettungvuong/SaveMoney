@@ -1,5 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:save_money/add.dart';
+
+import 'main.dart';
 
 class Spending{
   double? spentMoney;
@@ -19,6 +22,13 @@ class Spending{
 void sortSpending(List<Spending> spendings){ //item nay de dai dien hien thi mot cái spending
   spendings.sort((Spending a, Spending b) => (a.spentMoney=0 as double).compareTo(b.spentMoney=0));
   //nma de coi lai quick sort
+}
+
+IconData getIcon(Spending spending){
+  if (spending.typeOfSpending==spendingCategories[0]){
+    return Icons.fastfood;
+  }
+  return Icons.star;
 }
 
 class SpendingItem extends StatelessWidget {
@@ -45,7 +55,7 @@ class SpendingItem extends StatelessWidget {
               width: 10,
             ),
             Icon(
-              Icons.star,
+              getIcon(spending), //lay icon phu thuoc vao spending
               color: Colors.yellow[700],
             ),
             const SizedBox(
@@ -55,7 +65,12 @@ class SpendingItem extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                
+                Text(
+                  'Số tiền ${spending.getMoney()}',
+                ),
+                Text(
+                  '${spending.typeOfSpending}'
+                ),
               ],
             ),
           ],
