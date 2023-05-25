@@ -176,7 +176,6 @@ class _AddPageState extends State<AddSpending> {
                         }
                         else {
                           spentMoney = double.parse(value);
-                          print(spentMoney);
                         }
                       }
                     });
