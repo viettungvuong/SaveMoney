@@ -8,6 +8,7 @@ import 'package:save_money/userPage.dart';
 import 'firebase_options.dart';
 import 'spending.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:searchable_listview/searchable_listview.dart';
 
 FirebaseFirestore? database; //dung firebase database
 User? currentUser; //user dang dang nhap
@@ -271,6 +272,10 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ),
             SizedBox(height: 100,),
+
+            SearchableList<Spending>(
+              initialList: spendings,
+              builder: (Spending spending)=>,
           ],
         ),
       ),
