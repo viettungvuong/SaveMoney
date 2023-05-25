@@ -144,6 +144,7 @@ class _LoginPageState extends State<LoginPage> {
                           if (credential != null) {
                             currentUser=credential.user as User;
                             userId=currentUser?.uid; //them dau ? de null safety
+                            initializeSpendings(spendings); //load cac spending
                             Navigator.push(
                               context,
                               MaterialPageRoute(builder: (context) => const MyApp()),

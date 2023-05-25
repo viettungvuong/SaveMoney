@@ -37,6 +37,7 @@ Future<void> main() async {
        //neu co id token thi tien hanh auto login vao man hinh chinh luon
         currentUser=user;
         userId=user.uid;
+        initializeSpendings(spendings);
         runApp(const MyApp());
       }
       else{
@@ -142,6 +143,20 @@ class MyHomePage extends StatefulWidget {
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
+}
+
+void initializeSpendings(List<Spending> spendings){
+  database?.collection(userId!).get().then(
+        (querySnapshot) {
+      print("Successfully completed");
+      for (var docSnapshot in querySnapshot.docs) {
+        double amount = double.parse(docSnapshot.data()['amount']);
+        String typeOfSpending = docSnapshot.data()['type'];
+        spendings.add(new Spending(amount,typeOfSpending: typeOfSpending));
+      }
+    },
+    onError: (e) => print("Lỗi: $e"),
+  );
 }
 
 class _MyHomePageState extends State<MyHomePage> {
