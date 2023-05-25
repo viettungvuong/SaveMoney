@@ -38,8 +38,10 @@ void addToDatabase(Spending spending, FirebaseFirestore db){
   //dung add de no dat ten doc la mot random id
 }
 
-void reset(){
-
+void reset(TextEditingController valueController, TextEditingController? valueController2){
+  valueController.text='';
+  if (valueController2!=null)
+    valueController2.text='';
 }
 
 class AddSpending extends StatefulWidget{
@@ -56,6 +58,7 @@ class _AddPageState extends State<AddSpending> {
   bool secondaryTextField = false;
 
   final TextEditingController _textEditingController = TextEditingController(); //textcontroller de dieu khien data tu textfield
+  final TextEditingController _textEditingController2 = TextEditingController(); //cho textfield 2 neu co
 
   @override
   Widget build(BuildContext context) {
@@ -136,8 +139,7 @@ class _AddPageState extends State<AddSpending> {
                   )).toList(),
               onChanged: (value) {
                 setState(() {
-                  selectedCategory =
-                  value as String; //no se dat selectedItem la vat vua duoc chon
+                  selectedCategory = value as String; //no se dat selectedItem la vat vua duoc chon
                   //roi chinh value cua dropdownbutton2
 
                   if (selectedCategory == 'Trả tiền vay') {
@@ -155,6 +157,7 @@ class _AddPageState extends State<AddSpending> {
             Container( //wrap trong container
                 width: 200,
                 child: TextField(
+                  controller: _textEditingController,
                   decoration: InputDecoration(
                     hintText: 'Số tiền đã chi',
                   ),
@@ -186,7 +189,7 @@ class _AddPageState extends State<AddSpending> {
               Container( //wrap trong container
                   width: 200,
                   child: TextField(
-                    controller: _textEditingController,
+                    controller: _textEditingController2,
                     decoration: InputDecoration(
                       hintText: 'Lãi (%)',
                       suffixText: '%',
@@ -199,13 +202,13 @@ class _AddPageState extends State<AddSpending> {
                       setState(() {
                         if (double.tryParse(value) == null) {
                           // xoa text field neu nhu khong phai la so
-                          _textEditingController.clear();
+                          _textEditingController2.clear();
                         }
                         else {
                           double intValue = double.parse(value);
                           if (intValue < 0 || intValue > 100) {
                             // Limit the value to the range of 0-100
-                            _textEditingController.text = intValue.clamp(0, 100)
+                            _textEditingController2.text = intValue.clamp(0, 100)
                                 .toString();
                           }
                           else {
@@ -221,6 +224,7 @@ class _AddPageState extends State<AddSpending> {
             IconButton(onPressed: () {
               addSpending(
                   spentMoney, selectedCategory, spendings, context); //lamda functikon
+              reset(_textEditingController,_textEditingController2);
             }, icon: Icon(Icons.add),
               color: Colors.red,
             ), //them button de add spending// only text box
