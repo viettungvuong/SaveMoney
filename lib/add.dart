@@ -175,7 +175,8 @@ class _AddPageState extends State<AddSpending> {
                           _textEditingController.text = 0.toString();
                         }
                         else {
-                          spentMoney = value as double;
+                          spentMoney = double.parse(value);
+                          print(spentMoney);
                         }
                       }
                     });
