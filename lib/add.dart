@@ -33,8 +33,13 @@ void addToDatabase(Spending spending, FirebaseFirestore db){
 
   db
       .collection(userId??"")
-      .add(spendingString); //them vao firestore database
+      .add(spendingString).then((documentSnapshot) =>
+      print("Added Data with ID: ${documentSnapshot.id}"));; //them vao firestore database
   //dung add de no dat ten doc la mot random id
+}
+
+void reset(){
+
 }
 
 class AddSpending extends StatefulWidget{
