@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 class Spending{
   double? spentMoney;
@@ -15,7 +16,7 @@ class Spending{
   }
 }
 
-void sortSpending(List<Spending> spendings){
+void sortSpending(List<Spending> spendings){ //item nay de dai dien hien thi mot cái spending
   spendings.sort((Spending a, Spending b) => (a.spentMoney=0 as double).compareTo(b.spentMoney=0));
   //nma de coi lai quick sort
 }
@@ -54,26 +55,7 @@ class SpendingItem extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(
-                  'Firstname: ${actor.name}',
-                  style: const TextStyle(
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                Text(
-                  'Lastname: ${actor.lastName}',
-                  style: const TextStyle(
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                Text(
-                  'Age: ${actor.age}',
-                  style: const TextStyle(
-                    color: Colors.black,
-                  ),
-                ),
+                
               ],
             ),
           ],
