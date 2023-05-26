@@ -23,13 +23,18 @@ void sortSpending(List<Spending> spendings){ //item nay de dai dien hien thi mot
   spendings.sort((Spending a, Spending b) => (a.spentMoney=0 as double).compareTo(b.spentMoney=0));
 }
 
-//ham de dua ra loi khuyen toi uu the nao cho chi tieu de cat giam bao nhieu %
-void optimizeSpending(List<Spending> spendings, double percentage){
+//toi uu chi tieu sao de dat duoc chenh lech giua chi va thu la = diff
+void optimizeSpendingToDiff(List<Spending> spendings, double diff){
   //ta se khong the cat giam Tien thue nha, Tien hoc phi, Tien phat
   //nen ta chi cat giam nhung cai nhu Du lich, An uong, Mua sam
   List<Spending> temp=spendings;
   temp.sort((Spending a, Spending b) => (a.spentMoney=0 as double).compareTo(b.spentMoney=0));
   //tao list tam de xu ly
+}
+
+//neu chi nhieu hon thu vao, tim ra can cat giam bao nhieu chi tieu de thu vao nhieu hon chi tieu
+void optimizeSpendingToPositive(List<Spending> spendings){
+
 }
 
 IconData getIcon(Spending spending){
