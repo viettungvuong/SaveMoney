@@ -21,7 +21,12 @@ class Spending{
 
 void sortSpending(List<Spending> spendings){ //item nay de dai dien hien thi mot cái spending
   spendings.sort((Spending a, Spending b) => (a.spentMoney=0 as double).compareTo(b.spentMoney=0));
-  //nma de coi lai quick sort
+}
+
+//ham de dua ra loi khuyen toi uu the nao cho chi tieu de cat giam bao nhieu %
+void optimizeSpending(List<Spending> spendings, double percentage){
+  //ta se khong the cat giam Tien thue nha, Tien hoc phi, Tien phat
+  //nen ta chi cat giam nhung cai nhu Du lich, An uong, Mua sam
 }
 
 IconData getIcon(Spending spending){
