@@ -9,9 +9,12 @@ class Spending{
 
   String? typeOfSpending;
 
-  Spending(double spentMoney, {String typeOfSpending='Normal'}){
+  bool spent=true; //neu la false thi no bien thanh earned
+
+  Spending(double spentMoney, {String typeOfSpending='Normal', bool spent=true}){
     this.spentMoney=spentMoney;
     this.typeOfSpending=typeOfSpending;
+    this.spent=spent;
   }
 
   double? getMoney(){
