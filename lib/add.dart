@@ -18,6 +18,7 @@ void addSpending(double spentMoney, String? selectedCategory, List<Spending> spe
   else
        newSpending = Spending(spentMoney);
   spendings.add(newSpending);
+  spent+=newSpending.spentMoney!;
   addToDatabase(newSpending, database!); //dau ! o cuoi la null check
   //bay gio ta phai ket noi voi firebase o day
   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
