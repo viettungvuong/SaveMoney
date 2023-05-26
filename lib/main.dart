@@ -1,3 +1,5 @@
+import 'dart:core';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -10,9 +12,17 @@ import 'spending.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:searchable_listview/searchable_listview.dart';
 
+int selectedIndex=0; //index tren bottom menu bar
 FirebaseFirestore? database; //dung firebase database
 User? currentUser; //user dang dang nhap
 String? userId; //id nay quan trong de luu database
+
+double spent=0;
+double earned=0;
+
+double getDiff(){
+  return earned-spent;
+}
 
 Future<void> main() async {
 
@@ -77,7 +87,7 @@ class MyApp extends StatelessWidget {
   }
 }
 
-int selectedIndex=0; //index tren bottom menu bar currency
+
 
 class MyDialog extends StatefulWidget {
   @override
@@ -268,6 +278,7 @@ class _MyHomePageState extends State<MyHomePage> {
             const Text(
               'Số dư hiện tại là',
             ),
+
             Text(
               '$balance VND', //xuat ra bien balance (so tien hien co)
               style: Theme.of(context).textTheme.headlineMedium,
@@ -286,9 +297,19 @@ class _MyHomePageState extends State<MyHomePage> {
                 fontSize: 18,
               ),
             ),
+
             SizedBox(height: 100,),
 
-            SearchableList<Spending>(
+            Text(
+              'Chênh lệch'
+            ),
+
+            Text(
+              '${getDiff()} VND', //xuat ra chenh lech
+              style: Theme.of(context).textTheme.headlineMedium,
+            ),
+
+            /*SearchableList<Spending>(
               initialList: spendings,
               builder: (Spending spending)=>SpendingItem(spending: spending),
               inputDecoration: InputDecoration(
@@ -301,7 +322,8 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                   borderRadius: BorderRadius.circular(10.0),
                 ),
-              ),),
+              ),),*/
+
           ],
         ),
       ),
