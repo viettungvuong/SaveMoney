@@ -46,6 +46,10 @@ void reset(TextEditingController valueController, TextEditingController? valueCo
     valueController2.text='';
 }
 
+void addEarns(double earnedMoney, String? selectedCategory, List<Spending> spendings, BuildContext context){
+
+}
+
 class AddSpending extends StatefulWidget{
   const AddSpending({super.key});
 
