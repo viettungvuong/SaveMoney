@@ -290,7 +290,18 @@ class _MyHomePageState extends State<MyHomePage> {
 
             SearchableList<Spending>(
               initialList: spendings,
-              builder: (Spending spending)=>SpendingItem(spending: spending),),
+              builder: (Spending spending)=>SpendingItem(spending: spending),
+              inputDecoration: InputDecoration(
+                labelText: "Search Actor",
+                fillColor: Colors.white,
+                focusedBorder: OutlineInputBorder(
+                  borderSide: const BorderSide(
+                    color: Colors.blue,
+                    width: 1.0,
+                  ),
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
+              ),),
           ],
         ),
       ),

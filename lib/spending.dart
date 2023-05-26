@@ -28,8 +28,9 @@ void optimizeSpendingToDiff(List<Spending> spendings, double diff){
   //ta se khong the cat giam Tien thue nha, Tien hoc phi, Tien phat
   //nen ta chi cat giam nhung cai nhu Du lich, An uong, Mua sam
   List<Spending> temp=spendings;
-  temp.sort((Spending a, Spending b) => (a.spentMoney=0 as double).compareTo(b.spentMoney=0));
-  //tao list tam de xu ly
+  temp.sort((Spending a, Spending b) => (a.typeOfSpending!).compareTo(b.typeOfSpending!));
+  //tao list tam de xu ly bang cach sort theo type of spending
+  //de cac spending giong nhau se lien ke nhau
 }
 
 //neu chi nhieu hon thu vao, tim ra can cat giam bao nhieu chi tieu de thu vao nhieu hon chi tieu
