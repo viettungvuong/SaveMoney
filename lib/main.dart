@@ -26,6 +26,24 @@ double getDiff(){
   return earned-spent;
 }
 
+//cai nay phai dua vao mot thread rieng, doi cai nay xong roi moi mo app
+Future<void> initializeSpendings(List<Spending> spendings)async {
+  await database?.collection(userId!).get().then(
+        (querySnapshot) {
+      for (var docSnapshot in querySnapshot.docs) {
+        double amount = docSnapshot.data()['amount'];
+        String typeOfSpending = docSnapshot.data()['type'];
+        spendings.add(new Spending(amount,typeOfSpending: typeOfSpending));
+        print(amount);
+        spent+=amount; //them vao so tien da chi
+      }
+    },
+    onError: (e) => print("Lỗi: $e"),
+  );
+  //them await de doi no doc het xong roi moi ket thuc
+}
+
+
 Future<void> main() async {
 
   WidgetsFlutterBinding.ensureInitialized();
@@ -49,7 +67,7 @@ Future<void> main() async {
        //neu co id token thi tien hanh auto login vao man hinh chinh luon
         currentUser=user;
         userId=user.uid;
-        initializeSpendings(spendings);
+        await initializeSpendings(spendings); //doi xong
         runApp(const MyApp());
       }
       else{
@@ -157,24 +175,7 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
-//cai nay phai dua vao mot thread rieng, doi cai nay xong roi moi mo app
-void initializeSpendings(List<Spending> spendings){
-  database?.collection(userId!).get().then(
-        (querySnapshot) {
-      print("Successfully completed");
-      for (var docSnapshot in querySnapshot.docs) {
-        double amount = docSnapshot.data()['amount'];
-        String typeOfSpending = docSnapshot.data()['type'];
-        spendings.add(new Spending(amount,typeOfSpending: typeOfSpending));
-        print(amount);
-        spent+=amount; //them vao so tien da chi
-        print("Spent "+spent.toString());
-      }
-    },
-    onError: (e) => print("Lỗi: $e"),
-  );
 
-}
 
 class _MyHomePageState extends State<MyHomePage> {
   double balance=0;
