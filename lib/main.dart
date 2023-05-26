@@ -17,6 +17,8 @@ FirebaseFirestore? database; //dung firebase database
 User? currentUser; //user dang dang nhap
 String? userId; //id nay quan trong de luu database
 
+List<Spending> spendings=[]; //danh sach cac khoan chi tieu
+
 double spent=0;
 double earned=0;
 
@@ -137,7 +139,7 @@ void _showAddDialog(BuildContext context) async {
     // Do something with the text input
   }
 }
-List<Spending> spendings=[]; //danh sach cac khoan chi tieu
+
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
@@ -155,18 +157,23 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
+//cai nay phai dua vao mot thread rieng, doi cai nay xong roi moi mo app
 void initializeSpendings(List<Spending> spendings){
   database?.collection(userId!).get().then(
         (querySnapshot) {
       print("Successfully completed");
       for (var docSnapshot in querySnapshot.docs) {
-        double amount = double.parse(docSnapshot.data()['amount']);
+        double amount = docSnapshot.data()['amount'];
         String typeOfSpending = docSnapshot.data()['type'];
         spendings.add(new Spending(amount,typeOfSpending: typeOfSpending));
+        print(amount);
+        spent+=amount; //them vao so tien da chi
+        print("Spent "+spent.toString());
       }
     },
     onError: (e) => print("Lỗi: $e"),
   );
+
 }
 
 class _MyHomePageState extends State<MyHomePage> {
