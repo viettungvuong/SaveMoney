@@ -26,7 +26,6 @@ void addSpending(double spentMoney, String? selectedCategory, List<Spending> spe
   ));
 }
 
-
 void addToDatabase(Spending spending, FirebaseFirestore db){
   final spendingString = {
     "amount": spending.spentMoney,
