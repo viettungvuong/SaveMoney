@@ -273,8 +273,12 @@ class _MyHomePageState extends State<MyHomePage> {
           // center the children vertically; the main axis here is the vertical
           // axis because Columns are vertical (the cross axis would be
           // horizontal).
-          mainAxisAlignment: MainAxisAlignment.center,
+          //mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            const SizedBox(
+              height: 50,
+            ),
+
             const Text(
               'Số dư hiện tại là',
             ),
@@ -288,6 +292,17 @@ class _MyHomePageState extends State<MyHomePage> {
             SizedBox(height: 100), // thêm khoảng trăng giữa 2 widget
 
             Text(
+                'Chênh lệch'
+            ),
+
+            Text(
+              '${getDiff()} VND', //xuat ra chenh lech
+              style: Theme.of(context).textTheme.headlineMedium,
+            ),
+
+            SizedBox(height: 100,),
+
+            Text(
               'Mục tiêu tháng ${getCurrentMonth()} là',
 
             ),
@@ -298,16 +313,6 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ),
 
-            SizedBox(height: 100,),
-
-            Text(
-              'Chênh lệch'
-            ),
-
-            Text(
-              '${getDiff()} VND', //xuat ra chenh lech
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
 
             /*SearchableList<Spending>(
               initialList: spendings,
