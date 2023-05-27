@@ -88,6 +88,7 @@ void addEarning(double earnedMoney, String? selectedCategory, List<Earning> list
   list.add(newEarning);
   earned+=earnedMoney;
   addEarningToDatabase(newEarning, database!); //dau ! o cuoi la null check
+  
   //bay gio ta phai ket noi voi firebase o day
   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
     content: Text("Thêm thành công"),
