@@ -28,12 +28,13 @@ double getDiff(){
 
 //cai nay phai dua vao mot thread rieng, doi cai nay xong roi moi mo app
 Future<void> initializeSpendings(List<Spending> spendings)async {
-  await database?.collection(userId!).get().then(
+  String collectionName=userId!+"-spent";
+  await database?.collection(collectionName).get().then(
         (querySnapshot) {
       for (var docSnapshot in querySnapshot.docs) {
         double amount = docSnapshot.data()['amount'];
         String typeOfSpending = docSnapshot.data()['type'];
-        spendings.add(new Spending(amount,typeOfSpending: typeOfSpending));
+        spendings.add(new Spending(amount,type: typeOfSpending));
         print(amount);
         spent+=amount; //them vao so tien da chi
       }
