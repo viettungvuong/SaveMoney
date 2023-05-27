@@ -95,6 +95,7 @@ void addEarning(double earnedMoney, String? selectedCategory, List<Earning> list
   ));
 }
 
+
 void sortSpending(List<Spending> list){
   list.sort((Spending a , Spending b) => ((a).amount=0 as double).compareTo((b).amount=0));
 }
