@@ -7,32 +7,17 @@ import 'main.dart';
 abstract class Money{
   double? amount;
   String? type;
-  double? getMoney();
-}
-
-class Spending implements Money{
-  Spending(double amount, {String type='Normal'}){
+  double? getMoney(){
+    return amount;
+  }
+  Money(double amount, {String type='Normal'}){
     this.amount=amount;
     this.type=type;
   }
-
-  @override
-  double? getMoney(){
-    return amount;
-  }
-
-  @override
-  double? amount;
-
-  @override
-  String? type;
 }
 
-class Earning implements Money{
-  @override
-  double? getMoney(){
-    return amount;
-  }
+class Spending extends Money{
+  Spending(super.amount, {String type='Normal'});
 
   @override
   double? amount;
@@ -40,9 +25,50 @@ class Earning implements Money{
   @override
   String? type;
 
-  Earning(double amount, {String type='Normal'}){
-    this.amount=amount;
-    this.type=type;
+}
+
+class Earning extends Money{
+  @override
+  double? amount;
+
+  @override
+  String? type;
+
+  Earning(super.amount, {String type='Normal'});
+}
+
+abstract class AC<T> {
+  void add(double spentMoney, String? selectedCategory, List<T> list, BuildContext context) {
+    assert(T is Money); //dam bao T deu inherit tu abstract class Money
+    T newT;
+    if (selectedCategory!=null){
+      if (T is Spending){
+        newT = Spending(spentMoney,type: selectedCategory) as T; //day la cach dung optional parameter
+      }
+      else{
+        newT = Earning(spentMoney,type: selectedCategory) as T; //day la cach dung optional parameter
+      }
+    }
+    else{
+      if (T is Spending){
+        newT = Spending(spentMoney) as T; //day la cach dung optional parameter
+      }
+      else{
+        newT = Earning(spentMoney) as T; //day la cach dung optional parameter
+      }
+    }
+    list.add(newT);
+    if (T is Spending){
+      spent += (newT as Spending).getMoney()!;
+    }
+    else{
+      earned += (newT as Spending).getMoney()!;
+    }
+    addToDatabase(newT, database!); //dau ! o cuoi la null check
+    //bay gio ta phai ket noi voi firebase o day
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      content: Text("Thêm thành công"),
+    ));
   }
 }
 
