@@ -98,7 +98,7 @@ abstract class AC<T> {
           print("Added Data with ID: ${documentSnapshot.id}"));; //them vao firestore database
       //dung add de no dat ten doc la mot random id
     }
-    else{
+    else{ //neu la earning
       collectionName=userId!+'earned';
       final earningString = {
         "amount": (t as Earning).amount,
