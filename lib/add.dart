@@ -14,11 +14,11 @@ List<String> spendingCategories=['Ăn uống','Mua sắm','Tiền thuê nhà','T
 void addSpending(double spentMoney, String? selectedCategory, List<Spending> spendings, BuildContext context){ //them chi tieu
   Spending newSpending;
   if (selectedCategory!=null)
-       newSpending = Spending(spentMoney,typeOfSpending: selectedCategory); //day la cach dung optional parameter
+       newSpending = Spending(spentMoney,type: selectedCategory); //day la cach dung optional parameter
   else
        newSpending = Spending(spentMoney);
   spendings.add(newSpending);
-  spent+=newSpending.spentMoney!;
+  spent+=newSpending.amount!;
   addToDatabase(newSpending, database!); //dau ! o cuoi la null check
   //bay gio ta phai ket noi voi firebase o day
   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
@@ -29,8 +29,8 @@ void addSpending(double spentMoney, String? selectedCategory, List<Spending> spe
 
 void addToDatabase(Spending spending, FirebaseFirestore db){
   final spendingString = {
-    "amount": spending.spentMoney,
-    "type": spending.typeOfSpending.toString(),
+    "amount": spending.amount,
+    "type": spending.type.toString(),
   };
 
   db

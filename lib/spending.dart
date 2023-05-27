@@ -4,26 +4,50 @@ import 'package:save_money/add.dart';
 
 import 'main.dart';
 
-class Spending{
-  double? spentMoney;
+abstract class Money{
+  double? amount;
+  String? type;
+  double? getMoney();
+}
 
-  String? typeOfSpending;
-
-  bool spent=true; //neu la false thi no bien thanh earned
-
-  Spending(double spentMoney, {String typeOfSpending='Normal', bool spent=true}){
-    this.spentMoney=spentMoney;
-    this.typeOfSpending=typeOfSpending;
-    this.spent=spent;
+class Spending implements Money{
+  Spending(double amount, {String type='Normal'}){
+    this.amount=amount;
+    this.type=type;
   }
 
+  @override
   double? getMoney(){
-    return spentMoney;
+    return amount;
+  }
+
+  @override
+  double? amount;
+
+  @override
+  String? type;
+}
+
+class Earning implements Money{
+  @override
+  double? getMoney(){
+    return amount;
+  }
+
+  @override
+  double? amount;
+
+  @override
+  String? type;
+
+  Earning(double amount, {String type='Normal'}){
+    this.amount=amount;
+    this.type=type;
   }
 }
 
 void sortSpending(List<Spending> spendings){ //item nay de dai dien hien thi mot cái spending
-  spendings.sort((Spending a, Spending b) => (a.spentMoney=0 as double).compareTo(b.spentMoney=0));
+  spendings.sort((Spending a, Spending b) => (a.amount=0 as double).compareTo(b.amount=0));
 }
 
 //toi uu chi tieu sao de dat duoc chenh lech giua chi va thu la = diff
@@ -31,7 +55,7 @@ void optimizeSpendingToDiff(List<Spending> spendings, double diff){
   //ta se khong the cat giam Tien thue nha, Tien hoc phi, Tien phat
   //nen ta chi cat giam nhung cai nhu Du lich, An uong, Mua sam
   List<Spending> temp=spendings;
-  temp.sort((Spending a, Spending b) => (a.typeOfSpending!).compareTo(b.typeOfSpending!));
+  temp.sort((Spending a, Spending b) => (a.type!).compareTo(b.type!));
   //tao list tam de xu ly bang cach sort theo type of spending
   //de cac spending giong nhau se lien ke nhau
 }
@@ -42,25 +66,25 @@ void optimizeSpendingToPositive(List<Spending> spendings){
 }
 
 IconData getIcon(Spending spending){
-  if (spending.typeOfSpending==spendingCategories[0]){
+  if (spending.type==spendingCategories[0]){
     return Icons.fastfood;
   }
-  else if (spending.typeOfSpending==spendingCategories[1]){
+  else if (spending.type==spendingCategories[1]){
     return Icons.shopping_cart;
   }
-  else if (spending.typeOfSpending==spendingCategories[2]){
+  else if (spending.type==spendingCategories[2]){
     return Icons.house;
   }
-  else if (spending.typeOfSpending==spendingCategories[3]){
+  else if (spending.type==spendingCategories[3]){
     return Icons.school;
   }
-  else if (spending.typeOfSpending==spendingCategories[4]){
+  else if (spending.type==spendingCategories[4]){
     return Icons.attach_money;
   }
-  else if (spending.typeOfSpending==spendingCategories[5]){
+  else if (spending.type==spendingCategories[5]){
     return Icons.policy;
   }
-  else if (spending.typeOfSpending==spendingCategories[6]){
+  else if (spending.type==spendingCategories[6]){
     return Icons.travel_explore;
   }
   else{
@@ -107,7 +131,7 @@ class SpendingItem extends StatelessWidget {
                   'Số tiền ${spending.getMoney()}',
                 ),
                 Text(
-                  '${spending.typeOfSpending}'
+                  '${spending.type}'
                 ),
               ],
             ),
