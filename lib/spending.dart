@@ -8,17 +8,40 @@ import 'main.dart';
 abstract class Money{
   double? amount;
   String? type;
+  double? getMoney();
+  Money(double amount, {String type='Normal'});
+}
+
+class Spending implements Money{
+  @override
+  Money(double amount, {String type='Normal'}){
+    this.amount=amount;
+    this.type=type;
+  }
+
+  @override
+  double? amount;
+
+  @override
+  String? type;
+
+  @override
   double? getMoney(){
     return amount;
   }
-  Money(double amount, {String type='Normal'}){
+
+  Spending(double amount, {String type='Normal'}){
     this.amount=amount;
     this.type=type;
   }
 }
 
-class Spending extends Money{
-  Spending(super.amount, {String type='Normal'});
+class Earning implements Money{
+  @override
+  Money(double amount, {String type='Normal'}){
+    this.amount=amount;
+    this.type=type;
+  }
 
   @override
   double? amount;
@@ -26,95 +49,88 @@ class Spending extends Money{
   @override
   String? type;
 
-}
-
-class Earning extends Money{
   @override
-  double? amount;
+  double? getMoney(){
+    return amount;
+  }
 
-  @override
-  String? type;
-
-  Earning(super.amount, {String type='Normal'});
+  Earning(double amount, {String type='Normal'}){
+    this.amount=amount;
+    this.type=type;
+  }
 }
 
-abstract class AC<T> {
-  void add(double spentMoney, String? selectedCategory, List<T> list, BuildContext context) {
-    assert(T is Money); //dam bao T deu inherit tu abstract class Money
-    T newT;
-    if (selectedCategory!=null){
-      if (T is Spending){
-        newT = Spending(spentMoney,type: selectedCategory) as T; //day la cach dung optional parameter
-      }
-      else{
-        newT = Earning(spentMoney,type: selectedCategory) as T; //day la cach dung optional parameter
-      }
-    }
-    else{
-      if (T is Spending){
-        newT = Spending(spentMoney) as T; //day la cach dung optional parameter
-      }
-      else{
-        newT = Earning(spentMoney) as T; //day la cach dung optional parameter
-      }
-    }
-    list.add(newT);
-    if (T is Spending){
-      spent += (newT as Spending).getMoney()!;
-    }
-    else{
-      earned += (newT as Spending).getMoney()!;
-    }
-    addToDatabase(newT, database!); //dau ! o cuoi la null check
-    //bay gio ta phai ket noi voi firebase o day
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-      content: Text("Thêm thành công"),
-    ));
+void addSpending(double spentMoney, String? selectedCategory, List<Spending> list, BuildContext context){
+  Spending newSpending;
+  if (selectedCategory!=null){
+    newSpending = Spending(spentMoney,type: selectedCategory); //day la cach dung optional parameter
   }
-
-  void sort(List<T> list){ //item nay de dai dien hien thi mot cái spending
-    assert(T is Money);
-    if (T is Spending){
-      list.sort((T a , T b) => ((a as Spending).amount=0 as double).compareTo((b as Spending).amount=0));
-    }
-    else{
-      list.sort((T a , T b) => ((a as Earning).amount=0 as double).compareTo((b as Earning).amount=0));
-    }
+  else{
+    newSpending = Spending(spentMoney);
   }
-
-  void addToDatabase(T t, FirebaseFirestore db){
-    String collectionName;
-    assert(T is Money);
-    if (t is Spending){
-      collectionName=userId!+'spent';
-      final spendingString = {
-        "amount": (t as Spending).amount,
-        "type": (t as Spending).type.toString(),
-      };
-
-      db
-          .collection(collectionName??"")
-          .add(spendingString).then((documentSnapshot) =>
-          print("Added Data with ID: ${documentSnapshot.id}"));; //them vao firestore database
-      //dung add de no dat ten doc la mot random id
-    }
-    else{ //neu la earning
-      collectionName=userId!+'earned';
-      final earningString = {
-        "amount": (t as Earning).amount,
-        "type": (t as Earning).type.toString(),
-      };
-
-      db
-          .collection(collectionName??"")
-          .add(earningString).then((documentSnapshot) =>
-          print("Added Data with ID: ${documentSnapshot.id}"));; //them vao firestore database
-      //dung add de no dat ten doc la mot random id
-    }
-  }
-
+  list.add(newSpending);
+  spent+=spentMoney;
+  addSpendingToDatabase(newSpending, database!); //dau ! o cuoi la null check
+  //bay gio ta phai ket noi voi firebase o day
+  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+    content: Text("Thêm thành công"),
+  ));
 }
 
+void addEarning(double earnedMoney, String? selectedCategory, List<Earning> list, BuildContext context){
+  Earning newEarning;
+  if (selectedCategory!=null){
+    newEarning = Earning(earnedMoney,type: selectedCategory); //day la cach dung optional parameter
+  }
+  else{
+    newEarning = Earning(earnedMoney);
+  }
+  list.add(newEarning);
+  earned+=earnedMoney;
+  addEarningToDatabase(newEarning, database!); //dau ! o cuoi la null check
+  //bay gio ta phai ket noi voi firebase o day
+  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+    content: Text("Thêm thành công"),
+  ));
+}
+
+void sortSpending(List<Spending> list){
+  list.sort((Spending a , Spending b) => ((a).amount=0 as double).compareTo((b).amount=0));
+}
+
+void sortEarning(List<Earning> list){
+  list.sort((Earning a , Earning b) => ((a).amount=0 as double).compareTo((b).amount=0));
+}
+
+void addSpendingToDatabase(Spending spending, FirebaseFirestore db){
+  String collectionName;
+  collectionName=userId!+'spent';
+  final spendingString = {
+      "amount": spending.amount,
+      "type": spending.type.toString(),
+  };
+
+  db
+        .collection(collectionName??"")
+        .add(spendingString).then((documentSnapshot) =>
+        print("Added Data with ID: ${documentSnapshot.id}"));; //them vao firestore database
+    //dung add de no dat ten doc la mot random id
+}
+
+void addEarningToDatabase(Earning earning, FirebaseFirestore db){
+  String collectionName;
+  collectionName=userId!+'earned';
+  final earningString = {
+    "amount": earning.amount,
+    "type": earning.type.toString(),
+  };
+
+  db
+      .collection(collectionName??"")
+      .add(earningString).then((documentSnapshot) =>
+      print("Added Data with ID: ${documentSnapshot.id}"));; //them vao firestore database
+  //dung add de no dat ten doc la mot random id
+}
 
 
 //toi uu chi tieu sao de dat duoc chenh lech giua chi va thu la = diff

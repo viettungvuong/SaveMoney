@@ -11,23 +11,6 @@ import 'main.dart';
 
 List<String> spendingCategories=['Ăn uống','Mua sắm','Tiền thuê nhà','Tiền học phí','Trả tiền vay','Đóng phạt','Du lịch','Khác']; //danh sach cac loai tieu tien
 
-void addSpending(double spentMoney, String? selectedCategory, List<Spending> spendings, BuildContext context){ //them chi tieu
-  Spending newSpending;
-  if (selectedCategory!=null)
-       newSpending = Spending(spentMoney,type: selectedCategory); //day la cach dung optional parameter
-  else
-       newSpending = Spending(spentMoney);
-  spendings.add(newSpending);
-  spent+=newSpending.amount!;
-  addToDatabase(newSpending, database!); //dau ! o cuoi la null check
-  //bay gio ta phai ket noi voi firebase o day
-  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-    content: Text("Thêm thành công"),
-  ));
-}
-
-
-
 
 void reset(TextEditingController valueController, TextEditingController? valueController2){
   valueController.text='';
@@ -35,9 +18,6 @@ void reset(TextEditingController valueController, TextEditingController? valueCo
     valueController2.text='';
 }
 
-void addEarns(double earnedMoney, String? selectedCategory, List<Spending> spendings, BuildContext context){
-
-}
 
 class AddSpending extends StatefulWidget{
   const AddSpending({super.key});
