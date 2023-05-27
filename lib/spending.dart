@@ -70,11 +70,20 @@ abstract class AC<T> {
       content: Text("Thêm thành công"),
     ));
   }
+
+  void sort(List<T> list){ //item nay de dai dien hien thi mot cái spending
+    assert(T is Money);
+    if (T is Spending){
+      list.sort((T a , T b) => ((a as Spending).amount=0 as double).compareTo((b as Spending).amount=0));
+    }
+    else{
+      list.sort((T a , T b) => ((a as Earning).amount=0 as double).compareTo((b as Earning).amount=0));
+    }
+
+  }
 }
 
-void sortSpending(List<Spending> spendings){ //item nay de dai dien hien thi mot cái spending
-  spendings.sort((Spending a, Spending b) => (a.amount=0 as double).compareTo(b.amount=0));
-}
+
 
 //toi uu chi tieu sao de dat duoc chenh lech giua chi va thu la = diff
 void optimizeSpendingToDiff(List<Spending> spendings, double diff){
