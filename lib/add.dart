@@ -27,18 +27,7 @@ void addSpending(double spentMoney, String? selectedCategory, List<Spending> spe
 }
 
 
-void addToDatabase(Spending spending, FirebaseFirestore db){
-  final spendingString = {
-    "amount": spending.amount,
-    "type": spending.type.toString(),
-  };
 
-  db
-      .collection(userId??"")
-      .add(spendingString).then((documentSnapshot) =>
-      print("Added Data with ID: ${documentSnapshot.id}"));; //them vao firestore database
-  //dung add de no dat ten doc la mot random id
-}
 
 void reset(TextEditingController valueController, TextEditingController? valueController2){
   valueController.text='';

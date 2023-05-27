@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:save_money/add.dart';
@@ -79,8 +80,39 @@ abstract class AC<T> {
     else{
       list.sort((T a , T b) => ((a as Earning).amount=0 as double).compareTo((b as Earning).amount=0));
     }
-
   }
+
+  void addToDatabase(T t, FirebaseFirestore db){
+    String collectionName;
+    assert(T is Money);
+    if (t is Spending){
+      collectionName=userId!+'spent';
+      final spendingString = {
+        "amount": (t as Spending).amount,
+        "type": (t as Spending).type.toString(),
+      };
+
+      db
+          .collection(collectionName??"")
+          .add(spendingString).then((documentSnapshot) =>
+          print("Added Data with ID: ${documentSnapshot.id}"));; //them vao firestore database
+      //dung add de no dat ten doc la mot random id
+    }
+    else{
+      collectionName=userId!+'earned';
+      final earningString = {
+        "amount": (t as Earning).amount,
+        "type": (t as Earning).type.toString(),
+      };
+
+      db
+          .collection(collectionName??"")
+          .add(earningString).then((documentSnapshot) =>
+          print("Added Data with ID: ${documentSnapshot.id}"));; //them vao firestore database
+      //dung add de no dat ten doc la mot random id
+    }
+  }
+
 }
 
 
