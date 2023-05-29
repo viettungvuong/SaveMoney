@@ -322,21 +322,22 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ),
 
+            SizedBox(
+              height: 100,
+            ),
 
-            /*ListView.separated(    //Element-5
+
+            ListView.separated(
               shrinkWrap: true,  //this property is must when you put List/Grid View inside SingleChildScrollView
               physics: NeverScrollableScrollPhysics(), //this property is must when you put List/Grid View inside SingleChildScrollView
               itemCount: spendings.length,
-              /*itemBuilder: (context, i) {
-                return ListTile(
-                  title: Text(spendings[i].Title),
-                  subtitle: Text(listItems[i].Description),
-                );
-              },*/
+              itemBuilder: (context, i) {
+                return SpendingItem(spending: spendings[i]);
+              },
               separatorBuilder: (context, i) {
                 return Divider();
               },
-            ),*/
+            ),
 
           ],
         ),
