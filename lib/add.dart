@@ -194,7 +194,7 @@ class _AddPageState extends State<AddSpending> {
                     },
                   )),
 
-            SizedBox(height: 300), // thêm khoảng trăng giữa 2 widget//number-
+            SizedBox(height: 50), // thêm khoảng trăng giữa 2 widget//number-
 
             IconButton(onPressed: () {
               addSpending(spentMoney, selectedCategory, spendings, context); //lamda functikon
@@ -202,6 +202,18 @@ class _AddPageState extends State<AddSpending> {
             }, icon: Icon(Icons.add),
               color: Colors.red,
             ), //them button de add spending// only text box
+
+            SizedBox(height: 50),
+
+            Expanded(
+              child: ListView.builder(
+                itemCount: spendings.length,
+                itemBuilder: (context, i) {
+                  return SpendingItem(spending: spendings[i]);
+                },
+              ),
+            ),
+
 
           ],
         ),

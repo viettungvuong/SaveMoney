@@ -330,14 +330,6 @@ class _MyHomePageState extends State<MyHomePage> {
               height: 100,
             ),
 
-            Expanded(
-              child: ListView.builder(
-                itemCount: spendings.length,
-                itemBuilder: (context, i) {
-                  return SpendingItem(spending: spendings[i]);
-                },
-              ),
-            ),
 
 
           ],
