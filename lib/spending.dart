@@ -153,25 +153,22 @@ void optimizeSpendingToPositive(List<Spending> spendings){
 
 IconData getIcon2(Earning earning){
   if (earning.type==earningCategories[0]){
-    return Icons.fastfood;
+    return Icons.work;
   }
   else if (earning.type==earningCategories[1]){
-    return Icons.shopping_cart;
+    return Icons.monetization_on;
   }
   else if (earning.type==earningCategories[2]){
     return Icons.house;
   }
   else if (earning.type==earningCategories[3]){
-    return Icons.school;
+    return Icons.celebration;
   }
   else if (earning.type==earningCategories[4]){
-    return Icons.attach_money;
+    return Icons.card_giftcard;
   }
   else if (earning.type==earningCategories[5]){
-    return Icons.policy;
-  }
-  else if (earning.type==earningCategories[6]){
-    return Icons.travel_explore;
+    return Icons.keyboard_return;
   }
   else{
     return Icons.money;
