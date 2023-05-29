@@ -25,6 +25,7 @@ String? userId; //id nay quan trong de luu database
 List<Spending> spendings=[]; //danh sach cac khoan chi tieu
 List<Earning> earnings=[]; //danh sach cac nguon thu
 
+
 double spent=0;
 double earned=0;
 
@@ -85,8 +86,6 @@ Future<void> main() async {
        //exception
     }
   }
-
-
 }
 
 class MyApp extends StatelessWidget {
@@ -107,7 +106,7 @@ class MyApp extends StatelessWidget {
         // or simply save your changes to "hot reload" in a Flutter IDE).
         // Notice that the counter didn't reset back to zero; the application
         // is not restarted.
-        primarySwatch: Colors.red,
+        primarySwatch: Colors.indigo,
       ),
       home: const MyHomePage(),
     );
@@ -123,6 +122,11 @@ class MyDialog extends StatefulWidget {
 
 class _MyDialogState extends State<MyDialog> {
   final _textController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -213,7 +217,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-
     // This method is rerun every time setState is called, for instance as done
     // by the _incrementCounter method above.
     //

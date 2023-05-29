@@ -41,6 +41,11 @@ class _AddPageState extends State<AddSpending> {
   final TextEditingController _textEditingController2 = TextEditingController(); //cho textfield 2 neu co
 
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
