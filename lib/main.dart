@@ -23,6 +23,7 @@ User? currentUser; //user dang dang nhap
 String? userId; //id nay quan trong de luu database
 
 List<Spending> spendings=[]; //danh sach cac khoan chi tieu
+List<Earning> earnings=[]; //danh sach cac nguon thu
 
 double spent=0;
 double earned=0;

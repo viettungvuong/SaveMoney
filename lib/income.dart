@@ -214,7 +214,7 @@ class _AddPageState extends State<AddEarning> {
 
             Expanded(
               child: ListView.builder(
-                itemCount: spendings.length,
+                itemCount: earnings.length,
                 itemBuilder: (context, i) {
                   return SpendingItem(spending: spendings[i]);
                 },
