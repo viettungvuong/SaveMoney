@@ -51,6 +51,23 @@ Future<void> initializeSpendings(List<Spending> spendings)async {
   //them await de doi no doc het xong roi moi ket thuc
 }
 
+Future<void> initializeEarnings(List<Earning> earnings)async {
+  String collectionName=userId!+"earned";
+  await database?.collection(collectionName).get().then(
+        (querySnapshot) {
+      for (var docSnapshot in querySnapshot.docs) {
+        double amount = docSnapshot.data()['amount'];
+        String typeOfSpending = docSnapshot.data()['type'];
+        earnings.add(new Earning(amount,type: typeOfSpending));
+        print(amount);
+        earned+=amount; //them vao so tien da chi
+      }
+    },
+    onError: (e) => print("Lỗi: $e"),
+  );
+  //them await de doi no doc het xong roi moi ket thuc
+}
+
 
 Future<void> main() async {
 
