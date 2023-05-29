@@ -323,7 +323,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
 
 
-            /*SearchableList<Spending>(
+            SearchableList<Spending>(
               initialList: spendings,
               builder: (Spending spending)=>SpendingItem(spending: spending),
               inputDecoration: InputDecoration(
@@ -336,7 +336,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                   borderRadius: BorderRadius.circular(10.0),
                 ),
-              ),),*/
+              ),),
 
           ],
         ),
