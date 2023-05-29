@@ -7,10 +7,10 @@ import 'package:flutter/services.dart';
 import 'package:save_money/spending.dart';
 import 'package:selection_menu/components_configurations.dart';
 import 'package:selection_menu/selection_menu.dart';
-import 'income.dart';
+import 'add.dart';
 import 'main.dart';
 
-List<String> spendingCategories=['Ăn uống','Mua sắm','Tiền thuê nhà','Tiền học phí','Trả tiền vay','Đóng phạt','Du lịch','Khác']; //danh sach cac loai tieu tien
+List<String> earningCategories=['Tiền lương','Nhận lãi','Tiền thuê nhà','Học bổng','Tặng','Hoàn tiền','Khác']; //danh sach cac loai tieu tien
 
 
 void reset(TextEditingController valueController, TextEditingController? valueController2){
@@ -20,17 +20,17 @@ void reset(TextEditingController valueController, TextEditingController? valueCo
 }
 
 
-class AddSpending extends StatefulWidget{
-  const AddSpending({super.key});
+class AddEarning extends StatefulWidget{
+  const AddEarning({super.key});
 
   @override
-  State<AddSpending> createState() => _AddPageState();
+  State<AddEarning> createState() => _AddPageState();
 }
 
-class _AddPageState extends State<AddSpending> {
+class _AddPageState extends State<AddEarning> {
   double spentMoney = 0,
       optionalFee = 0;
-  String selectedCategory=spendingCategories[0];
+  String selectedCategory=earningCategories[0];
   bool secondaryTextField = false;
 
   final TextEditingController _textEditingController = TextEditingController(); //textcontroller de dieu khien data tu textfield
@@ -108,7 +108,7 @@ class _AddPageState extends State<AddSpending> {
 
             DropdownButton2(
               value: selectedCategory, //vat duoc chon
-              items: spendingCategories.map((category) =>
+              items: earningCategories.map((category) =>
                   DropdownMenuItem<
                       String>( //doi list<string> thanh list dropdownmenuitem
                     value: category, //tham so dropdownmenuitem

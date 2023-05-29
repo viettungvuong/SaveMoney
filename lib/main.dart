@@ -8,6 +8,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:save_money/add.dart';
 import 'package:save_money/userPage.dart';
 import 'firebase_options.dart';
+import 'income.dart';
 import 'spending.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:searchable_listview/searchable_listview.dart';
@@ -245,6 +246,14 @@ class _MyHomePageState extends State<MyHomePage> {
                 );
                 break;
               }
+              case 2:{
+                //neu bam add
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const AddEarning()),
+                );
+                break;
+              }
             }
           });
         },
@@ -270,6 +279,8 @@ class _MyHomePageState extends State<MyHomePage> {
             label: '$thirdPage',
             backgroundColor: Colors.pink,
           ),
+
+
         ],
       ),
 
