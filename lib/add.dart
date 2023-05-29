@@ -29,7 +29,7 @@ class AddSpending extends StatefulWidget{
 class _AddPageState extends State<AddSpending> {
   double spentMoney = 0,
       optionalFee = 0;
-  String? selectedCategory;
+  String selectedCategory=spendingCategories[0];
   bool secondaryTextField = false;
 
   final TextEditingController _textEditingController = TextEditingController(); //textcontroller de dieu khien data tu textfield
