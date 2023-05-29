@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:save_money/add.dart';
 
+import 'income.dart';
 import 'main.dart';
 
 abstract class Money{
@@ -150,6 +151,34 @@ void optimizeSpendingToPositive(List<Spending> spendings){
 
 }
 
+IconData getIcon2(Earning earning){
+  if (earning.type==earningCategories[0]){
+    return Icons.fastfood;
+  }
+  else if (earning.type==earningCategories[1]){
+    return Icons.shopping_cart;
+  }
+  else if (earning.type==earningCategories[2]){
+    return Icons.house;
+  }
+  else if (earning.type==earningCategories[3]){
+    return Icons.school;
+  }
+  else if (earning.type==earningCategories[4]){
+    return Icons.attach_money;
+  }
+  else if (earning.type==earningCategories[5]){
+    return Icons.policy;
+  }
+  else if (earning.type==earningCategories[6]){
+    return Icons.travel_explore;
+  }
+  else{
+    return Icons.money;
+  }
+
+}
+
 IconData getIcon(Spending spending){
   if (spending.type==spendingCategories[0]){
     return Icons.fastfood;
@@ -217,6 +246,55 @@ class SpendingItem extends StatelessWidget {
                 ),
                 Text(
                   '${spending.type}'
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class EarningItem extends StatelessWidget {
+  final Earning earning;
+
+  const EarningItem({
+    Key? key,
+    required this.earning, //bat buoc phai co
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Container(
+        height: 60,
+        decoration: BoxDecoration(
+          color: Colors.grey[200],
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: Row(
+          children: [
+            const SizedBox(
+              width: 10,
+            ),
+            Icon(
+              getIcon2(earning), //lay icon phu thuoc vao spending
+              color: Colors.yellow[700],
+            ),
+            const SizedBox(
+              width: 10,
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  'Số tiền ${earning.getMoney()}',
+                ),
+                Text(
+                    '${earning.type}'
                 ),
               ],
             ),
