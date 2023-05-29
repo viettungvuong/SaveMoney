@@ -81,13 +81,13 @@ class _AddPageState extends State<AddSpending> {
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
-            label: 'Trang chủ',
+            label: '$firstPage',
             backgroundColor: Colors.pink,
           ),
 
           BottomNavigationBarItem(
             icon: Icon(Icons.add),
-            label: 'Thêm chi tiêu',
+            label: '$secondPage',
             backgroundColor: Colors.pink,
           ),
         ],

@@ -12,6 +12,10 @@ import 'spending.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:searchable_listview/searchable_listview.dart';
 
+const String firstPage='Trang chủ';
+const String secondPage='Chi tiêu';
+const String thirdPage='Nguồn thu';
+
 int selectedIndex=0; //index tren bottom menu bar
 FirebaseFirestore? database; //dung firebase database
 User? currentUser; //user dang dang nhap
@@ -251,13 +255,13 @@ class _MyHomePageState extends State<MyHomePage> {
         items: <BottomNavigationBarItem>[
         BottomNavigationBarItem(
           icon: Icon(Icons.home),
-          label: 'Trang chủ',
+          label: '$firstPage',
           backgroundColor: Colors.pink,
         ),
 
           BottomNavigationBarItem(
             icon: Icon(Icons.add),
-            label: 'Thêm chi tiêu',
+            label: '$secondPage',
             backgroundColor: Colors.pink,
           ),
         ],
