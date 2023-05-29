@@ -92,7 +92,8 @@ Future<void> main() async {
        //neu co id token thi tien hanh auto login vao man hinh chinh luon
         currentUser=user;
         userId=user.uid;
-        await initializeSpendings(spendings); //doi xong
+        await initializeSpendings(spendings); //doi xong (await)
+        await initializeEarnings(earnings);
         runApp(const MyApp());
       }
       else{
