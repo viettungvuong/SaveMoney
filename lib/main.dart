@@ -260,12 +260,17 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
 
           BottomNavigationBarItem(
-            icon: Icon(Icons.add),
+            icon: Icon(Icons.money_off),
             label: '$secondPage',
             backgroundColor: Colors.pink,
           ),
-        ],
 
+          BottomNavigationBarItem(
+            icon: Icon(Icons.monetization_on),
+            label: '$thirdPage',
+            backgroundColor: Colors.pink,
+          ),
+        ],
       ),
 
       body: Center(
