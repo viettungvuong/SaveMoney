@@ -232,7 +232,7 @@ class SpendingItem extends StatelessWidget {
             ),
             Icon(
               getIcon(spending), //lay icon phu thuoc vao spending
-              color: Colors.yellow[700],
+              color: Colors.red,
             ),
             const SizedBox(
               width: 10,
@@ -281,7 +281,7 @@ class EarningItem extends StatelessWidget {
             ),
             Icon(
               getIcon2(earning), //lay icon phu thuoc vao spending
-              color: Colors.yellow[700],
+              color: Colors.green,
             ),
             const SizedBox(
               width: 10,

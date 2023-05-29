@@ -216,7 +216,7 @@ class _AddPageState extends State<AddEarning> {
               child: ListView.builder(
                 itemCount: earnings.length,
                 itemBuilder: (context, i) {
-                  return SpendingItem(spending: spendings[i]);
+                  return EarningItem(earning: earnings[i]);
                 },
               ),
             ),
