@@ -176,7 +176,7 @@ IconData getIcon2(Earning earning){
   else{
     return Icons.money;
   }
-
+ //phai chinh lai no lay ra icon nao
 }
 
 IconData getIcon(Spending spending){

@@ -13,10 +13,14 @@ import 'main.dart';
 List<String> earningCategories=['Tiền lương','Nhận lãi','Tiền thuê nhà','Học bổng','Tặng','Hoàn tiền','Khác']; //danh sach cac loai tieu tien
 
 
-void reset(TextEditingController valueController, TextEditingController? valueController2){
+void reset(TextEditingController valueController, TextEditingController? valueController2, BuildContext context){
   valueController.text='';
   if (valueController2!=null)
     valueController2.text='';
+  Navigator.push(
+    context,
+    MaterialPageRoute(builder: (context) => const AddEarning()),
+  );
 }
 
 
@@ -28,7 +32,7 @@ class AddEarning extends StatefulWidget{
 }
 
 class _AddPageState extends State<AddEarning> {
-  double spentMoney = 0,
+  double earnedMoney = 0,
       optionalFee = 0;
   String selectedCategory=earningCategories[0];
   bool secondaryTextField = false;
@@ -55,6 +59,10 @@ class _AddPageState extends State<AddEarning> {
               case 0:
                 {
                   //neu bam home
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const MyApp()),
+                  );
                   break;
                 }
               case 1:{
@@ -67,10 +75,6 @@ class _AddPageState extends State<AddEarning> {
               }
               case 2:{
                 //neu bam add
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const AddEarning()),
-                );
                 break;
               }
             }
@@ -160,7 +164,7 @@ class _AddPageState extends State<AddEarning> {
                           _textEditingController.text = 0.toString();
                         }
                         else {
-                          spentMoney = double.parse(value);
+                          earnedMoney = double.parse(value);
                         }
                       }
                     });
@@ -204,8 +208,8 @@ class _AddPageState extends State<AddEarning> {
             SizedBox(height: 50), // thêm khoảng trăng giữa 2 widget//number-
 
             IconButton(onPressed: () {
-              addSpending(spentMoney, selectedCategory, spendings, context); //lamda functikon
-              reset(_textEditingController,_textEditingController2); //reset lai cac o so sau khi bam add
+              addEarning(earnedMoney, selectedCategory, earnings, context); //lamda functikon
+              reset(_textEditingController,_textEditingController2,context); //reset lai cac o so sau khi bam add
             }, icon: Icon(Icons.add),
               color: Colors.red,
             ), //them button de add spending// only text box

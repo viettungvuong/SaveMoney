@@ -13,10 +13,14 @@ import 'main.dart';
 List<String> spendingCategories=['Ăn uống','Mua sắm','Tiền thuê nhà','Tiền học phí','Trả tiền vay','Đóng phạt','Du lịch','Khác']; //danh sach cac loai tieu tien
 
 
-void reset(TextEditingController valueController, TextEditingController? valueController2){
+void reset(TextEditingController valueController, TextEditingController? valueController2, BuildContext context){
   valueController.text='';
   if (valueController2!=null)
     valueController2.text='';
+  Navigator.push(
+    context,
+    MaterialPageRoute(builder: (context) => const AddSpending()),
+  );
 }
 
 
@@ -55,14 +59,15 @@ class _AddPageState extends State<AddSpending> {
               case 0:
                 {
                   //neu bam home
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const MyApp()),
+                  );
                   break;
                 }
               case 1:{
                 //neu bam add
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const AddSpending()),
-                );
+
                 break;
               }
               case 2:{
@@ -205,7 +210,7 @@ class _AddPageState extends State<AddSpending> {
 
             IconButton(onPressed: () {
               addSpending(spentMoney, selectedCategory, spendings, context); //lamda functikon
-              reset(_textEditingController,_textEditingController2); //reset lai cac o so sau khi bam add
+              reset(_textEditingController,_textEditingController2,context); //reset lai cac o so sau khi bam add
             }, icon: Icon(Icons.add),
               color: Colors.red,
             ), //them button de add spending// only text box
