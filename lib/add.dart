@@ -220,10 +220,11 @@ class _AddPageState extends State<AddSpending> {
               color: Colors.red,
             ), //them button de add spending// only text box
 
-            Text(
-              'Chi tiêu: $spent VNĐ',
-              style: TextStyle(color: Colors.red, fontSize: 20),
-            ),
+            Row( mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+              Text("Chi tiêu: ", style: TextStyle(color: Colors.red, fontSize: 20, fontWeight: FontWeight.bold),),
+              Text("$spent VNĐ", style: TextStyle(color: Colors.red, fontSize: 20),)
+            ]),
 
             SizedBox(height: 50),
 

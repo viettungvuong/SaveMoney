@@ -219,10 +219,12 @@ class _AddPageState extends State<AddEarning> {
               color: Colors.green,
             ), //them button de add spending// only text box
 
-            Text(
-              'Thu vào: $earned VNĐ',
-              style: TextStyle(color: Colors.green, fontSize: 20),
-            ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                Text("Thu vào: ", style: TextStyle(color: Colors.green, fontSize: 20, fontWeight: FontWeight.bold),),
+                Text("$earned VNĐ", style: TextStyle(color: Colors.green, fontSize: 20),)
+            ]),
 
             SizedBox(height: 50),
 
