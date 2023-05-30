@@ -16,6 +16,7 @@ import 'package:searchable_listview/searchable_listview.dart';
 const String firstPage='Trang chủ';
 const String secondPage='Chi tiêu';
 const String thirdPage='Nguồn thu';
+const MaterialColor colorBar=Colors.cyan;
 
 int selectedIndex=0; //index tren bottom menu bar
 FirebaseFirestore? database; //dung firebase database
@@ -248,7 +249,7 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: selectedIndex,
-        selectedItemColor: Colors.pink,
+        selectedItemColor: colorBar,
 
         onTap: (value){
           setState(() {
@@ -287,19 +288,19 @@ class _MyHomePageState extends State<MyHomePage> {
         BottomNavigationBarItem(
           icon: Icon(Icons.home),
           label: '$firstPage',
-          backgroundColor: Colors.pink,
+          backgroundColor: colorBar,
         ),
 
           BottomNavigationBarItem(
             icon: Icon(Icons.money_off),
             label: '$secondPage',
-            backgroundColor: Colors.pink,
+            backgroundColor: colorBar,
           ),
 
           BottomNavigationBarItem(
             icon: Icon(Icons.monetization_on),
             label: '$thirdPage',
-            backgroundColor: Colors.pink,
+            backgroundColor: colorBar,
           ),
 
 

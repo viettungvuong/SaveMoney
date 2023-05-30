@@ -54,7 +54,7 @@ class _AddPageState extends State<AddEarning> {
       ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: selectedIndex,
-        selectedItemColor: Colors.pink,
+        selectedItemColor: colorBar,
 
         onTap: (value){
           setState(() {
@@ -93,19 +93,19 @@ class _AddPageState extends State<AddEarning> {
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: '$firstPage',
-            backgroundColor: Colors.pink,
+            backgroundColor: colorBar,
           ),
 
           BottomNavigationBarItem(
             icon: Icon(Icons.money_off),
             label: '$secondPage',
-            backgroundColor: Colors.pink,
+            backgroundColor: colorBar,
           ),
 
           BottomNavigationBarItem(
             icon: Icon(Icons.monetization_on),
             label: '$thirdPage',
-            backgroundColor: Colors.pink,
+            backgroundColor: colorBar,
           ),
         ],
       ),
