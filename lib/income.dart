@@ -216,8 +216,13 @@ class _AddPageState extends State<AddEarning> {
               addEarning(earnedMoney, selectedCategory, earnings, context); //lamda functikon
               reset(_textEditingController,_textEditingController2,context); //reset lai cac o so sau khi bam add
             }, icon: Icon(Icons.add),
-              color: Colors.red,
+              color: Colors.green,
             ), //them button de add spending// only text box
+
+            Text(
+              'Thu vào: $earned VNĐ',
+              style: TextStyle(color: Colors.green, fontSize: 20),
+            ),
 
             SizedBox(height: 50),
 
