@@ -225,6 +225,7 @@ class _AddPageState extends State<AddEarning> {
                 Text("Thu vào: ", style: TextStyle(color: Colors.green, fontSize: 20, fontWeight: FontWeight.bold),),
                 Text("$earned VNĐ", style: TextStyle(color: Colors.green, fontSize: 20),)
             ]),
+
             
             SizedBox(height: 50),
 
