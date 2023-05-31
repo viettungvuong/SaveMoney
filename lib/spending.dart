@@ -14,11 +14,6 @@ abstract class Money{
 }
 
 class Spending implements Money{
-  @override
-  Money(double amount, {String type='Normal'}){
-    this.amount=amount;
-    this.type=type;
-  }
 
   @override
   double? amount;
@@ -38,11 +33,6 @@ class Spending implements Money{
 }
 
 class Earning implements Money{
-  @override
-  Money(double amount, {String type='Normal'}){
-    this.amount=amount;
-    this.type=type;
-  }
 
   @override
   double? amount;
