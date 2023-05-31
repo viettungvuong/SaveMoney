@@ -26,6 +26,11 @@ String? userId; //id nay quan trong de luu database
 List<Spending> spendings=[]; //danh sach cac khoan chi tieu
 List<Earning> earnings=[]; //danh sach cac nguon thu
 
+DateTime now=DateTime.now();
+int month=now.month;
+int day=now.day;
+int year=now.year;
+String dateString=day.toString()+"-"+month.toString()+"-"+year.toString();
 
 double spent=0;
 double earned=0;
