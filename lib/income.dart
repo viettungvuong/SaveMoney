@@ -45,21 +45,21 @@ class _AddPageState extends State<AddEarning> {
 
   Future<void> filterEarning(List<Earning> earnings, String date)async {
     String collectionName=userId!+"earned";
-    setState(() async {
       await database?.collection(collectionName).where("date", arrayContains: date).get().then(
             (querySnapshot) {
           for (var docSnapshot in querySnapshot.docs) {
             double amount = docSnapshot.data()['amount'];
             String typeOfSpending = docSnapshot.data()['type'];
             DateTime date=docSnapshot.data()['date']??now;
-            earnings.add(new Earning(amount,date,type: typeOfSpending));
+            setState(() {
+              earnings.add(new Earning(amount,date,type: typeOfSpending));
+            });
             print(amount);
             earned+=amount; //them vao so tien da chi
           }
         },
         onError: (e) => print("Lỗi: $e"),
       );
-    });
 
     //them await de doi no doc het xong roi moi ket thuc
   }
