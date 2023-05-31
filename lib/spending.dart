@@ -245,6 +245,9 @@ class SpendingItem extends StatelessWidget {
                 Text(
                   '${spending.type}'
                 ),
+                Text(
+                  '${convertDateToString(spending.date!)}'
+                ),
               ],
             ),
           ],
@@ -293,6 +296,9 @@ class EarningItem extends StatelessWidget {
                 ),
                 Text(
                     '${earning.type}'
+                ),
+                Text(
+                    '${convertDateToString(earning.date!)}'
                 ),
               ],
             ),
