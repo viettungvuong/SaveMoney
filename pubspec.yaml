@@ -45,6 +45,7 @@ dependencies:
   firebase_auth: ^4.6.0
   cloud_firestore: ^4.7.1
   searchable_listview: ^2.4.0
+  date_time_picker: ^2.1.0
 
 
 dev_dependencies:
