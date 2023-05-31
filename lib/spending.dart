@@ -101,6 +101,7 @@ void addSpendingToDatabase(Spending spending, FirebaseFirestore db){
   final spendingString = {
       "amount": spending.amount,
       "type": spending.type.toString(),
+      "date": dateString, //ngay 
   };
 
   db
@@ -116,6 +117,7 @@ void addEarningToDatabase(Earning earning, FirebaseFirestore db){
   final earningString = {
     "amount": earning.amount,
     "type": earning.type.toString(),
+    "date": dateString,
   };
 
   db
