@@ -281,7 +281,7 @@ class EarningItem extends StatelessWidget {
               width: 10,
             ),
             Icon(
-              getIcon2(earning), //lay icon phu thuoc vao spending
+              getIcon2(earning), //lay icon phu thuoc vao earning
               color: Colors.green,
             ),
             const SizedBox(
