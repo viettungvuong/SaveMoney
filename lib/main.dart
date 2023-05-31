@@ -47,7 +47,8 @@ Future<void> initializeSpendings(List<Spending> spendings)async {
       for (var docSnapshot in querySnapshot.docs) {
         double amount = docSnapshot.data()['amount'];
         String typeOfSpending = docSnapshot.data()['type'];
-        spendings.add(new Spending(amount,type: typeOfSpending));
+        DateTime date=docSnapshot.data()['date']??now;
+        spendings.add(new Spending(amount,date,type: typeOfSpending));
         print(amount);
         spent+=amount; //them vao so tien da chi
       }
@@ -64,7 +65,8 @@ Future<void> initializeEarnings(List<Earning> earnings)async {
       for (var docSnapshot in querySnapshot.docs) {
         double amount = docSnapshot.data()['amount'];
         String typeOfSpending = docSnapshot.data()['type'];
-        earnings.add(new Earning(amount,type: typeOfSpending));
+        DateTime date=docSnapshot.data()['date']??now;
+        earnings.add(new Earning(amount,date,type: typeOfSpending));
         print(amount);
         earned+=amount; //them vao so tien da chi
       }
@@ -216,19 +218,6 @@ class _MyHomePageState extends State<MyHomePage> {
   double balance=0;
   double target=0;
 
-  void addToBalance(double money){
-    setState(() {
-      balance+=money;
-
-      spendings.add(Spending(money)); //them vao list danh sach cac spending
-    });
-  }
-
-  void setBalance(double money){
-    setState(() {
-      target=money;
-    });
-  }
 
   void SortSpending(){
     //quick sort
