@@ -10,6 +10,7 @@ abstract class Money{
   double? amount;
   String? type;
   double? getMoney();
+  DateTime? date;
   Money(double amount, {String type='Normal'});
 }
 
@@ -20,6 +21,9 @@ class Spending implements Money{
 
   @override
   String? type;
+
+  @override
+  DateTime? date;
 
   @override
   double? getMoney(){
@@ -39,6 +43,9 @@ class Earning implements Money{
 
   @override
   String? type;
+
+  @override
+  DateTime? date;
 
   @override
   double? getMoney(){
@@ -101,7 +108,7 @@ void addSpendingToDatabase(Spending spending, FirebaseFirestore db){
   final spendingString = {
       "amount": spending.amount,
       "type": spending.type.toString(),
-      "date": dateString, //ngay 
+      "date": dateString, //ngay
   };
 
   db

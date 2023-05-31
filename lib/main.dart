@@ -27,10 +27,6 @@ List<Spending> spendings=[]; //danh sach cac khoan chi tieu
 List<Earning> earnings=[]; //danh sach cac nguon thu
 
 DateTime now=DateTime.now();
-int month=now.month;
-int day=now.day;
-int year=now.year;
-String dateString=day.toString()+"-"+month.toString()+"-"+year.toString();
 
 double spent=0;
 double earned=0;
@@ -38,6 +34,10 @@ double earned=0;
 double getDiff(){
   return earned-spent;
 }
+
+String convertDateToString(DateTime date){
+  return date.day.toString()+"-"+date.month.toString()+"-"+date.year.toString();
+} //doi ngay thang qua string
 
 //cai nay phai dua vao mot thread rieng, doi cai nay xong roi moi mo app
 Future<void> initializeSpendings(List<Spending> spendings)async {
