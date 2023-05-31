@@ -89,7 +89,6 @@ Future<void> main() async {
   FirebaseAuth auth = FirebaseAuth.instance;
   User? user = auth.currentUser;
 
-
   if (user != null) { //session chua expire
     try {
       //kiem tra co id token khong
@@ -111,6 +110,9 @@ Future<void> main() async {
       print('Error');
        //exception
     }
+  }
+  else{
+    runApp(const LoginPage());
   }
 }
 
