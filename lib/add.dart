@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:date_time_picker/date_time_picker.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -228,6 +229,24 @@ class _AddPageState extends State<AddSpending> {
 
             SizedBox(height: 50),
 
+
+            Container(
+              margin: const EdgeInsets.only(left: 40.0, right: 40.0),
+              child: DateTimePicker(
+                initialValue: '',
+                firstDate: DateTime(2000),
+                lastDate: DateTime(2100),
+                dateLabelText: 'Date',
+                onChanged: (val) => print(val),
+                validator: (val) {
+                  print(val);
+                  return null;
+                },
+                onSaved: (val) => print(val),
+              ),
+            ),
+
+
             Expanded(
               child: ListView.builder(
                 itemCount: spendings.length,
@@ -236,6 +255,7 @@ class _AddPageState extends State<AddSpending> {
                 },
               ),
             ),
+
 
 
           ],
