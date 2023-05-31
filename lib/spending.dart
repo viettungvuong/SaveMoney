@@ -11,7 +11,7 @@ abstract class Money{
   String? type;
   double? getMoney();
   DateTime? date;
-  Money(double amount, {String type='Normal'});
+  Money(double amount, DateTime date, {String type='Normal'});
 }
 
 class Spending implements Money{
@@ -30,9 +30,10 @@ class Spending implements Money{
     return amount;
   }
 
-  Spending(double amount, {String type='Normal'}){
+  Spending(double amount, DateTime date, {String type='Normal'}){
     this.amount=amount;
     this.type=type;
+    this.date=date;
   }
 }
 
@@ -52,19 +53,20 @@ class Earning implements Money{
     return amount;
   }
 
-  Earning(double amount, {String type='Normal'}){
+  Earning(double amount, DateTime date, {String type='Normal'}){
     this.amount=amount;
     this.type=type;
+    this.date=date;
   }
 }
 
 void addSpending(double spentMoney, String? selectedCategory, List<Spending> list, BuildContext context){
   Spending newSpending;
   if (selectedCategory!=null){
-    newSpending = Spending(spentMoney,type: selectedCategory); //day la cach dung optional parameter
+    newSpending = Spending(spentMoney,now,type: selectedCategory); //day la cach dung optional parameter
   }
   else{
-    newSpending = Spending(spentMoney);
+    newSpending = Spending(spentMoney,now);
   }
   list.add(newSpending);
   spent+=spentMoney;
@@ -78,10 +80,10 @@ void addSpending(double spentMoney, String? selectedCategory, List<Spending> lis
 void addEarning(double earnedMoney, String? selectedCategory, List<Earning> list, BuildContext context){
   Earning newEarning;
   if (selectedCategory!=null){
-    newEarning = Earning(earnedMoney,type: selectedCategory); //day la cach dung optional parameter
+    newEarning = Earning(earnedMoney,now,type: selectedCategory); //day la cach dung optional parameter
   }
   else{
-    newEarning = Earning(earnedMoney);
+    newEarning = Earning(earnedMoney,now);
   }
   list.add(newEarning);
   earned+=earnedMoney;
@@ -108,7 +110,7 @@ void addSpendingToDatabase(Spending spending, FirebaseFirestore db){
   final spendingString = {
       "amount": spending.amount,
       "type": spending.type.toString(),
-      "date": dateString, //ngay
+      "date": convertDateToString(spending.date!), //ngay
   };
 
   db
@@ -124,7 +126,7 @@ void addEarningToDatabase(Earning earning, FirebaseFirestore db){
   final earningString = {
     "amount": earning.amount,
     "type": earning.type.toString(),
-    "date": dateString,
+    "date": convertDateToString(earning.date!),
   };
 
   db
