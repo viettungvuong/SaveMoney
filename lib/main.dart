@@ -39,23 +39,7 @@ String convertDateToString(DateTime date){
   return date.day.toString()+"-"+date.month.toString()+"-"+date.year.toString();
 } //doi ngay thang qua string
 
-Future<void> filterSpending(CollectionReference? collection, List<Spending> spendings, DateTime date)async {
-  String collectionName=userId!+"spent";
-  await database?.collection(collectionName).where("date", arrayContains: convertDateToString(date)).get().then(
-        (querySnapshot) {
-      for (var docSnapshot in querySnapshot.docs) {
-          double amount = docSnapshot.data()['amount'];
-          String typeOfSpending = docSnapshot.data()['type'];
-          DateTime date=docSnapshot.data()['date']??now;
-          spendings.add(new Spending(amount,date,type: typeOfSpending));
-          print(amount);
-          spent+=amount; //them vao so tien da chi
-        }
-    },
-    onError: (e) => print("Lỗi: $e"),
-  );
-  //them await de doi no doc het xong roi moi ket thuc
-}
+
 //cai nay phai dua vao mot thread rieng, doi cai nay xong roi moi mo app
 Future<void> initializeSpendings(List<Spending> spendings)async {
   String collectionName=userId!+"spent";
@@ -74,23 +58,7 @@ Future<void> initializeSpendings(List<Spending> spendings)async {
   );
   //them await de doi no doc het xong roi moi ket thuc
 }
-Future<void> filterEarning(CollectionReference collection, List<Earning> earnings, DateTime date)async {
-  String collectionName=userId!+"earned";
-  await database?.collection(collectionName).where("date", arrayContains: convertDateToString(date)).get().then(
-        (querySnapshot) {
-      for (var docSnapshot in querySnapshot.docs) {
-        double amount = docSnapshot.data()['amount'];
-        String typeOfSpending = docSnapshot.data()['type'];
-        DateTime date=docSnapshot.data()['date']??now;
-        earnings.add(new Earning(amount,date,type: typeOfSpending));
-        print(amount);
-        earned+=amount; //them vao so tien da chi
-      }
-    },
-    onError: (e) => print("Lỗi: $e"),
-  );
-  //them await de doi no doc het xong roi moi ket thuc
-}
+
 
 Future<void> initializeEarnings(List<Earning> earnings)async {
   String collectionName=userId!+"earned";

@@ -33,6 +33,8 @@ class AddSpending extends StatefulWidget{
 }
 
 class _AddPageState extends State<AddSpending> {
+  List<Spending> temp=spendings;
+
   double spentMoney = 0,
       optionalFee = 0;
   String selectedCategory=spendingCategories[0];
@@ -41,9 +43,25 @@ class _AddPageState extends State<AddSpending> {
   final TextEditingController _textEditingController = TextEditingController(); //textcontroller de dieu khien data tu textfield
   final TextEditingController _textEditingController2 = TextEditingController(); //cho textfield 2 neu co
 
-  @override
-  void initState() {
-    super.initState();
+  Future<void> filterSpending(List<Spending> spendings, String date)async {
+    String collectionName=userId!+"spent";
+    setState(() async {
+      await database?.collection(collectionName).where("date", arrayContains: date).get().then(
+      (querySnapshot) {
+      for (var docSnapshot in querySnapshot.docs) {
+      double amount = docSnapshot.data()['amount'];
+      String typeOfSpending = docSnapshot.data()['type'];
+      DateTime date=docSnapshot.data()['date']??now;
+      spendings.add(new Spending(amount,date,type: typeOfSpending));
+      print(amount);
+      spent+=amount; //them vao so tien da chi
+      }
+      },
+      onError: (e) => print("Lỗi: $e"),
+      );
+    });
+
+    //them await de doi no doc het xong roi moi ket thuc
   }
 
   @override
@@ -237,16 +255,16 @@ class _AddPageState extends State<AddSpending> {
                 firstDate: DateTime(2023),
                 lastDate: DateTime(2100),
                 dateLabelText: 'Ngày',
-                onChanged: (val) => print(val),
+                onChanged: (val) => filterSpending(temp, val),
               ),
             ),
 
 
             Expanded(
               child: ListView.builder(
-                itemCount: spendings.length,
+                itemCount: temp.length,
                 itemBuilder: (context, i) {
-                  return SpendingItem(spending: spendings[i]);
+                  return SpendingItem(spending: temp[i]);
                 },
               ),
             ),
@@ -258,12 +276,4 @@ class _AddPageState extends State<AddSpending> {
       ),
     );
   }
-}
-
-CollectionReference? filterSpending (DateTime date, FirebaseFirestore db){
-  String collectionName;
-  collectionName=userId!+'spent';
-  final collection = db.collection(collectionName??'');
-  collection.where("date", arrayContains: convertDateToString(date));
-  return collection;
 }

@@ -32,6 +32,8 @@ class AddEarning extends StatefulWidget{
 }
 
 class _AddPageState extends State<AddEarning> {
+  List<Earning> temp=earnings;
+
   double earnedMoney = 0,
       optionalFee = 0;
   String selectedCategory=earningCategories[0];
@@ -40,9 +42,28 @@ class _AddPageState extends State<AddEarning> {
   final TextEditingController _textEditingController = TextEditingController(); //textcontroller de dieu khien data tu textfield
   final TextEditingController _textEditingController2 = TextEditingController(); //cho textfield 2 neu co
 
-  @override
-  void initState() {
-    super.initState();
+
+  Future<void> filterEarning(List<Earning> earnings, String date)async {
+    String collectionName=userId!+"earned";
+    setState(() async {
+      await database?.collection(collectionName).where("date", arrayContains: date).get().then(
+            (querySnapshot) {
+          for (var docSnapshot in querySnapshot.docs) {
+            double amount = docSnapshot.data()['amount'];
+            String typeOfSpending = docSnapshot.data()['type'];
+            DateTime date=docSnapshot.data()['date']??now;
+            setState(){
+              earnings.add(new Earning(amount,date,type: typeOfSpending));
+            }
+            print(amount);
+            earned+=amount; //them vao so tien da chi
+          }
+        },
+        onError: (e) => print("Lỗi: $e"),
+      );
+    });
+
+    //them await de doi no doc het xong roi moi ket thuc
   }
 
   @override
@@ -231,9 +252,9 @@ class _AddPageState extends State<AddEarning> {
 
             Expanded(
               child: ListView.builder(
-                itemCount: earnings.length,
+                itemCount: temp.length,
                 itemBuilder: (context, i) {
-                  return EarningItem(earning: earnings[i]);
+                  return EarningItem(earning: temp[i]);
                 },
               ),
             ),
