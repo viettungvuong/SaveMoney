@@ -233,16 +233,11 @@ class _AddPageState extends State<AddSpending> {
             Container(
               margin: const EdgeInsets.only(left: 40.0, right: 40.0),
               child: DateTimePicker(
-                initialValue: '',
-                firstDate: DateTime(2000),
+                initialValue: convertDateToString(now),
+                firstDate: DateTime(2023),
                 lastDate: DateTime(2100),
-                dateLabelText: 'Date',
+                dateLabelText: 'Ngày',
                 onChanged: (val) => print(val),
-                validator: (val) {
-                  print(val);
-                  return null;
-                },
-                onSaved: (val) => print(val),
               ),
             ),
 
@@ -263,4 +258,12 @@ class _AddPageState extends State<AddSpending> {
       ),
     );
   }
+}
+
+CollectionReference? filterSpending (DateTime date, FirebaseFirestore db){
+  String collectionName;
+  collectionName=userId!+'spent';
+  final collection = db.collection(collectionName??'');
+  collection.where("date", arrayContains: convertDateToString(date));
+  return collection;
 }
