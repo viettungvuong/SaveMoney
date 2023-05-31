@@ -52,9 +52,7 @@ class _AddPageState extends State<AddEarning> {
             double amount = docSnapshot.data()['amount'];
             String typeOfSpending = docSnapshot.data()['type'];
             DateTime date=docSnapshot.data()['date']??now;
-            setState(){
-              earnings.add(new Earning(amount,date,type: typeOfSpending));
-            }
+            earnings.add(new Earning(amount,date,type: typeOfSpending));
             print(amount);
             earned+=amount; //them vao so tien da chi
           }

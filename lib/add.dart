@@ -43,24 +43,24 @@ class _AddPageState extends State<AddSpending> {
   final TextEditingController _textEditingController = TextEditingController(); //textcontroller de dieu khien data tu textfield
   final TextEditingController _textEditingController2 = TextEditingController(); //cho textfield 2 neu co
 
-  Future<void> filterSpending(List<Spending> spendings, String date)async {
+  Future<void> filterSpending(List<Spending> spendings, String date) async{
     String collectionName=userId!+"spent";
-    setState(() async {
       await database?.collection(collectionName).where("date", arrayContains: date).get().then(
       (querySnapshot) {
       for (var docSnapshot in querySnapshot.docs) {
       double amount = docSnapshot.data()['amount'];
       String typeOfSpending = docSnapshot.data()['type'];
       DateTime date=docSnapshot.data()['date']??now;
-      spendings.add(new Spending(amount,date,type: typeOfSpending));
+      setState(() {
+        spendings.add(new Spending(amount,date,type: typeOfSpending));
+      });
       print(amount);
       spent+=amount; //them vao so tien da chi
       }
       },
       onError: (e) => print("Lỗi: $e"),
       );
-    });
-
+    print(temp.length);
     //them await de doi no doc het xong roi moi ket thuc
   }
 
