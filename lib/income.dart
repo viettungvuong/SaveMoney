@@ -204,7 +204,7 @@ class _AddPageState extends State<AddEarning> {
                 child: TextField(
                   controller: _textEditingController,
                   decoration: InputDecoration(
-                    hintText: 'Số tiền đã chi',
+                    hintText: 'Số tiền đã nhận',
                   ),
                   keyboardType: TextInputType.number,
                   inputFormatters: <TextInputFormatter>[
