@@ -216,8 +216,6 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
-
-
 class _MyHomePageState extends State<MyHomePage> {
   double balance=0;
   double target=0;
@@ -301,7 +299,6 @@ class _MyHomePageState extends State<MyHomePage> {
             backgroundColor: colorBar,
           ),
 
-
         ],
       ),
 
@@ -366,8 +363,6 @@ class _MyHomePageState extends State<MyHomePage> {
             SizedBox(
               height: 100,
             ),
-
-
 
           ],
         ),

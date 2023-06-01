@@ -75,7 +75,7 @@ class _AddPageState extends State<AddSpending> {
 
   Future<void> filterSpending(List<Spending> spendings, String date) async {
     setState(() {
-      temp.clear();
+      spendings.clear();
     });
     String collectionName = userId! + "spent";
     await database
@@ -298,7 +298,10 @@ class _AddPageState extends State<AddSpending> {
                 firstDate: DateTime(2023),
                 lastDate: DateTime(2100),
                 dateLabelText: 'Ngày',
-                onChanged: (val) => filterSpending(temp, val),
+                onChanged: (val) => (){
+                  print(val);
+                  filterSpending(temp, val);
+                } ,
               ),
             ),
 
