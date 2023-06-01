@@ -293,6 +293,8 @@ String reformatNumber(int money){
     strings.removeLast();
   }
 
+  strings = List.from(strings.reversed);
+
   moneyString = strings.join();
   return moneyString;
   //no dang xuat nguoc
