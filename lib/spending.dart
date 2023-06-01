@@ -289,6 +289,12 @@ String reformatNumber(int money){
     strings.add(',');
   }
 
+  if (strings.elementAt(n)==','){
+    strings.removeLast();
+  }
+
   moneyString = strings.join();
   return moneyString;
+  //no dang xuat nguoc
+  //gio ta phai cho no xuat dung chieu
 }
