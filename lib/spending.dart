@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -277,8 +279,10 @@ class EarningItem extends StatelessWidget {
 }
 
 String reformatNumber(int money){
-  if (money<10)
+  if (money<=100)
     return money.toString();
+
+  print(money);
 
   String moneyString=money.toString();
 
@@ -286,16 +290,17 @@ String reformatNumber(int money){
 
   int n=moneyString.length-1;
   for (int i=n; i>=0; i-=3){
-    int start=(i-2>0)?i-2:0;
-    int end=(i+1>n+1)?n+1:i+1;
+    int start=max(i-2,0);
+    int end=min(n+1,i+1);
     String s = moneyString.substring(start,end);
+    print(s);
     strings.add(s);
 
     strings.add(',');
   }
 
-  if (strings.elementAt(n)==','){
-    strings.removeAt(n);
+  if (strings.elementAt(strings.length-1)==','){
+    strings.removeAt(strings.length-1);
   }
 
   strings = List.from(strings.reversed);
