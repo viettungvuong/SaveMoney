@@ -28,10 +28,10 @@ List<Earning> earnings=[]; //danh sach cac nguon thu
 
 DateTime now=DateTime.now();
 
-double spent=0;
-double earned=0;
+int spent=0;
+int earned=0;
 
-double getDiff(){
+int getDiff(){
   return earned-spent;
 }
 
@@ -91,7 +91,31 @@ Future<void> main() async {
   FirebaseAuth auth = FirebaseAuth.instance;
   User? user = auth.currentUser;
 
-  runApp(const LoginPage());
+  if (user != null) { //session chua expire
+    try {
+      //kiem tra co id token khong
+      IdTokenResult tokenResult = await user.getIdTokenResult();
+
+      //session nay chua expire
+      if (tokenResult.token != null) {
+       //neu co id token thi tien hanh auto login vao man hinh chinh luon
+        currentUser=user;
+        userId=user.uid;
+        await initializeSpendings(spendings); //doi xong (await)
+        await initializeEarnings(earnings);
+        runApp(const MyApp());
+      }
+      else{
+        runApp(const LoginPage());
+      }
+    } catch (e) {
+      print('Error');
+       //exception
+    }
+  }
+  else{
+    runApp(const LoginPage());
+  }
 }
 
 class MyApp extends StatelessWidget {
@@ -193,8 +217,8 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  double balance=0;
-  double target=0;
+  int balance=0;
+  int target=0;
 
 
   void SortSpending(){
@@ -319,7 +343,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
 
             Text(
-              '${getDiff()} VND', //xuat ra chenh lech
+              '${reformatNumber(getDiff())} VND', //xuat ra chenh lech
               style: Theme.of(context).textTheme.headlineMedium,
             ),
 
@@ -330,7 +354,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
             ),
             Text(
-              '$target VND',
+              '${reformatNumber(target)} VND',
               style: TextStyle(
                 fontSize: 18,
               ),

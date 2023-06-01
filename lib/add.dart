@@ -285,7 +285,7 @@ class _AddPageState extends State<AddSpending> {
                     fontWeight: FontWeight.bold),
               ),
               Text(
-                "$spent VNĐ",
+                '${reformatNumber(spent)} VNĐ',
                 style: TextStyle(color: Colors.red, fontSize: 20),
               )
             ]),
