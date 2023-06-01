@@ -278,12 +278,17 @@ class EarningItem extends StatelessWidget {
 
 String reformatNumber(double money){
   String moneyString=money.toString();
-  
+
+  List<String> strings=[];
+
   int n=moneyString.length-1;
   for (int i=n; i>=0; i-=3){
-    String temp = moneyString[i];
+    String s = moneyString.substring(i-3,i);
+    strings.add(s);
 
+    strings.add(',');
   }
 
+  moneyString = strings.join();
   return moneyString;
 }
