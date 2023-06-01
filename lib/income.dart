@@ -24,10 +24,10 @@ void reset(TextEditingController valueController,
     TextEditingController? valueController2, BuildContext context) {
   valueController.text = '';
   if (valueController2 != null) valueController2.text = '';
-  Navigator.push(
+  /*Navigator.push(
     context,
     MaterialPageRoute(builder: (context) => const AddEarning()),
-  );
+  );*/
 }
 
 class AddEarning extends StatefulWidget {
