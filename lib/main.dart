@@ -91,31 +91,7 @@ Future<void> main() async {
   FirebaseAuth auth = FirebaseAuth.instance;
   User? user = auth.currentUser;
 
-  if (user != null) { //session chua expire
-    try {
-      //kiem tra co id token khong
-      IdTokenResult tokenResult = await user.getIdTokenResult();
-
-      //session nay chua expire
-      if (tokenResult.token != null) {
-       //neu co id token thi tien hanh auto login vao man hinh chinh luon
-        currentUser=user;
-        userId=user.uid;
-        await initializeSpendings(spendings); //doi xong (await)
-        await initializeEarnings(earnings);
-        runApp(const MyApp());
-      }
-      else{
-        runApp(const LoginPage());
-      }
-    } catch (e) {
-      print('Error');
-       //exception
-    }
-  }
-  else{
-    runApp(const LoginPage());
-  }
+  runApp(const LoginPage());
 }
 
 class MyApp extends StatelessWidget {
