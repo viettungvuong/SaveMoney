@@ -207,7 +207,7 @@ class SpendingItem extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  'Số tiền ${spending.getMoney()}',
+                  'Số tiền ${spending.getMoney()} VNĐ',
                 ),
                 Text(
                   '${spending.type}'
@@ -259,7 +259,7 @@ class EarningItem extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  'Số tiền ${earning.getMoney()}',
+                  'Số tiền ${earning.getMoney()} VNĐ',
                 ),
                 Text(
                     '${earning.type}'
