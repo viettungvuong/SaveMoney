@@ -277,6 +277,9 @@ class EarningItem extends StatelessWidget {
 }
 
 String reformatNumber(int money){
+  if (money<10)
+    return money.toString();
+
   String moneyString=money.toString();
 
   List<String> strings=[];
@@ -284,7 +287,7 @@ String reformatNumber(int money){
   int n=moneyString.length-1;
   for (int i=n; i>=0; i-=3){
     int start=(i-2>0)?i-2:0;
-    int end=(i+1<n)?i+1:n;
+    int end=(i+1>n+1)?n+1:i+1;
     String s = moneyString.substring(start,end);
     strings.add(s);
 

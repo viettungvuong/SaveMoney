@@ -39,6 +39,13 @@ String convertDateToString(DateTime date){
   return date.day.toString()+"-"+date.month.toString()+"-"+date.year.toString();
 } //doi ngay thang qua string
 
+DateTime convertStringToDate(String date){
+  List<String> splitRes=date.split('-');
+  int month=int.parse(splitRes[1]);
+  int year=int.parse(splitRes[2]);
+  int day=int.parse(splitRes[0]);
+  return DateTime(year,month,day);
+}
 
 //cai nay phai dua vao mot thread rieng, doi cai nay xong roi moi mo app
 Future<void> initializeSpendings(List<Spending> spendings)async {
@@ -48,7 +55,7 @@ Future<void> initializeSpendings(List<Spending> spendings)async {
       for (var docSnapshot in querySnapshot.docs) {
         int amount = docSnapshot.data()['amount'];
         String typeOfSpending = docSnapshot.data()['type'];
-        DateTime date=docSnapshot.data()['date']??now;
+        DateTime date=convertStringToDate(docSnapshot.data()['date']!);
         spendings.add(new Spending(amount,date,type: typeOfSpending));
         print(amount);
         spent+=amount; //them vao so tien da chi
@@ -67,7 +74,7 @@ Future<void> initializeEarnings(List<Earning> earnings)async {
       for (var docSnapshot in querySnapshot.docs) {
         int amount = docSnapshot.data()['amount'];
         String typeOfSpending = docSnapshot.data()['type'];
-        DateTime date=docSnapshot.data()['date']??now;
+        DateTime date=convertStringToDate(docSnapshot.data()['date']!);
         earnings.add(new Earning(amount,date,type: typeOfSpending));
         print(amount);
         earned+=amount; //them vao so tien da chi
@@ -109,7 +116,7 @@ Future<void> main() async {
         runApp(const LoginPage());
       }
     } catch (e) {
-      print('Error');
+      print(e);
        //exception
     }
   }
