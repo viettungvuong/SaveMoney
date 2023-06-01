@@ -42,7 +42,7 @@ class AddSpending extends StatefulWidget {
 class _AddPageState extends State<AddSpending> {
 
 
-  double spentMoney = 0, optionalFee = 0;
+  int spentMoney = 0, optionalFee = 0;
   String selectedCategory = spendingCategories[0];
   bool secondaryTextField = false;
 
@@ -51,7 +51,7 @@ class _AddPageState extends State<AddSpending> {
   final TextEditingController _textEditingController2 =
       TextEditingController(); //cho textfield 2 neu co
 
-  void addSpending(double spentMoney, String? selectedCategory, List<Spending> list, BuildContext context){
+  void addSpending(int spentMoney, String? selectedCategory, List<Spending> list, BuildContext context){
     Spending newSpending;
     if (selectedCategory!=null){
       newSpending = Spending(spentMoney,now,type: selectedCategory); //day la cach dung optional parameter
@@ -85,7 +85,7 @@ class _AddPageState extends State<AddSpending> {
         .then(
       (querySnapshot) {
         for (var docSnapshot in querySnapshot.docs) {
-          double amount = docSnapshot.data()['amount'];
+          int amount = docSnapshot.data()['amount'];
           String typeOfSpending = docSnapshot.data()['type'];
           DateTime date = docSnapshot.data()['date'] ?? now;
           setState(() {
@@ -214,16 +214,16 @@ class _AddPageState extends State<AddSpending> {
                   ],
                   onChanged: (value) {
                     setState(() {
-                      if (double.tryParse(value) == null) {
+                      if (int.tryParse(value) == null) {
                         // xoa text field neu nhu khong phai la so
                         _textEditingController.clear();
                       } else {
-                        double intValue = double.parse(value);
+                        int intValue = int.parse(value);
                         if (intValue < 0) {
                           // Limit the value to the range of 0-100
                           _textEditingController.text = 0.toString();
                         } else {
-                          spentMoney = double.parse(value);
+                          spentMoney = int.parse(value);
                         }
                       }
                     });
@@ -256,7 +256,7 @@ class _AddPageState extends State<AddSpending> {
                             _textEditingController2.text =
                                 intValue.clamp(0, 100).toString();
                           } else {
-                            optionalFee = value as double;
+                            optionalFee = value as int;
                           }
                         }
                       });

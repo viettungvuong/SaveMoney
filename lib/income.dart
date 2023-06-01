@@ -40,7 +40,7 @@ class AddEarning extends StatefulWidget {
 class _AddPageState extends State<AddEarning> {
   List<Earning> temp = earnings;
 
-  double earnedMoney = 0, optionalFee = 0;
+  int earnedMoney = 0, optionalFee = 0;
   String selectedCategory = earningCategories[0];
   bool secondaryTextField = false;
 
@@ -49,7 +49,7 @@ class _AddPageState extends State<AddEarning> {
   final TextEditingController _textEditingController2 =
       TextEditingController(); //cho textfield 2 neu co
 
-  void addEarning(double earnedMoney, String? selectedCategory, List<Earning> list, BuildContext context){
+  void addEarning(int earnedMoney, String? selectedCategory, List<Earning> list, BuildContext context){
     Earning newEarning;
     if (selectedCategory!=null){
       newEarning = Earning(earnedMoney,now,type: selectedCategory); //day la cach dung optional parameter
@@ -84,7 +84,7 @@ class _AddPageState extends State<AddEarning> {
         .then(
       (querySnapshot) {
         for (var docSnapshot in querySnapshot.docs) {
-          double amount = docSnapshot.data()['amount'];
+          int amount = docSnapshot.data()['amount'];
           String typeOfSpending = docSnapshot.data()['type'];
           DateTime date = docSnapshot.data()['date'] ?? now;
           setState(() {
@@ -212,16 +212,16 @@ class _AddPageState extends State<AddEarning> {
                   ],
                   onChanged: (value) {
                     setState(() {
-                      if (double.tryParse(value) == null) {
+                      if (int.tryParse(value) == null) {
                         // xoa text field neu nhu khong phai la so
                         _textEditingController.clear();
                       } else {
-                        double intValue = double.parse(value);
+                        int intValue = int.parse(value);
                         if (intValue < 0) {
                           // Limit the value to the range of 0-100
                           _textEditingController.text = 0.toString();
                         } else {
-                          earnedMoney = double.parse(value);
+                          earnedMoney = int.parse(value);
                         }
                       }
                     });
@@ -254,7 +254,7 @@ class _AddPageState extends State<AddEarning> {
                             _textEditingController2.text =
                                 intValue.clamp(0, 100).toString();
                           } else {
-                            optionalFee = value as double;
+                            optionalFee = value as int;
                           }
                         }
                       });

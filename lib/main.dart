@@ -46,7 +46,7 @@ Future<void> initializeSpendings(List<Spending> spendings)async {
   await database?.collection(collectionName).get().then(
         (querySnapshot) {
       for (var docSnapshot in querySnapshot.docs) {
-        double amount = docSnapshot.data()['amount'];
+        int amount = docSnapshot.data()['amount'];
         String typeOfSpending = docSnapshot.data()['type'];
         DateTime date=docSnapshot.data()['date']??now;
         spendings.add(new Spending(amount,date,type: typeOfSpending));
@@ -65,7 +65,7 @@ Future<void> initializeEarnings(List<Earning> earnings)async {
   await database?.collection(collectionName).get().then(
         (querySnapshot) {
       for (var docSnapshot in querySnapshot.docs) {
-        double amount = docSnapshot.data()['amount'];
+        int amount = docSnapshot.data()['amount'];
         String typeOfSpending = docSnapshot.data()['type'];
         DateTime date=docSnapshot.data()['date']??now;
         earnings.add(new Earning(amount,date,type: typeOfSpending));

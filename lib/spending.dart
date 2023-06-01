@@ -7,17 +7,17 @@ import 'income.dart';
 import 'main.dart';
 
 abstract class Money{
-  double? amount;
+  int? amount;
   String? type;
-  double? getMoney();
+  int? getMoney();
   DateTime? date;
-  Money(double amount, DateTime date, {String type='Normal'});
+  Money(int amount, DateTime date, {String type='Normal'});
 }
 
 class Spending implements Money{
 
   @override
-  double? amount;
+  int? amount;
 
   @override
   String? type;
@@ -26,11 +26,11 @@ class Spending implements Money{
   DateTime? date;
 
   @override
-  double? getMoney(){
+  int? getMoney(){
     return amount;
   }
 
-  Spending(double amount, DateTime date, {String type='Normal'}){
+  Spending(int amount, DateTime date, {String type='Normal'}){
     this.amount=amount;
     this.type=type;
     this.date=date;
@@ -40,7 +40,7 @@ class Spending implements Money{
 class Earning implements Money{
 
   @override
-  double? amount;
+  int? amount;
 
   @override
   String? type;
@@ -49,11 +49,11 @@ class Earning implements Money{
   DateTime? date;
 
   @override
-  double? getMoney(){
+  int? getMoney(){
     return amount;
   }
 
-  Earning(double amount, DateTime date, {String type='Normal'}){
+  Earning(int amount, DateTime date, {String type='Normal'}){
     this.amount=amount;
     this.type=type;
     this.date=date;
@@ -64,11 +64,11 @@ class Earning implements Money{
 
 
 void sortSpending(List<Spending> list){
-  list.sort((Spending a , Spending b) => ((a).amount=0 as double).compareTo((b).amount=0));
+  list.sort((Spending a , Spending b) => ((a).amount=0 as int).compareTo((b).amount=0));
 }
 
 void sortEarning(List<Earning> list){
-  list.sort((Earning a , Earning b) => ((a).amount=0 as double).compareTo((b).amount=0));
+  list.sort((Earning a , Earning b) => ((a).amount=0 as int).compareTo((b).amount=0));
 }
 
 void addSpendingToDatabase(Spending spending, FirebaseFirestore db){
@@ -207,7 +207,7 @@ class SpendingItem extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  'Số tiền ${spending.getMoney()} VNĐ',
+                  'Số tiền ${reformatNumber(spending.getMoney()!)} VNĐ',
                 ),
                 Text(
                   '${spending.type}'
@@ -276,7 +276,7 @@ class EarningItem extends StatelessWidget {
   }
 }
 
-String reformatNumber(double money){
+String reformatNumber(int money){
   String moneyString=money.toString();
 
   List<String> strings=[];
