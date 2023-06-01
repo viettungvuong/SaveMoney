@@ -295,11 +295,12 @@ class _AddPageState extends State<AddSpending> {
               margin: const EdgeInsets.only(left: 40.0, right: 40.0),
               child: DateTimePicker(
                 initialValue: convertDateToString(now),
+                dateMask: 'd-M-yyyy',
                 firstDate: DateTime(2023),
                 lastDate: DateTime(2100),
                 dateLabelText: 'Ngày',
                 onChanged: (val) => (){
-                  print(val);
+                  print("Date = " + val);
                   filterSpending(temp, val);
                 } ,
               ),
