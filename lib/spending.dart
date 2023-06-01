@@ -283,7 +283,7 @@ String reformatNumber(int money){
 
   int n=moneyString.length-1;
   for (int i=n; i>=0; i-=3){
-    String s = moneyString.substring(i-3,i);
+    String s = moneyString.substring(i-2,i+1);
     strings.add(s);
 
     strings.add(',');
