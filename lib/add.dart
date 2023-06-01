@@ -44,7 +44,10 @@ class _AddPageState extends State<AddSpending> {
   final TextEditingController _textEditingController2 = TextEditingController(); //cho textfield 2 neu co
 
   Future<void> filterSpending(List<Spending> spendings, String date) async{
-    String collectionName=userId!+"spent";
+    setState(() {
+      temp.clear();
+    });
+     String collectionName=userId!+"spent";
       await database?.collection(collectionName).where("date", arrayContains: date).get().then(
       (querySnapshot) {
       for (var docSnapshot in querySnapshot.docs) {
@@ -60,7 +63,7 @@ class _AddPageState extends State<AddSpending> {
       },
       onError: (e) => print("Lỗi: $e"),
       );
-    print(temp.length);
+     print(temp.length);
     //them await de doi no doc het xong roi moi ket thuc
   }
 

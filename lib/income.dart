@@ -44,6 +44,9 @@ class _AddPageState extends State<AddEarning> {
 
 
   Future<void> filterEarning(List<Earning> earnings, String date)async {
+    setState(() {
+      temp.clear();
+    });
     String collectionName=userId!+"earned";
       await database?.collection(collectionName).where("date", arrayContains: date).get().then(
             (querySnapshot) {
