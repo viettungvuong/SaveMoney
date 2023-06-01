@@ -40,7 +40,7 @@ class AddSpending extends StatefulWidget {
 }
 
 class _AddPageState extends State<AddSpending> {
-  List<Spending> temp = spendings;
+
 
   double spentMoney = 0, optionalFee = 0;
   String selectedCategory = spendingCategories[0];
@@ -73,9 +73,9 @@ class _AddPageState extends State<AddSpending> {
   }
 
 
-  Future<void> filterSpending(List<Spending> spendings, String date) async {
+  Future<void> filterSpending(List<Spending> list, String date) async {
     setState(() {
-      spendings.clear();
+      list.clear();
     });
     String collectionName = userId! + "spent";
     await database
@@ -89,7 +89,7 @@ class _AddPageState extends State<AddSpending> {
           String typeOfSpending = docSnapshot.data()['type'];
           DateTime date = docSnapshot.data()['date'] ?? now;
           setState(() {
-            spendings.add(new Spending(amount, date, type: typeOfSpending));
+            list.add(new Spending(amount, date, type: typeOfSpending));
           });
           print(amount);
           spent += amount; //them vao so tien da chi
@@ -97,12 +97,13 @@ class _AddPageState extends State<AddSpending> {
       },
       onError: (e) => print("Lỗi: $e"),
     );
-    print(temp.length);
+    print(list.length);
     //them await de doi no doc het xong roi moi ket thuc
   }
 
   @override
   Widget build(BuildContext context) {
+    List<Spending> temp = spendings;
     return Scaffold(
       appBar: AppBar(
           // Here we take the value from the MyHomePage object that was created by
