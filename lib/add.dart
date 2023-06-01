@@ -80,14 +80,14 @@ class _AddPageState extends State<AddSpending> {
     String collectionName = userId! + "spent";
     await database
         ?.collection(collectionName)
-        .where("date", arrayContains: date)
+        .where('date', isEqualTo: date)
         .get()
         .then(
       (querySnapshot) {
         for (var docSnapshot in querySnapshot.docs) {
           int amount = docSnapshot.data()['amount'];
           String typeOfSpending = docSnapshot.data()['type'];
-          DateTime date = docSnapshot.data()['date'] ?? now;
+          DateTime date = convertStringToDate(docSnapshot.data()['date']!);
           setState(() {
             list.add(new Spending(amount, date, type: typeOfSpending));
           });
@@ -301,10 +301,10 @@ class _AddPageState extends State<AddSpending> {
                 firstDate: DateTime(2023),
                 lastDate: DateTime(2100),
                 dateLabelText: 'Ngày',
-                onChanged: (val) => (){
-                  print("Date = " + val);
-                  filterSpending(temp, val);
-                } ,
+                onChanged: (val) => setState(()  {
+                  print(reformatDate(val));
+                  filterSpending(spendings, reformatDate(val));
+                }),
               ),
             ),
 
@@ -321,4 +321,17 @@ class _AddPageState extends State<AddSpending> {
       ),
     );
   }
+}
+
+String reformatDate(String val){
+  List<String> strings=val.split('-');
+
+  for (int i=1; i<=2; i++){
+    if (strings[i][0]=='0'){
+      strings[i]=strings[i][1];
+    }
+  }
+
+  strings=List.from(strings.reversed);
+  return strings.join('-');
 }

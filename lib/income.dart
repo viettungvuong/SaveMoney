@@ -86,7 +86,7 @@ class _AddPageState extends State<AddEarning> {
         for (var docSnapshot in querySnapshot.docs) {
           int amount = docSnapshot.data()['amount'];
           String typeOfSpending = docSnapshot.data()['type'];
-          DateTime date = docSnapshot.data()['date'] ?? now;
+          DateTime date = convertStringToDate(docSnapshot.data()['date']!);
           setState(() {
             earnings.add(new Earning(amount, date, type: typeOfSpending));
           });
