@@ -284,14 +284,15 @@ String reformatNumber(int money){
   int n=moneyString.length-1;
   for (int i=n; i>=0; i-=3){
     int start=(i-2>0)?i-2:0;
-    String s = moneyString.substring(start,i+1);
+    int end=(i+1<n)?i+1:n;
+    String s = moneyString.substring(start,end);
     strings.add(s);
 
     strings.add(',');
   }
 
   if (strings.elementAt(n)==','){
-    strings.removeLast();
+    strings.removeAt(n);
   }
 
   strings = List.from(strings.reversed);
