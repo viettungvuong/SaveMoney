@@ -221,6 +221,8 @@ class _AddPageState extends State<AddEarning> {
                           // Limit the value to the range of 0-100
                           _textEditingController.text = 0.toString();
                         } else {
+                          _textEditingController.text=reformatNumber(intValue);
+                          _textEditingController.selection = TextSelection.fromPosition(TextPosition(offset: _textEditingController.text.length));
                           earnedMoney = int.parse(value);
                         }
                       }

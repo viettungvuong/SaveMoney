@@ -186,8 +186,7 @@ class _AddPageState extends State<AddSpending> {
                   .toList(),
               onChanged: (value) {
                 setState(() {
-                  selectedCategory = value
-                      as String; //no se dat selectedItem la vat vua duoc chon
+                  selectedCategory = value as String; //no se dat selectedItem la vat vua duoc chon
                   //roi chinh value cua dropdownbutton2
 
                   if (selectedCategory == 'Trả tiền vay') {
@@ -223,7 +222,9 @@ class _AddPageState extends State<AddSpending> {
                           // Limit the value to the range of 0-100
                           _textEditingController.text = 0.toString();
                         } else {
+                          _textEditingController.text=reformatNumber(intValue);
                           spentMoney = int.parse(value);
+                          _textEditingController.selection = TextSelection.fromPosition(TextPosition(offset: _textEditingController.text.length));
                         }
                       }
                     });
