@@ -51,6 +51,28 @@ class _AddPageState extends State<AddSpending> {
   final TextEditingController _textEditingController2 =
       TextEditingController(); //cho textfield 2 neu co
 
+  void addSpending(double spentMoney, String? selectedCategory, List<Spending> list, BuildContext context){
+    Spending newSpending;
+    if (selectedCategory!=null){
+      newSpending = Spending(spentMoney,now,type: selectedCategory); //day la cach dung optional parameter
+    }
+    else{
+      newSpending = Spending(spentMoney,now);
+    }
+
+    setState(() {
+      list.add(newSpending);
+      spent+=spentMoney;
+    });
+
+    addSpendingToDatabase(newSpending, database!); //dau ! o cuoi la null check
+    //bay gio ta phai ket noi voi firebase o day
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      content: Text("Thêm thành công"),
+    ));
+  }
+
+
   Future<void> filterSpending(List<Spending> spendings, String date) async {
     setState(() {
       temp.clear();

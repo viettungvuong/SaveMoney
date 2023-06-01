@@ -49,6 +49,29 @@ class _AddPageState extends State<AddEarning> {
   final TextEditingController _textEditingController2 =
       TextEditingController(); //cho textfield 2 neu co
 
+  void addEarning(double earnedMoney, String? selectedCategory, List<Earning> list, BuildContext context){
+    Earning newEarning;
+    if (selectedCategory!=null){
+      newEarning = Earning(earnedMoney,now,type: selectedCategory); //day la cach dung optional parameter
+    }
+    else{
+      newEarning = Earning(earnedMoney,now);
+    }
+
+    setState(() {
+      list.add(newEarning);
+      earned+=earnedMoney;
+    });
+
+    addEarningToDatabase(newEarning, database!); //dau ! o cuoi la null check
+
+    //bay gio ta phai ket noi voi firebase o day
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      content: Text("Thêm thành công"),
+    ));
+  }
+
+
   Future<void> filterEarning(List<Earning> earnings, String date) async {
     setState(() {
       temp.clear();

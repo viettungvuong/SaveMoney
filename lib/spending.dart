@@ -60,40 +60,7 @@ class Earning implements Money{
   }
 }
 
-void addSpending(double spentMoney, String? selectedCategory, List<Spending> list, BuildContext context){
-  Spending newSpending;
-  if (selectedCategory!=null){
-    newSpending = Spending(spentMoney,now,type: selectedCategory); //day la cach dung optional parameter
-  }
-  else{
-    newSpending = Spending(spentMoney,now);
-  }
-  list.add(newSpending);
-  spent+=spentMoney;
-  addSpendingToDatabase(newSpending, database!); //dau ! o cuoi la null check
-  //bay gio ta phai ket noi voi firebase o day
-  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-    content: Text("Thêm thành công"),
-  ));
-}
 
-void addEarning(double earnedMoney, String? selectedCategory, List<Earning> list, BuildContext context){
-  Earning newEarning;
-  if (selectedCategory!=null){
-    newEarning = Earning(earnedMoney,now,type: selectedCategory); //day la cach dung optional parameter
-  }
-  else{
-    newEarning = Earning(earnedMoney,now);
-  }
-  list.add(newEarning);
-  earned+=earnedMoney;
-  addEarningToDatabase(newEarning, database!); //dau ! o cuoi la null check
-
-  //bay gio ta phai ket noi voi firebase o day
-  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-    content: Text("Thêm thành công"),
-  ));
-}
 
 
 void sortSpending(List<Spending> list){
