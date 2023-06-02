@@ -266,7 +266,7 @@ class _AddPageState extends State<AddEarning> {
 
             SizedBox(height: 50), // thêm khoảng trăng giữa 2 widget//number-
 
-            IconButton(
+            ElevatedButton.icon(
               onPressed: () {
                 addEarning(earnedMoney, selectedCategory, earnings,
                     context); //lamda functikon
@@ -274,7 +274,8 @@ class _AddPageState extends State<AddEarning> {
                     context); //reset lai cac o so sau khi bam add
               },
               icon: Icon(Icons.add),
-              color: Colors.green,
+              style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Colors.green),),
+              label: Text('Thêm'),
             ), //them button de add spending// only text box
 
             Row(mainAxisAlignment: MainAxisAlignment.center, children: [
