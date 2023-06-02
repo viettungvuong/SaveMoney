@@ -224,11 +224,9 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int balance=0;
   int target=0;
 
-
-  void SortSpending(){
+  void sortSpending(){
     //quick sort
   }
 
@@ -236,8 +234,8 @@ class _MyHomePageState extends State<MyHomePage> {
     return DateTime.now().month;
   }
 
-  void setTarget(){
-
+  void setTarget(int target, int amount){
+    target=amount;
   }
 
   @override
@@ -364,12 +362,69 @@ class _MyHomePageState extends State<MyHomePage> {
 
                 },
                 icon: Icon(Icons.add),
-                label: Text('Đặt mục tiêu'),),
+                label: Text('Đặt mục tiêu'),
+            ),
 
             SizedBox(
               height: 100,
             ),
 
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class SetTarget extends StatefulWidget {
+  final int target;
+  final int amount;
+
+  final void Function(int,int) onAdd;
+  //truyen ham tu widget hien tai qua dialog
+
+  SetTarget({required this.target, required this.amount, required this.onAdd});
+
+  @override
+  _SetTargetState createState() => _SetTargetState();
+}
+
+class _SetTargetState extends State<SetTarget> {
+  TextEditingController _textEditingController = TextEditingController();
+
+  @override
+  void dispose() {
+    _textEditingController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Dialog(
+      child: Padding(
+        padding: EdgeInsets.all(16.0),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            TextField(
+              controller: _textEditingController,
+              decoration: InputDecoration(
+                hintText: 'Mục tiêu',
+              ),
+            ),
+
+            SizedBox(height: 16.0),
+
+            ElevatedButton.icon(
+              onPressed: (){
+                setState(() {
+                  widget.onAdd(widget.target,widget.amount);
+                  //widget la de cap toi bien o cai phan State
+                });
+              },
+              icon: Icon(Icons.add),
+              label: Text('Đặt mục tiêu'),
+            ),
           ],
         ),
       ),
