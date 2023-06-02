@@ -286,7 +286,7 @@ class _AddPageState extends State<AddEarning> {
                     fontWeight: FontWeight.bold),
               ),
               Text(
-                "$earned VNĐ",
+                "${reformatNumber(earned)} VNĐ",
                 style: TextStyle(color: Colors.green, fontSize: 20),
               )
             ]),
