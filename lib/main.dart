@@ -230,11 +230,14 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void SortSpending(){
     //quick sort
-
   }
 
   int getCurrentMonth(){
     return DateTime.now().month;
+  }
+
+  void setTarget(){
+
   }
 
   @override
@@ -333,20 +336,10 @@ class _MyHomePageState extends State<MyHomePage> {
               height: 50,
             ),
 
-            const Text(
-              'Số dư hiện tại là',
-            ),
-
-            Text(
-              '$balance VND', //xuat ra bien balance (so tien hien co)
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-
-
             SizedBox(height: 100), // thêm khoảng trăng giữa 2 widget
 
             Text(
-                'Chênh lệch'
+                'Chênh lệch tháng ${getCurrentMonth()}'
             ),
 
             Text(
@@ -358,7 +351,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
             Text(
               'Mục tiêu tháng ${getCurrentMonth()} là',
-
             ),
             Text(
               '${reformatNumber(target)} VND',
@@ -366,6 +358,13 @@ class _MyHomePageState extends State<MyHomePage> {
                 fontSize: 18,
               ),
             ),
+
+            ElevatedButton.icon(
+                onPressed: (){
+
+                },
+                icon: Icon(Icons.add),
+                label: Text('Đặt mục tiêu'),),
 
             SizedBox(
               height: 100,
