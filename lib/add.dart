@@ -335,3 +335,4 @@ String reformatDate(String val){
   strings=List.from(strings.reversed);
   return strings.join('-');
 }
+//co the dung proxy design pattern de luu lai cac list spending truoc day (do truy cap), van dung cung hashmap

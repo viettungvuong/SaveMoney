@@ -310,3 +310,4 @@ String reformatNumber(int money){
   //no dang xuat nguoc
   //gio ta phai cho no xuat dung chieu
 }
+

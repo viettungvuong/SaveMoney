@@ -97,33 +97,39 @@ class _LoginPageState extends State<LoginPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              TextField(
-                controller: txt,
-                decoration: InputDecoration(
-                  hintText: 'Email',
-                ),
-                keyboardType: TextInputType.number,
-                onChanged: (value) {
-                  setState(() {
-                    if (value.contains('@')) userName = value as String;
-                    //o nut login ta check email co dau @
-                  });
-                },
-                textInputAction: TextInputAction.next, // Moves focus to next.
+              Container(
+                 margin: EdgeInsets.only(left: 20, right: 20),
+                 child: TextField(
+                   controller: txt,
+                   decoration: InputDecoration(
+                     hintText: 'Email',
+                   ),
+                   keyboardType: TextInputType.number,
+                   onChanged: (value) {
+                     setState(() {
+                       if (value.contains('@')) userName = value as String;
+                       //o nut login ta check email co dau @
+                     });
+                   },
+                   textInputAction: TextInputAction.next, // Moves focus to next.
+                 ),
               ),
-              TextField(
-                decoration: InputDecoration(
-                  hintText: 'Mật khẩu',
+              Container(
+                margin: EdgeInsets.only(left: 20, right: 20),
+                child: TextField(
+                  decoration: InputDecoration(
+                    hintText: 'Mật khẩu',
+                  ),
+                  obscureText: true,
+                  onChanged: (value) {
+                    setState(() {
+                      password = value as String;
+                    });
+                  },
+                  textInputAction: TextInputAction.done,
                 ),
-                obscureText: true,
-                onChanged: (value) {
-                  setState(() {
-                    password = value as String;
-                  });
-                },
-                textInputAction: TextInputAction.done,
               ),
-              FutureBuilder<bool>(
+              FutureBuilder<bool>( //bool nay se thuc thi dua vao mot ham Future
                 future: accountExists(userName, password),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
