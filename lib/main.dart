@@ -5,6 +5,7 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/services.dart';
 import 'package:save_money/add.dart';
 import 'package:save_money/userPage.dart';
 import 'firebase_options.dart';
@@ -358,8 +359,15 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
 
             ElevatedButton.icon(
-                onPressed: (){
-
+                onPressed: () async{
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return SetTarget(
+                        target: target,
+                        onAdd: setTarget,
+                      );
+                    });
                 },
                 icon: Icon(Icons.add),
                 label: Text('Đặt mục tiêu'),
@@ -378,18 +386,18 @@ class _MyHomePageState extends State<MyHomePage> {
 
 class SetTarget extends StatefulWidget {
   final int target;
-  final int amount;
 
   final void Function(int,int) onAdd;
   //truyen ham tu widget hien tai qua dialog
 
-  SetTarget({required this.target, required this.amount, required this.onAdd});
+  SetTarget({required this.target, required this.onAdd});
 
   @override
   _SetTargetState createState() => _SetTargetState();
 }
 
 class _SetTargetState extends State<SetTarget> {
+  int? addAmount;
   TextEditingController _textEditingController = TextEditingController();
 
   @override
@@ -411,6 +419,15 @@ class _SetTargetState extends State<SetTarget> {
               decoration: InputDecoration(
                 hintText: 'Mục tiêu',
               ),
+              keyboardType: TextInputType.number,
+              inputFormatters: <TextInputFormatter>[
+                FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+              ],
+              onChanged: (value) {
+                setState(() {
+                  addAmount=int.tryParse(value);
+                });
+              },
             ),
 
             SizedBox(height: 16.0),
@@ -418,7 +435,7 @@ class _SetTargetState extends State<SetTarget> {
             ElevatedButton.icon(
               onPressed: (){
                 setState(() {
-                  widget.onAdd(widget.target,widget.amount);
+                  widget.onAdd(widget.target,addAmount!);
                   //widget la de cap toi bien o cai phan State
                 });
               },
