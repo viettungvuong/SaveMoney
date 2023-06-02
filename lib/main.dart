@@ -235,7 +235,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return DateTime.now().month;
   }
 
-  void setTarget(int target, int amount){
+  void setTarget(int amount){
     setState(() {
       target=amount;
     });
@@ -362,14 +362,15 @@ class _MyHomePageState extends State<MyHomePage> {
 
             ElevatedButton.icon(
                 onPressed: () async{
-                  showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return SetTarget(
-                        target: target,
-                        onAdd: setTarget,
-                      );
-                    });
+                  setState(() {
+                    showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return SetTarget(
+                            onAdd: setTarget,
+                          );
+                        });
+                  });
                 },
                 icon: Icon(Icons.add),
                 label: Text('Đặt mục tiêu'),
@@ -387,12 +388,10 @@ class _MyHomePageState extends State<MyHomePage> {
 }
 
 class SetTarget extends StatefulWidget {
-  final int target;
-
-  final void Function(int,int) onAdd;
+  final void Function(int) onAdd;
   //truyen ham tu widget hien tai qua dialog
 
-  SetTarget({required this.target, required this.onAdd});
+  SetTarget({required this.onAdd});
 
   @override
   _SetTargetState createState() => _SetTargetState();
@@ -439,7 +438,7 @@ class _SetTargetState extends State<SetTarget> {
             ElevatedButton.icon(
               onPressed: (){
                 setState(() {
-                  widget.onAdd(widget.target,addAmount!);
+                  widget.onAdd(addAmount!);
                   //widget la de cap toi bien o cai phan State
                   Navigator.pop(context);
                 });
