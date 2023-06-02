@@ -236,7 +236,9 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void setTarget(int target, int amount){
-    target=amount;
+    setState(() {
+      target=amount;
+    });
   }
 
   @override
@@ -426,6 +428,8 @@ class _SetTargetState extends State<SetTarget> {
               onChanged: (value) {
                 setState(() {
                   addAmount=int.tryParse(value);
+                  _textEditingController.text=reformatNumber(addAmount!);
+                  _textEditingController.selection = TextSelection.fromPosition(TextPosition(offset: _textEditingController.text.length));
                 });
               },
             ),
@@ -437,6 +441,7 @@ class _SetTargetState extends State<SetTarget> {
                 setState(() {
                   widget.onAdd(widget.target,addAmount!);
                   //widget la de cap toi bien o cai phan State
+                  Navigator.pop(context);
                 });
               },
               icon: Icon(Icons.add),
