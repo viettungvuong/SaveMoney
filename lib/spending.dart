@@ -261,7 +261,7 @@ class EarningItem extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  'Số tiền ${earning.getMoney()} VNĐ',
+                  'Số tiền ${reformatNumber(earning.getMoney()!)} VNĐ',
                 ),
                 Text(
                     '${earning.type}'
