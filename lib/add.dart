@@ -236,7 +236,6 @@ class _AddPageState extends State<AddSpending> {
             Container(
               margin: const EdgeInsets.only(left: 40.0, right: 40.0),
               child: DateTimePicker(
-                initialValue: convertDateToString(now),
                 dateMask: 'd-M-yyyy',
                 firstDate: DateTime(2023),
                 lastDate: DateTime(2100),
