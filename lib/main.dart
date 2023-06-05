@@ -8,58 +8,63 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
 import 'package:save_money/add.dart';
 import 'package:save_money/userPage.dart';
+import 'package:searchable_listview/widgets/list_item.dart';
 import 'firebase_options.dart';
 import 'income.dart';
 import 'spending.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:searchable_listview/searchable_listview.dart';
 
-const String firstPage='Trang chủ';
-const String secondPage='Chi tiêu';
-const String thirdPage='Nguồn thu';
-const MaterialColor colorBar=Colors.cyan;
+const String firstPage = 'Trang chủ';
+const String secondPage = 'Chi tiêu';
+const String thirdPage = 'Nguồn thu';
+const MaterialColor colorBar = Colors.cyan;
 
-int selectedIndex=0; //index tren bottom menu bar
+int selectedIndex = 0; //index tren bottom menu bar
 FirebaseFirestore? database; //dung firebase database
 User? currentUser; //user dang dang nhap
 String? userId; //id nay quan trong de luu database
 
-List<Spending> spendings=[]; //danh sach cac khoan chi tieu
-List<Earning> earnings=[]; //danh sach cac nguon thu
+List<Spending> spendings = []; //danh sach cac khoan chi tieu
+List<Earning> earnings = []; //danh sach cac nguon thu
 
-DateTime now=DateTime.now();
+DateTime now = DateTime.now();
 
-int spent=0;
-int earned=0;
+int spent = 0;
+int earned = 0;
 
-int getDiff(){
-  return earned-spent;
+int getDiff() {
+  return earned - spent;
 }
 
-String convertDateToString(DateTime date){
-  return date.day.toString()+"-"+date.month.toString()+"-"+date.year.toString();
+String convertDateToString(DateTime date) {
+  return date.day.toString() +
+      "-" +
+      date.month.toString() +
+      "-" +
+      date.year.toString();
 } //doi ngay thang qua string
 
-DateTime convertStringToDate(String date){
-  List<String> splitRes=date.split('-');
-  int month=int.parse(splitRes[1]);
-  int year=int.parse(splitRes[2]);
-  int day=int.parse(splitRes[0]);
-  return DateTime(year,month,day);
+DateTime convertStringToDate(String date) {
+  List<String> splitRes = date.split('-');
+  int month = int.parse(splitRes[1]);
+  int year = int.parse(splitRes[2]);
+  int day = int.parse(splitRes[0]);
+  return DateTime(year, month, day);
 }
 
 //cai nay phai dua vao mot thread rieng, doi cai nay xong roi moi mo app
-Future<void> initializeSpendings(List<Spending> spendings)async {
-  String collectionName=userId!+"spent";
+Future<void> initializeSpendings(List<Spending> spendings) async {
+  String collectionName = userId! + "spent";
   await database?.collection(collectionName).get().then(
-        (querySnapshot) {
+    (querySnapshot) {
       for (var docSnapshot in querySnapshot.docs) {
         int amount = docSnapshot.data()['amount'];
         String typeOfSpending = docSnapshot.data()['type'];
-        DateTime date=convertStringToDate(docSnapshot.data()['date']!);
-        spendings.add(new Spending(amount,date,type: typeOfSpending));
+        DateTime date = convertStringToDate(docSnapshot.data()['date']!);
+        spendings.add(new Spending(amount, date, type: typeOfSpending));
         print(amount);
-        spent+=amount; //them vao so tien da chi
+        spent += amount; //them vao so tien da chi
       }
     },
     onError: (e) => print("Lỗi: $e"),
@@ -67,61 +72,56 @@ Future<void> initializeSpendings(List<Spending> spendings)async {
   //them await de doi no doc het xong roi moi ket thuc
 }
 
-
-Future<void> initializeEarnings(List<Earning> earnings)async {
-  String collectionName=userId!+"earned";
+Future<void> initializeEarnings(List<Earning> earnings) async {
+  String collectionName = userId! + "earned";
   await database?.collection(collectionName).get().then(
-        (querySnapshot) {
+    (querySnapshot) {
       for (var docSnapshot in querySnapshot.docs) {
         int amount = docSnapshot.data()['amount'];
         String typeOfSpending = docSnapshot.data()['type'];
-        DateTime date=convertStringToDate(docSnapshot.data()['date']!);
-        earnings.add(new Earning(amount,date,type: typeOfSpending));
+        DateTime date = convertStringToDate(docSnapshot.data()['date']!);
+        earnings.add(new Earning(amount, date, type: typeOfSpending));
         print(amount);
-        earned+=amount; //them vao so tien da chi
+        earned += amount; //them vao so tien da chi
       }
     },
     onError: (e) => print("Lỗi: $e"),
   );
   //them await de doi no doc het xong roi moi ket thuc
 }
-
 
 Future<void> main() async {
-
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
   database = FirebaseFirestore.instance;
 
-
   FirebaseAuth auth = FirebaseAuth.instance;
   User? user = auth.currentUser;
 
-  if (user != null) { //session chua expire
+  if (user != null) {
+    //session chua expire
     try {
       //kiem tra co id token khong
       IdTokenResult tokenResult = await user.getIdTokenResult();
 
       //session nay chua expire
       if (tokenResult.token != null) {
-       //neu co id token thi tien hanh auto login vao man hinh chinh luon
-        currentUser=user;
-        userId=user.uid;
+        //neu co id token thi tien hanh auto login vao man hinh chinh luon
+        currentUser = user;
+        userId = user.uid;
         await initializeSpendings(spendings); //doi xong (await)
         await initializeEarnings(earnings);
         runApp(const MyApp());
-      }
-      else{
+      } else {
         runApp(const LoginPage());
       }
     } catch (e) {
       print(e);
-       //exception
+      //exception
     }
-  }
-  else{
+  } else {
     runApp(const LoginPage());
   }
 }
@@ -150,8 +150,6 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-
 
 class MyDialog extends StatefulWidget {
   @override
@@ -207,7 +205,6 @@ void _showAddDialog(BuildContext context) async {
   }
 }
 
-
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
 
@@ -225,19 +222,19 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int target=0;
+  int target = 0;
 
-  void sortSpending(){
+  void sortSpending() {
     //quick sort
   }
 
-  int getCurrentMonth(){
+  int getCurrentMonth() {
     return DateTime.now().month;
   }
 
-  void setTarget(int amount){
+  void setTarget(int amount) {
     setState(() {
-      target=amount;
+      target = amount;
     });
   }
 
@@ -251,39 +248,42 @@ class _MyHomePageState extends State<MyHomePage> {
     // than having to individually change instances of widgets.
     return Scaffold(
       appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-      ),
+          // Here we take the value from the MyHomePage object that was created by
+          // the App.build method, and use it to set our appbar title.
+          ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: selectedIndex,
         selectedItemColor: colorBar,
 
-        onTap: (value){
+        onTap: (value) {
           setState(() {
-            selectedIndex=value;
+            selectedIndex = value;
 
-            switch (selectedIndex){
+            switch (selectedIndex) {
               case 0:
                 {
                   //neu bam home
                   break;
                 }
-              case 1:{
-                //neu bam add
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const AddSpending()),
-                );
-                break;
-              }
-              case 2:{
-                //neu bam add
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const AddEarning()),
-                );
-                break;
-              }
+              case 1:
+                {
+                  //neu bam add
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const AddSpending()),
+                  );
+                  break;
+                }
+              case 2:
+                {
+                  //neu bam add
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const AddEarning()),
+                  );
+                  break;
+                }
             }
           });
         },
@@ -292,27 +292,23 @@ class _MyHomePageState extends State<MyHomePage> {
         //nho phai co setState
 
         items: <BottomNavigationBarItem>[
-        BottomNavigationBarItem(
-          icon: Icon(Icons.home),
-          label: '$firstPage',
-          backgroundColor: colorBar,
-        ),
-
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: '$firstPage',
+            backgroundColor: colorBar,
+          ),
           BottomNavigationBarItem(
             icon: Icon(Icons.money_off),
             label: '$secondPage',
             backgroundColor: colorBar,
           ),
-
           BottomNavigationBarItem(
             icon: Icon(Icons.monetization_on),
             label: '$thirdPage',
             backgroundColor: colorBar,
           ),
-
         ],
       ),
-
       body: Center(
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.
@@ -339,16 +335,16 @@ class _MyHomePageState extends State<MyHomePage> {
 
             SizedBox(height: 100), // thêm khoảng trăng giữa 2 widget
 
-            Text(
-                'Chênh lệch tháng ${getCurrentMonth()}'
-            ),
+            Text('Chênh lệch tháng ${getCurrentMonth()}'),
 
             Text(
               '${reformatNumber(getDiff())} VND', //xuat ra chenh lech
               style: Theme.of(context).textTheme.headlineMedium,
             ),
 
-            SizedBox(height: 100,),
+            SizedBox(
+              height: 100,
+            ),
 
             Text(
               'Mục tiêu tháng ${getCurrentMonth()} là',
@@ -361,28 +357,59 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
 
             ElevatedButton.icon(
-                onPressed: () async{
-                  setState(() {
-                    showDialog(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return SetTarget(
-                            onAdd: setTarget,
-                          );
-                        });
-                  });
-                },
-                icon: Icon(Icons.add),
-                label: Text('Đặt mục tiêu'),
+              onPressed: () async {
+                setState(() {
+                  showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return SetTarget(
+                          onAdd: setTarget,
+                        );
+                      });
+                });
+              },
+              icon: Icon(Icons.add),
+              label: Text('Đặt mục tiêu'),
             ),
 
             SizedBox(
               height: 100,
             ),
-
           ],
         ),
       ),
+      drawer: Drawer(
+          child: ListView(
+        children: [
+          DrawerHeader(
+            decoration: BoxDecoration(
+              color: Colors.blue,
+            ),
+            child: Container(
+              margin: EdgeInsets.all(50),
+              child: ElevatedButton.icon(
+                onPressed: () {},
+                icon: Icon(Icons.logout),
+                label: Text("Đăng xuất"),
+              ),
+            ),
+          ),
+          ListTile(
+            leading: Icon(Icons.home),
+            title: const Text('Tổng quan'),
+            onTap: () {
+              Navigator.pop(context);
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.analytics),
+            title: const Text('Phân tích'),
+            onTap: () {
+              Navigator.pop(context);
+            },
+          ),
+        ],
+      )),
     );
   }
 }
@@ -396,7 +423,6 @@ class SetTarget extends StatefulWidget {
   @override
   _SetTargetState createState() => _SetTargetState();
 }
-
 
 class _SetTargetState extends State<SetTarget> {
   int? addAmount;
@@ -427,17 +453,16 @@ class _SetTargetState extends State<SetTarget> {
               ],
               onChanged: (value) {
                 setState(() {
-                  addAmount=int.tryParse(value);
-                  _textEditingController.text=reformatNumber(addAmount!);
-                  _textEditingController.selection = TextSelection.fromPosition(TextPosition(offset: _textEditingController.text.length));
+                  addAmount = int.tryParse(value);
+                  _textEditingController.text = reformatNumber(addAmount!);
+                  _textEditingController.selection = TextSelection.fromPosition(
+                      TextPosition(offset: _textEditingController.text.length));
                 });
               },
             ),
-
             SizedBox(height: 16.0),
-
             ElevatedButton.icon(
-              onPressed: (){
+              onPressed: () {
                 setState(() {
                   widget.onAdd(addAmount!);
                   //widget la de cap toi bien o cai phan State
