@@ -10,58 +10,63 @@ class AnalyticsPage extends StatefulWidget {
 }
 
 class AnalyticsState extends State<AnalyticsPage> {
-  int currentSelection=0; //cho biet dang chon o phan Ngay, Tuan, hay Thang
+  int currentSelection = 0; //cho biet dang chon o phan Ngay, Tuan, hay Thang
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
+    return DefaultTabController(
+      initialIndex: 0,
+      length: 3,
+      child: Scaffold(
+        appBar: AppBar(
           // Here we take the value from the MyHomePage object that was created by
           // the App.build method, and use it to set our appbar title.
-          ),
-      body: Center(
-        child: Column(
-          children: [
-            Container(
-              margin: EdgeInsets.all(50),
-              child: Wrap(
-                direction: Axis.horizontal,
-                children: [
-                  ElevatedButton(
-                      onPressed: () {
-                        setState(() {
-                          selectedIndex=0;
-                        });
-                      },
-                      child: Text(
-                        "Ngày",
-                      ),
-                      style: ElevatedButton.styleFrom(primary: (selectedIndex==0)?Colors.blue:Colors.cyan)),
-                  ElevatedButton(
-                      onPressed: () {
-                        setState(() {
-                          selectedIndex=1;
-                        });
-                      },
-                      child: Text(
-                        "Tuần",
-                      ),
-                      style: ElevatedButton.styleFrom(primary: (selectedIndex==1)?Colors.blue:Colors.cyan)),
-                  ElevatedButton(
-                      onPressed: () {
-                        setState(() {
-                          selectedIndex=2;
-                        });
-                      },
-                      child: Text(
-                        "Tháng",
-                      ),
-                      style: ElevatedButton.styleFrom(primary: (selectedIndex==2)?Colors.blue:Colors.cyan)),
-                ],
+          bottom: const TabBar(
+            dividerColor: Colors.transparent,
+            tabs: <Widget>[
+              Tab(
+                text: 'Ngày',
               ),
-            )
+              Tab(
+                text: 'Tháng',
+              ),
+              Tab(
+                text: 'Năm',
+              ),
+            ],
+          ),
+        ),
+        body: TabBarView(
+          children: [
+            TabPage(tabName: 'Ngày',),
+            TabPage(tabName: 'Tháng',),
+            TabPage(tabName: 'Năm',),
           ],
         ),
       ),
     );
   }
+}
+
+class TabPage extends StatefulWidget{
+  final String tabName;
+  //truyen ham tu widget hien tai qua dialog
+
+  TabPage({required this.tabName});
+
+  @override
+  State<TabPage> createState() => TabState();
+}
+
+class TabState extends State<TabPage>{
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Column(
+        children: [
+
+        ],
+      ),
+    );
+  }
+
 }
