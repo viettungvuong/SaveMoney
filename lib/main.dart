@@ -223,6 +223,96 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+
+  @override
+  Widget build(BuildContext context) {
+    return DefaultTabController(
+        initialIndex: 0,
+        length: 3,
+        child: Scaffold(
+          appBar: AppBar(
+            bottom: const TabBar(
+              dividerColor: Colors.transparent,
+              tabs: <Widget>[
+                Tab(
+                  text: 'Trang chủ',
+                  icon: Icon(Icons.home),
+                ),
+                Tab(
+                  text: 'Chi tiêu',
+                  icon: Icon(Icons.money_off),
+                ),
+                Tab(
+                  text: 'Nguồn thu',
+                  icon: Icon(Icons.monetization_on),
+                ),
+              ],
+            ),
+            // Here we take the value from the MyHomePage object that was created by
+            // the App.build method, and use it to set our appbar title.
+          ),
+
+          body: TabBarView(
+            children: [
+              HomePage(),
+              AddSpending(),
+              AddEarning(),
+            ],
+          ),
+
+          drawer: Drawer(
+              child: ListView(
+                children: [
+                  DrawerHeader(
+                    decoration: BoxDecoration(
+                      color: Colors.blue,
+                    ),
+                    child: Container(
+                      margin: EdgeInsets.all(50),
+                      child: ElevatedButton.icon(
+                        onPressed: () {},
+                        icon: Icon(Icons.logout),
+                        label: Text("Đăng xuất"),
+                      ),
+                    ),
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.home),
+                    title: const Text('Tổng quan'),
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.analytics),
+                    title: const Text('Phân tích'),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const AnalyticsPage()),
+                      );
+                    },
+                  ),
+                ],
+              )),
+        ));
+    // This method is rerun every time setState is called, for instance as done
+    // by the _incrementCounter method above.
+    //
+    // The Flutter framework has been optimized to make rerunning build methods
+    // fast, so that you can just rebuild anything that needs updating rather
+    // than having to individually change instances of widgets.
+  }
+}
+
+class HomePage extends StatefulWidget{
+  HomePage({super.key});
+
+  @override
+  HomePageState createState() => HomePageState();
+}
+
+class HomePageState extends State<HomePage>{
   int target = 0;
 
   void sortSpending() {
@@ -241,75 +331,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
+    // TODO: implement build
     return Scaffold(
-      appBar: AppBar(
-          // Here we take the value from the MyHomePage object that was created by
-          // the App.build method, and use it to set our appbar title.
-          ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: selectedIndex,
-        selectedItemColor: colorBar,
-
-        onTap: (value) {
-          setState(() {
-            selectedIndex = value;
-
-            switch (selectedIndex) {
-              case 0:
-                {
-                  //neu bam home
-                  break;
-                }
-              case 1:
-                {
-                  //neu bam add
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const AddSpending()),
-                  );
-                  break;
-                }
-              case 2:
-                {
-                  //neu bam add
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const AddEarning()),
-                  );
-                  break;
-                }
-            }
-          });
-        },
-        //value la gia tri ma onTap se tra ve, ta dung value nay de chinh selectedIndex
-        //{} la de dung ham truc tiep tai dong ma khong can khai bao ham rieng
-        //nho phai co setState
-
-        items: <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: '$firstPage',
-            backgroundColor: colorBar,
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.money_off),
-            label: '$secondPage',
-            backgroundColor: colorBar,
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.monetization_on),
-            label: '$thirdPage',
-            backgroundColor: colorBar,
-          ),
-        ],
-      ),
       body: Center(
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.
@@ -383,44 +406,9 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
       ),
-
-      drawer: Drawer(
-          child: ListView(
-        children: [
-          DrawerHeader(
-            decoration: BoxDecoration(
-              color: Colors.blue,
-            ),
-            child: Container(
-              margin: EdgeInsets.all(50),
-              child: ElevatedButton.icon(
-                onPressed: () {},
-                icon: Icon(Icons.logout),
-                label: Text("Đăng xuất"),
-              ),
-            ),
-          ),
-          ListTile(
-            leading: Icon(Icons.home),
-            title: const Text('Tổng quan'),
-            onTap: () {
-              Navigator.pop(context);
-            },
-          ),
-          ListTile(
-            leading: Icon(Icons.analytics),
-            title: const Text('Phân tích'),
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const AnalyticsPage()),
-              );
-            },
-          ),
-        ],
-      )),
     );
   }
+
 }
 
 class SetTarget extends StatefulWidget {

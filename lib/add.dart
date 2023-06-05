@@ -106,68 +106,6 @@ class _AddPageState extends State<AddSpending> {
   Widget build(BuildContext context) {
     List<Spending> temp = spendings;
     return Scaffold(
-      appBar: AppBar(
-          // Here we take the value from the MyHomePage object that was created by
-          // the App.build method, and use it to set our appbar title.
-          ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: selectedIndex,
-        selectedItemColor: colorBar,
-
-        onTap: (value) {
-          setState(() {
-            selectedIndex = value;
-
-            switch (selectedIndex) {
-              case 0:
-                {
-                  //neu bam home
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const MyApp()),
-                  );
-                  break;
-                }
-              case 1:
-                {
-                  //neu bam add
-
-                  break;
-                }
-              case 2:
-                {
-                  //neu bam add
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const AddEarning()),
-                  );
-                  break;
-                }
-            }
-          });
-        },
-        //value la gia tri ma onTap se tra ve, ta dung value nay de chinh selectedIndex
-        //{} la de dung ham truc tiep tai dong ma khong can khai bao ham rieng
-        //nho phai co setState
-
-        items: <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: '$firstPage',
-            backgroundColor: colorBar,
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.money_off),
-            label: '$secondPage',
-            backgroundColor: colorBar,
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.monetization_on),
-            label: '$thirdPage',
-            backgroundColor: colorBar,
-          ),
-        ],
-      ),
       body: Center(
         child: Column(
           children: <Widget>[
@@ -322,41 +260,7 @@ class _AddPageState extends State<AddSpending> {
         ),
       ),
 
-      drawer: Drawer(
-          child: ListView(
-            children: [
-              DrawerHeader(
-                decoration: BoxDecoration(
-                  color: Colors.blue,
-                ),
-                child: Container(
-                  margin: EdgeInsets.all(50),
-                  child: ElevatedButton.icon(
-                    onPressed: () {},
-                    icon: Icon(Icons.logout),
-                    label: Text("Đăng xuất"),
-                  ),
-                ),
-              ),
-              ListTile(
-                leading: Icon(Icons.home),
-                title: const Text('Tổng quan'),
-                onTap: () {
-                  Navigator.pop(context);
-                },
-              ),
-              ListTile(
-                leading: Icon(Icons.analytics),
-                title: const Text('Phân tích'),
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const AnalyticsPage()),
-                  );
-                },
-              ),
-            ],
-          )),
+
 
     );
   }
