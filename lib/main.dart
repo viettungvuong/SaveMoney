@@ -339,7 +339,11 @@ class _MyHomePageState extends State<MyHomePage> {
 
             Text(
               '${reformatNumber(getDiff())} VND', //xuat ra chenh lech
-              style: Theme.of(context).textTheme.headlineMedium,
+              style: TextStyle(
+                fontSize: 35,
+                fontWeight: FontWeight.bold,
+                color: (getDiff()>0)?Colors.green:Colors.red,
+              ),
             ),
 
             SizedBox(
