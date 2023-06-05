@@ -5,6 +5,7 @@ import 'package:dropdown_search/dropdown_search.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:save_money/analytics.dart';
 import 'package:save_money/spending.dart';
 import 'package:selection_menu/components_configurations.dart';
 import 'package:selection_menu/selection_menu.dart';
@@ -348,7 +349,10 @@ class _AddPageState extends State<AddEarning> {
                 leading: Icon(Icons.analytics),
                 title: const Text('Phân tích'),
                 onTap: () {
-                  Navigator.pop(context);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const AnalyticsPage()),
+                  );
                 },
               ),
             ],

@@ -9,6 +9,7 @@ import 'package:flutter/services.dart';
 import 'package:save_money/add.dart';
 import 'package:save_money/userPage.dart';
 import 'package:searchable_listview/widgets/list_item.dart';
+import 'analytics.dart';
 import 'firebase_options.dart';
 import 'income.dart';
 import 'spending.dart';
@@ -410,7 +411,10 @@ class _MyHomePageState extends State<MyHomePage> {
             leading: Icon(Icons.analytics),
             title: const Text('Phân tích'),
             onTap: () {
-              Navigator.pop(context);
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const AnalyticsPage()),
+              );
             },
           ),
         ],

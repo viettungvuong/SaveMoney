@@ -8,6 +8,7 @@ import 'package:flutter/services.dart';
 import 'package:save_money/spending.dart';
 import 'package:selection_menu/components_configurations.dart';
 import 'package:selection_menu/selection_menu.dart';
+import 'analytics.dart';
 import 'income.dart';
 import 'main.dart';
 
@@ -348,7 +349,10 @@ class _AddPageState extends State<AddSpending> {
                 leading: Icon(Icons.analytics),
                 title: const Text('Phân tích'),
                 onTap: () {
-                  Navigator.pop(context);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const AnalyticsPage()),
+                  );
                 },
               ),
             ],
