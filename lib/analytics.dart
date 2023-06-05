@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:save_money/main.dart';
 
 class AnalyticsPage extends StatefulWidget {
   const AnalyticsPage({super.key});
@@ -9,6 +10,7 @@ class AnalyticsPage extends StatefulWidget {
 }
 
 class AnalyticsState extends State<AnalyticsPage> {
+  int currentSelection=0; //cho biet dang chon o phan Ngay, Tuan, hay Thang
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,27 +23,39 @@ class AnalyticsState extends State<AnalyticsPage> {
           children: [
             Container(
               margin: EdgeInsets.all(50),
-              child: Row(
+              child: Wrap(
+                direction: Axis.horizontal,
                 children: [
-                  Container(
-                    margin: EdgeInsets.all(10),
-                    child: ElevatedButton(
-                        onPressed: () {},
-                        child: Text(
-                          "Ngày",
-                        ),
-                        style: ElevatedButton.styleFrom(primary: Colors.teal)),
-                  ),
-
-                  Container(
-                    margin: EdgeInsets.all(10),
-                    child: ElevatedButton(
-                        onPressed: () {},
-                        child: Text(
-                          "Tháng",
-                        ),
-                        style: ElevatedButton.styleFrom(primary: Colors.teal)),
-                  ),
+                  ElevatedButton(
+                      onPressed: () {
+                        setState(() {
+                          selectedIndex=0;
+                        });
+                      },
+                      child: Text(
+                        "Ngày",
+                      ),
+                      style: ElevatedButton.styleFrom(primary: (selectedIndex==0)?Colors.blue:Colors.cyan)),
+                  ElevatedButton(
+                      onPressed: () {
+                        setState(() {
+                          selectedIndex=1;
+                        });
+                      },
+                      child: Text(
+                        "Tuần",
+                      ),
+                      style: ElevatedButton.styleFrom(primary: (selectedIndex==1)?Colors.blue:Colors.cyan)),
+                  ElevatedButton(
+                      onPressed: () {
+                        setState(() {
+                          selectedIndex=2;
+                        });
+                      },
+                      child: Text(
+                        "Tháng",
+                      ),
+                      style: ElevatedButton.styleFrom(primary: (selectedIndex==2)?Colors.blue:Colors.cyan)),
                 ],
               ),
             )
