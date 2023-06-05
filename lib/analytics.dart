@@ -40,8 +40,8 @@ class AnalyticsState extends State<AnalyticsPage> {
         ),
         body: TabBarView(
           children: [
-            AddSpending(),
-            AddEarning(),
+            TabPage("Ngày"),
+            TabPage("Tháng"),
             TabPage('Năm'),
           ],
         ),
