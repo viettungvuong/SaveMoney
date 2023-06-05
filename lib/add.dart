@@ -320,6 +320,40 @@ class _AddPageState extends State<AddSpending> {
           ],
         ),
       ),
+
+      drawer: Drawer(
+          child: ListView(
+            children: [
+              DrawerHeader(
+                decoration: BoxDecoration(
+                  color: Colors.blue,
+                ),
+                child: Container(
+                  margin: EdgeInsets.all(50),
+                  child: ElevatedButton.icon(
+                    onPressed: () {},
+                    icon: Icon(Icons.logout),
+                    label: Text("Đăng xuất"),
+                  ),
+                ),
+              ),
+              ListTile(
+                leading: Icon(Icons.home),
+                title: const Text('Tổng quan'),
+                onTap: () {
+                  Navigator.pop(context);
+                },
+              ),
+              ListTile(
+                leading: Icon(Icons.analytics),
+                title: const Text('Phân tích'),
+                onTap: () {
+                  Navigator.pop(context);
+                },
+              ),
+            ],
+          )),
+
     );
   }
 }
