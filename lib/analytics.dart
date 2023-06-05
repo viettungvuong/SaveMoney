@@ -1,6 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:save_money/income.dart';
 import 'package:save_money/main.dart';
+
+import 'add.dart';
 
 class AnalyticsPage extends StatefulWidget {
   const AnalyticsPage({super.key});
@@ -37,9 +40,9 @@ class AnalyticsState extends State<AnalyticsPage> {
         ),
         body: TabBarView(
           children: [
-            TabPage(tabName: 'Ngày',),
-            TabPage(tabName: 'Tháng',),
-            TabPage(tabName: 'Năm',),
+            AddSpending(),
+            AddEarning(),
+            TabPage('Năm'),
           ],
         ),
       ),
@@ -48,10 +51,12 @@ class AnalyticsState extends State<AnalyticsPage> {
 }
 
 class TabPage extends StatefulWidget{
-  final String tabName;
+
   //truyen ham tu widget hien tai qua dialog
 
-  TabPage({required this.tabName});
+  TabPage(this.tabName, {super.key});
+
+  final String tabName;
 
   @override
   State<TabPage> createState() => TabState();
@@ -62,9 +67,7 @@ class TabState extends State<TabPage>{
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
-        children: [
 
-        ],
       ),
     );
   }
