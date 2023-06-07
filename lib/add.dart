@@ -62,7 +62,6 @@ class _AddPageState extends State<AddSpending> {
     }
 
     setState(() {
-      list.add(newSpending);
       spent+=spentMoney;
     });
 
@@ -211,6 +210,7 @@ class _AddPageState extends State<AddSpending> {
                     context); //lamda functikon
                 reset(_textEditingController, _textEditingController2,
                     context); //reset lai cac o so sau khi bam add
+
               },
               icon: Icon(Icons.add),
               style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Colors.red),),

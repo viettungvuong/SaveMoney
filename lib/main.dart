@@ -108,7 +108,7 @@ Future<void> main() async {
       IdTokenResult tokenResult = await user.getIdTokenResult();
 
       //session nay chua expire
-      if (tokenResult.token != null) {
+      if (tokenResult.token != null&&user!=null) {
         //neu co id token thi tien hanh auto login vao man hinh chinh luon
         currentUser = user;
         userId = user.uid;

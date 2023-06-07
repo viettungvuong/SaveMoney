@@ -61,7 +61,6 @@ class _AddPageState extends State<AddEarning> {
     }
 
     setState(() {
-      list.add(newEarning);
       earned+=earnedMoney;
     });
 
@@ -74,31 +73,31 @@ class _AddPageState extends State<AddEarning> {
   }
 
 
-  Future<void> filterEarning(List<Earning> earnings, String date) async {
+  Future<void> filterEarning(List<Earning> list, String date) async {
     setState(() {
-      spendings.clear();
+      list.clear();
     });
-    String collectionName = userId! + "earned";
+    String collectionName = userId! + "spent";
     await database
         ?.collection(collectionName)
-        .where("date", arrayContains: date)
+        .where('date', isEqualTo: date)
         .get()
         .then(
-      (querySnapshot) {
+          (querySnapshot) {
         for (var docSnapshot in querySnapshot.docs) {
           int amount = docSnapshot.data()['amount'];
-          String typeOfSpending = docSnapshot.data()['type'];
+          String typeOfEarning = docSnapshot.data()['type'];
           DateTime date = convertStringToDate(docSnapshot.data()['date']!);
           setState(() {
-            earnings.add(new Earning(amount, date, type: typeOfSpending));
+            list.add(new Earning(amount, date, type: typeOfEarning));
           });
           print(amount);
-          earned += amount; //them vao so tien da chi
+          spent += amount; //them vao so tien da chi
         }
       },
       onError: (e) => print("Lỗi: $e"),
     );
-
+    print(list.length);
     //them await de doi no doc het xong roi moi ket thuc
   }
 

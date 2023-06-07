@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:save_money/income.dart';
 import 'package:save_money/main.dart';
-
+import 'package:mrx_charts/mrx_charts.dart';
 import 'add.dart';
 
 class AnalyticsPage extends StatefulWidget {
@@ -67,7 +67,11 @@ class TabState extends State<TabPage>{
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
+        children: [
+          Chart(
 
+          ),
+        ],
       ),
     );
   }
