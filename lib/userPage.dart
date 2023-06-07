@@ -1,3 +1,4 @@
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -6,6 +7,23 @@ import 'package:save_money/main.dart';
 
 String userName = "";
 String password = "";
+
+void dialog(BuildContext context, {required String noti}){
+  showDialog( //day la cach show dialog
+    context: context,
+    builder: (context) => AlertDialog(
+      title: Text('$noti'),
+      content: Text('$noti'),
+      actions: [
+        ElevatedButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            child: Text('OK'))
+      ],
+    ),
+  );
+}
 
 Future<bool> accountExists(String email, String password) async {
   FirebaseAuth _auth = FirebaseAuth.instance;
@@ -23,25 +41,25 @@ Future<bool> accountExists(String email, String password) async {
   }
 }
 
-Future<UserCredential?> login(String email, String password) async {
+Future<UserCredential?> login(String email, String password, BuildContext context) async {
   try {
-    final credential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+    final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(
       email: email,
       password: password,
     );
     return credential;
   } on FirebaseAuthException catch (e) {
-    if (e.code == 'weak-password') {
-      print('The password provided is too weak.');
-    } else if (e.code == 'email-already-in-use') {
-      print('The account already exists for that email.');
+    if (e.code == 'wrong-password') {
+      dialog(context, noti: 'Mật khẩu không đúng');
+    } else if (e.code == 'user-not-found') {
+      dialog(context, noti: 'Không tìm thấy người dùng');
     }
   } catch (e) {
     print(e);
   }
 }
 
-Future<UserCredential?> signup(String email, String password) async {
+Future<UserCredential?> signup(String email, String password, BuildContext context) async {
   try {
     final credential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
       email: email,
@@ -50,9 +68,7 @@ Future<UserCredential?> signup(String email, String password) async {
     return credential;
   } on FirebaseAuthException catch (e) {
     if (e.code == 'weak-password') {
-      print('The password provided is too weak.');
-    } else if (e.code == 'email-already-in-use') {
-      print('The account already exists for that email.');
+      dialog(context, noti: 'Mật khẩu quá ếu');
     }
   } catch (e) {
     print(e);
@@ -141,11 +157,11 @@ class _LoginPageState extends State<LoginPage> {
                         onPressed: () async {
                          UserCredential? credential;
                           if (accountExists) {
-                            credential = await login(userName, password);
+                            credential = await login(userName, password, context);
                             //do login la future
                             //nen ta dung await de gan vao bien bth
                           } else {
-                            credential = await signup(userName, password);
+                            credential = await signup(userName, password, context);
                           }
                           if (credential != null) {
                             currentUser=credential.user as User;
@@ -158,20 +174,7 @@ class _LoginPageState extends State<LoginPage> {
                           }
                           else{
                             print("Error!");
-                            showDialog( //day la cach show dialog
-                              context: context,
-                              builder: (context) => AlertDialog(
-                                title: Text('Email không hợp lệ'),
-                                content: Text('Email không hợp lệ, bạn hãy kiểm tra lại'),
-                                actions: [
-                                  ElevatedButton(
-                                      onPressed: () {
-                                        Navigator.pop(context);
-                                      },
-                                      child: Text('OK'))
-                                ],
-                              ),
-                            );
+                            dialog(context, noti: 'Email không hợp lệ');
                           }
                         },
                         child: Text(accountExists ? 'Đăng nhập' : 'Đăng ký'),

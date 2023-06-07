@@ -257,9 +257,6 @@ class _AddPageState extends State<AddEarning> {
           ],
         ),
       ),
-
-
-
     );
   }
 }
