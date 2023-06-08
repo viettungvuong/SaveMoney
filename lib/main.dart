@@ -175,13 +175,13 @@ class _MyDialogState extends State<MyDialog> {
       ),
       actions: [
         TextButton(
-          child: Text('Cancel'),
+          child: Text('Huỷ'),
           onPressed: () {
             Navigator.of(context).pop();
           },
         ),
         TextButton(
-          child: Text('Add'),
+          child: Text('Thêm'),
           onPressed: () {
             // Save the text input and close the dialog
             final text = _textController.text;
@@ -424,13 +424,7 @@ class SetTarget extends StatefulWidget {
 class _SetTargetState extends State<SetTarget> {
   int? addAmount;
   TextEditingController _textEditingController = TextEditingController();
-
-  @override
-  void dispose() {
-    _textEditingController.dispose();
-    super.dispose();
-  }
-
+  
   @override
   Widget build(BuildContext context) {
     return Dialog(

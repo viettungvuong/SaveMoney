@@ -107,6 +107,7 @@ class _AddPageState extends State<AddEarning> {
       body: Center(
         child: Column(
           children: <Widget>[
+
             SizedBox(height: 100),
 
             DropdownButton2(
@@ -254,6 +255,7 @@ class _AddPageState extends State<AddEarning> {
                 },
               ),
             ),
+
           ],
         ),
       ),
