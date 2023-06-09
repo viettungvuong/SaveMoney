@@ -311,3 +311,6 @@ String reformatNumber(int money){
   //gio ta phai cho no xuat dung chieu
 }
 
+Map<DateTime,List<Spending>> spendingByDate={};
+//danh sách spending theo ngày
+Map<DateTime,List<Earning>> earningByDate={};
