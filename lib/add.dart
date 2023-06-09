@@ -52,7 +52,7 @@ class _AddPageState extends State<AddSpending> {
   final TextEditingController _textEditingController2 =
       TextEditingController(); //cho textfield 2 neu co
 
-  void addSpending(int spentMoney, String? selectedCategory, List<Spending> list, BuildContext context){
+  Spending addSpending(int spentMoney, String? selectedCategory, List<Spending> list, BuildContext context){
     Spending newSpending;
     if (selectedCategory!=null){
       newSpending = Spending(spentMoney,now,type: selectedCategory); //day la cach dung optional parameter
@@ -63,6 +63,7 @@ class _AddPageState extends State<AddSpending> {
 
     setState(() {
       spent+=spentMoney;
+
     });
 
     addSpendingToDatabase(newSpending, database!); //dau ! o cuoi la null check
@@ -70,6 +71,8 @@ class _AddPageState extends State<AddSpending> {
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
       content: Text("Thêm thành công"),
     ));
+
+    return newSpending;
   }
 
 
@@ -100,6 +103,8 @@ class _AddPageState extends State<AddSpending> {
     print(list.length);
     //them await de doi no doc het xong roi moi ket thuc
   }
+
+  String dateTimeStr=convertDateToString(now);
 
   @override
   Widget build(BuildContext context) {
@@ -206,10 +211,15 @@ class _AddPageState extends State<AddSpending> {
 
             ElevatedButton.icon(
               onPressed: () {
-                addSpending(spentMoney, selectedCategory, spendings,
+                Spending newSpending=addSpending(spentMoney, selectedCategory, spendings,
                     context); //lamda functikon
                 reset(_textEditingController, _textEditingController2,
                     context); //reset lai cac o so sau khi bam add
+                setState(() {
+                  if (dateTimeStr==convertDateToString(now)){
+                    spendings.add(newSpending);
+                  }
+                });
 
               },
               icon: Icon(Icons.add),
@@ -242,7 +252,7 @@ class _AddPageState extends State<AddSpending> {
                 initialValue: convertDateToString(now),
                 dateLabelText: 'Ngày',
                 onChanged: (val) => setState(()  {
-                  print(reformatDate(val));
+                  dateTimeStr=reformatDate(val);
                   filterSpending(spendings, reformatDate(val));
                 }),
               ),

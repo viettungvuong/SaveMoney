@@ -51,7 +51,7 @@ class _AddPageState extends State<AddEarning> {
   final TextEditingController _textEditingController2 =
       TextEditingController(); //cho textfield 2 neu co
 
-  void addEarning(int earnedMoney, String? selectedCategory, List<Earning> list, BuildContext context){
+  Earning addEarning(int earnedMoney, String? selectedCategory, List<Earning> list, BuildContext context){
     Earning newEarning;
     if (selectedCategory!=null){
       newEarning = Earning(earnedMoney,now,type: selectedCategory); //day la cach dung optional parameter
@@ -62,6 +62,7 @@ class _AddPageState extends State<AddEarning> {
 
     setState(() {
       earned+=earnedMoney;
+
     });
 
     addEarningToDatabase(newEarning, database!); //dau ! o cuoi la null check
@@ -70,6 +71,8 @@ class _AddPageState extends State<AddEarning> {
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
       content: Text("Thêm thành công"),
     ));
+
+    return newEarning;
   }
 
 
@@ -100,6 +103,8 @@ class _AddPageState extends State<AddEarning> {
     print(list.length);
     //them await de doi no doc het xong roi moi ket thuc
   }
+
+  String dateTimeStr=convertDateToString(now);
 
   @override
   Widget build(BuildContext context) {
@@ -207,10 +212,15 @@ class _AddPageState extends State<AddEarning> {
 
             ElevatedButton.icon(
               onPressed: () {
-                addEarning(earnedMoney, selectedCategory, earnings,
+                Earning newEarning=addEarning(earnedMoney, selectedCategory, earnings,
                     context); //lamda functikon
                 reset(_textEditingController, _textEditingController2,
                     context); //reset lai cac o so sau khi bam add
+                setState(() {
+                  if (dateTimeStr==convertDateToString(now)){
+                    earnings.add(newEarning);
+                  }
+                });
               },
               icon: Icon(Icons.add),
               style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Colors.green),),
@@ -242,7 +252,7 @@ class _AddPageState extends State<AddEarning> {
                 dateLabelText: 'Ngày',
                 initialValue: convertDateToString(now),
                 onChanged: (val) => setState(()  { //setState o day luon
-                  print(reformatDate(val));
+                  dateTimeStr=reformatDate(val);
                   filterEarning(earnings, reformatDate(val));
                 }),
               ),
