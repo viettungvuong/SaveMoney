@@ -229,7 +229,7 @@ class _AddPageState extends State<AddEarning> {
 
             Row(mainAxisAlignment: MainAxisAlignment.center, children: [
               Text(
-                "Thu vào: ",
+                "Thu nhập tháng: ",
                 style: TextStyle(
                     color: Colors.green,
                     fontSize: 20,

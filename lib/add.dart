@@ -229,7 +229,7 @@ class _AddPageState extends State<AddSpending> {
 
             Row(mainAxisAlignment: MainAxisAlignment.center, children: [
               Text(
-                "Chi tiêu: ",
+                "Chi tiêu tháng: ",
                 style: TextStyle(
                     color: Colors.red,
                     fontSize: 20,
