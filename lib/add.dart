@@ -72,6 +72,8 @@ class _AddPageState extends State<AddSpending> {
       content: Text("Thêm thành công"),
     ));
 
+
+
     return newSpending;
   }
 
@@ -220,6 +222,11 @@ class _AddPageState extends State<AddSpending> {
                     spendings.add(newSpending);
                   }
                 });
+                if (spendingByDate[now]==null){
+                  spendingByDate[now]=[];
+                }
+                spendingByDate[now]!.add(newSpending);
+                //thêm vào danh sách theo ngày
                 FocusManager.instance.primaryFocus?.unfocus();
               },
               icon: Icon(Icons.add),

@@ -221,6 +221,11 @@ class _AddPageState extends State<AddEarning> {
                     earnings.add(newEarning);
                   }
                 });
+                if (earningByDate[now]==null){
+                  earningByDate[now]=[];
+                }
+                earningByDate[now]!.add(newEarning);
+                //thêm vào danh sách theo ngày
                 FocusManager.instance.primaryFocus?.unfocus();
               },
               icon: Icon(Icons.add),
