@@ -314,3 +314,19 @@ String reformatNumber(int money){
 Map<DateTime,List<Spending>> spendingByDate={};
 //danh sách spending theo ngày
 Map<DateTime,List<Earning>> earningByDate={};
+
+
+//hai hàm lấy tổng chi tiêu của từng ngày
+int totalSpentDay(Map<DateTime,List<Spending>> spendingByDate, DateTime date){
+  int total=0;
+  String dateStr=convertDateToString(date);
+  spendingByDate[dateStr]!.forEach((spending) => total+=spending.amount??0);
+  return total;
+}
+
+int totalEarnedDay(Map<DateTime,List<Earning>> earningByDate, DateTime date){
+  int total=0;
+  String dateStr=convertDateToString(date);
+  earningByDate[dateStr]!.forEach((earning) => total+=earning.amount??0);
+  return total;
+}
