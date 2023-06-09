@@ -221,6 +221,7 @@ class _AddPageState extends State<AddEarning> {
                     earnings.add(newEarning);
                   }
                 });
+                FocusManager.instance.primaryFocus?.unfocus();
               },
               icon: Icon(Icons.add),
               style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Colors.green),),

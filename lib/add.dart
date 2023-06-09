@@ -220,7 +220,7 @@ class _AddPageState extends State<AddSpending> {
                     spendings.add(newSpending);
                   }
                 });
-
+                FocusManager.instance.primaryFocus?.unfocus();
               },
               icon: Icon(Icons.add),
               style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Colors.red),),
