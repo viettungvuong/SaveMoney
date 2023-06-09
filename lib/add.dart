@@ -206,6 +206,7 @@ class _AddPageState extends State<AddSpending> {
 
             ElevatedButton.icon(
               onPressed: () {
+
                 addSpending(spentMoney, selectedCategory, spendings,
                     context); //lamda functikon
                 reset(_textEditingController, _textEditingController2,

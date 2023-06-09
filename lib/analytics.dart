@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:d_chart/d_chart.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:save_money/income.dart';
@@ -68,50 +69,10 @@ class TabState extends State<TabPage>{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
+      body: ListView(
         children: [
-          Chart(
-            layers: [
-              ChartAxisLayer(
-                settings: ChartAxisSettings(
-                  x: ChartAxisSettingsAxis(
-                    frequency: 1.0,
-                    max: 13.0,
-                    min: 7.0,
-                    textStyle: TextStyle(
-                      color: Colors.white.withOpacity(0.6),
-                      fontSize: 10.0,
-                    ),
-                  ),
-                  y: ChartAxisSettingsAxis(
-                    frequency: 100.0,
-                    max: 300.0,
-                    min: 0.0,
-                    textStyle: TextStyle(
-                      color: Colors.white.withOpacity(0.6),
-                      fontSize: 10.0,
-                    ),
-                  ),
-                ),
-                labelX: (value) => value.toInt().toString(),
-                labelY: (value) => value.toInt().toString(),
-              ),
-              ChartBarLayer(
-                items: List.generate(
-                  13 - 7 + 1,
-                      (index) => ChartBarDataItem(
-                    color: const Color(0xFF8043F9),
-                    value: Random().nextInt(280) + 20,
-                    x: index.toDouble() + 7,
-                  ),
-                ),
-                settings: const ChartBarSettings(
-                  thickness: 8.0,
-                  radius: BorderRadius.all(Radius.circular(4.0)),
-                ),
-              ),
-            ],
-          ),
+          Text("Hello",
+          style: TextStyle(fontSize: 50),),
         ],
       ),
     );

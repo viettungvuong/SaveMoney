@@ -56,9 +56,14 @@ DateTime convertStringToDate(String date) {
 
 //cai nay phai dua vao mot thread rieng, doi cai nay xong roi moi mo app
 Future<void> initializeSpendings(List<Spending> spendings) async {
+  spendings.clear();
   String collectionName = userId! + "spent";
-  await database?.collection(collectionName).get().then(
-    (querySnapshot) {
+  await database
+      ?.collection(collectionName)
+      .where('date', isEqualTo: convertDateToString(now))
+      .get()
+      .then(
+        (querySnapshot) {
       for (var docSnapshot in querySnapshot.docs) {
         int amount = docSnapshot.data()['amount'];
         String typeOfSpending = docSnapshot.data()['type'];
@@ -74,16 +79,21 @@ Future<void> initializeSpendings(List<Spending> spendings) async {
 }
 
 Future<void> initializeEarnings(List<Earning> earnings) async {
-  String collectionName = userId! + "earned";
-  await database?.collection(collectionName).get().then(
-    (querySnapshot) {
+  earnings.clear();
+  String collectionName = userId! + "spent";
+  await database
+      ?.collection(collectionName)
+      .where('date', isEqualTo: convertDateToString(now))
+      .get()
+      .then(
+        (querySnapshot) {
       for (var docSnapshot in querySnapshot.docs) {
         int amount = docSnapshot.data()['amount'];
         String typeOfSpending = docSnapshot.data()['type'];
         DateTime date = convertStringToDate(docSnapshot.data()['date']!);
         earnings.add(new Earning(amount, date, type: typeOfSpending));
         print(amount);
-        earned += amount; //them vao so tien da chi
+        spent += amount; //them vao so tien da chi
       }
     },
     onError: (e) => print("Lỗi: $e"),
