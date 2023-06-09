@@ -206,7 +206,6 @@ class _AddPageState extends State<AddSpending> {
 
             ElevatedButton.icon(
               onPressed: () {
-
                 addSpending(spentMoney, selectedCategory, spendings,
                     context); //lamda functikon
                 reset(_textEditingController, _textEditingController2,
@@ -240,6 +239,7 @@ class _AddPageState extends State<AddSpending> {
                 dateMask: 'd-M-yyyy',
                 firstDate: DateTime(2023),
                 lastDate: DateTime(2100),
+                initialValue: convertDateToString(now),
                 dateLabelText: 'Ngày',
                 onChanged: (val) => setState(()  {
                   print(reformatDate(val));

@@ -56,19 +56,17 @@ DateTime convertStringToDate(String date) {
 
 //cai nay phai dua vao mot thread rieng, doi cai nay xong roi moi mo app
 Future<void> initializeSpendings(List<Spending> spendings) async {
-  spendings.clear();
   String collectionName = userId! + "spent";
-  await database
-      ?.collection(collectionName)
-      .where('date', isEqualTo: convertDateToString(now))
-      .get()
-      .then(
+  await database?.collection(collectionName).get().then(
         (querySnapshot) {
       for (var docSnapshot in querySnapshot.docs) {
         int amount = docSnapshot.data()['amount'];
         String typeOfSpending = docSnapshot.data()['type'];
         DateTime date = convertStringToDate(docSnapshot.data()['date']!);
-        spendings.add(new Spending(amount, date, type: typeOfSpending));
+        if (date==now){
+          spendings.add(new Spending(amount, date, type: typeOfSpending));
+        }
+
         print(amount);
         spent += amount; //them vao so tien da chi
       }
@@ -79,21 +77,19 @@ Future<void> initializeSpendings(List<Spending> spendings) async {
 }
 
 Future<void> initializeEarnings(List<Earning> earnings) async {
-  earnings.clear();
-  String collectionName = userId! + "spent";
-  await database
-      ?.collection(collectionName)
-      .where('date', isEqualTo: convertDateToString(now))
-      .get()
-      .then(
-        (querySnapshot) {
+  String collectionName = userId! + "earned";
+  await database?.collection(collectionName).get().then(
+    (querySnapshot) {
       for (var docSnapshot in querySnapshot.docs) {
         int amount = docSnapshot.data()['amount'];
         String typeOfSpending = docSnapshot.data()['type'];
         DateTime date = convertStringToDate(docSnapshot.data()['date']!);
-        earnings.add(new Earning(amount, date, type: typeOfSpending));
+        if (date==now){
+          earnings.add(new Earning(amount, date, type: typeOfSpending));
+        }
+
         print(amount);
-        spent += amount; //them vao so tien da chi
+        earned += amount; //them vao so tien da chi
       }
     },
     onError: (e) => print("Lỗi: $e"),

@@ -240,6 +240,7 @@ class _AddPageState extends State<AddEarning> {
                 firstDate: DateTime(2023),
                 lastDate: DateTime(2100),
                 dateLabelText: 'Ngày',
+                initialValue: convertDateToString(now),
                 onChanged: (val) => setState(()  { //setState o day luon
                   print(reformatDate(val));
                   filterEarning(earnings, reformatDate(val));
