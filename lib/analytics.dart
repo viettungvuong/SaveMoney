@@ -83,6 +83,8 @@ class TabPage extends StatefulWidget{
 }
 
 class TabState extends State<TabPage>{
+  late Stack<DateTime> stack;
+  //late nghĩa là ta sẽ initialize sau
 
   @override
   Widget build(BuildContext context) {
