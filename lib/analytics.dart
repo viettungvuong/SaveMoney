@@ -16,7 +16,9 @@ class Stack<T>{
     list.add(t);
   }
 
-  T pop(){
+  T? pop(){
+    if (list.isEmpty)
+      return null;
     T poppedT=list!.last;
     list.removeLast(); //bỏ phần từ ở cuối list
     return poppedT;
