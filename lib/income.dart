@@ -72,11 +72,6 @@ class _AddPageState extends State<AddEarning> {
       content: Text("Thêm thành công"),
     ));
 
-    if (earningByDate[now]==null){
-      earningByDate[now]=[]; //initialize nếu null
-    }
-    earningByDate[now]!.add(newEarning);
-
     return newEarning;
   }
 
@@ -103,10 +98,6 @@ class _AddPageState extends State<AddEarning> {
             Earning newEarning=new Earning(amount, date, type: typeOfEarning);
             list.add(newEarning);
             //thêm luôn vào list
-            if (earningByDate[date]==null){
-              earningByDate[date]=[]; //initialize nếu null
-            }
-            earningByDate[date]!.add(newEarning);
           });
           print(amount);
           earned += amount; //them vao so tien da chi
@@ -237,10 +228,7 @@ class _AddPageState extends State<AddEarning> {
                     earnings.add(newEarning);
                   }
                 });
-                if (earningByDate[now]==null){
-                  earningByDate[now]=[];
-                }
-                earningByDate[now]!.add(newEarning);
+
                 //thêm vào danh sách theo ngày
                 FocusManager.instance.primaryFocus?.unfocus();
               },

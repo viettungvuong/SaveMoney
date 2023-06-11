@@ -114,22 +114,22 @@ class TabState extends State<TabPage> {
                       {
                         'domain':
                             '${convertDateToString(dateStack.iterate(0)!)}',
-                        'measure': totalSpentByDate[dateStack.iterate(0)!]
+                        'measure': calcTotalSpentDay(dateStack.iterate(0)!),
                       },
                       {
                         'domain':
                             '${convertDateToString(dateStack.iterate(1)!)}',
-                        'measure': totalSpentByDate[dateStack.iterate(1)!]
+                        'measure': calcTotalSpentDay(dateStack.iterate(1)!),
                       },
                       {
                         'domain':
                             '${convertDateToString(dateStack.iterate(2)!)}',
-                        'measure': totalSpentByDate[dateStack.iterate(2)!]
+                        'measure': calcTotalSpentDay(dateStack.iterate(2)!),
                       },
                       {
                         'domain':
                             '${convertDateToString(dateStack.iterate(3)!)}',
-                        'measure': totalSpentByDate[dateStack.iterate(3)!]
+                        'measure': calcTotalSpentDay(dateStack.iterate(3)!),
                       },
                     ],
                   },
@@ -160,12 +160,14 @@ DateTime add(DateTime date, int days) {
 }
 
 //danh sách spending của các các ngày
-Map<DateTime, List<Spending>> spendingByDate = {};
-Map<DateTime, List<Earning>> earningByDate = {};
+Map<DateTime, int> totalSpentByDate={};
+Map<DateTime, int> totalEarnedByDate={};
 
 //hai hàm lấy tổng chi tiêu của từng ngày
-Future<int> calcTotalSpentDay(
-    Map<DateTime, List<Spending>> spendingByDate, DateTime date) async {
+Future<int> calcTotalSpentDay(DateTime date) async {
+  if (totalSpentByDate[date]!=null){
+    return totalSpentByDate[date]!;
+  }
   int total = 0;
   String collectionName = userId! + "spent";
   await database
@@ -181,11 +183,14 @@ Future<int> calcTotalSpentDay(
     },
     onError: (e) => print("Lỗi: $e"),
   );
+  totalSpentByDate[date]=total;
   return total;
 }
 
-Future<int> calcTotalEarnedDay(
-    Map<DateTime, List<Earning>> earningByDate, DateTime date) async {
+Future<int> calcTotalEarnedDay(DateTime date) async {
+  if (totalEarnedByDate[date]!=null){
+    return totalEarnedByDate[date]!;
+  }
   int total = 0;
   String collectionName = userId! + "earned";
   await database
@@ -201,5 +206,6 @@ Future<int> calcTotalEarnedDay(
     },
     onError: (e) => print("Lỗi: $e"),
   );
+  totalEarnedByDate[date]=total; //proxy pattern
   return total;
 }

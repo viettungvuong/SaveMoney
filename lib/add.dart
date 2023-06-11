@@ -72,12 +72,6 @@ class _AddPageState extends State<AddSpending> {
       content: Text("Thêm thành công"),
     ));
 
-    //ta sẽ thêm vào danh sách spending của ngày hôm nay
-    if (spendingByDate[now]==null){
-      spendingByDate[now]=[]; //initialize nếu null
-    }
-    spendingByDate[now]!.add(newSpending);
-
 
     return newSpending;
   }
@@ -105,10 +99,6 @@ class _AddPageState extends State<AddSpending> {
             Spending newSpending=new Spending(amount, date, type: typeOfSpending);
             list.add(newSpending);
             //thêm luôn vào list
-            if (spendingByDate[date]==null){
-              spendingByDate[date]=[]; //initialize nếu null
-            }
-            spendingByDate[date]!.add(newSpending);
           });
           print(amount);
           spent += amount; //them vao so tien da chi
@@ -237,10 +227,7 @@ class _AddPageState extends State<AddSpending> {
                     spendings.add(newSpending);
                   }
                 });
-                if (spendingByDate[now]==null){
-                  spendingByDate[now]=[];
-                }
-                spendingByDate[now]!.add(newSpending);
+
                 //thêm vào danh sách theo ngày
                 FocusManager.instance.primaryFocus?.unfocus();
               },
