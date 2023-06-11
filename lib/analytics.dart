@@ -102,5 +102,12 @@ class TabState extends State<TabPage>{
       ),
     );
   }
+}
 
+DateTime minusOne(DateTime date){
+  return date.subtract(Duration(days: 1));
+}
+
+DateTime addOne(DateTime date){
+  return date.add(Duration(days: 1));
 }
