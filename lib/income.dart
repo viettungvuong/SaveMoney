@@ -72,6 +72,11 @@ class _AddPageState extends State<AddEarning> {
       content: Text("Thêm thành công"),
     ));
 
+    if (earningByDate[now]==null){
+      earningByDate[now]=[]; //initialize nếu null
+    }
+    earningByDate[now]!.add(newEarning);
+
     return newEarning;
   }
 

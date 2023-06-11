@@ -80,7 +80,7 @@ class TabState extends State<TabPage>{
                   {
                     'id': 'Bar',
                     'data': [
-                      {'domain': '${convertDateToString(now)}', 'measure': 3},
+                      {'domain': '${convertDateToString(now)}', 'measure': 2},
                       {'domain': '2021', 'measure': 4},
                       {'domain': '2022', 'measure': 6},
                       {'domain': '2023', 'measure': 0.3},

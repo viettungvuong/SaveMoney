@@ -72,7 +72,11 @@ class _AddPageState extends State<AddSpending> {
       content: Text("Thêm thành công"),
     ));
 
-
+    //ta sẽ thêm vào danh sách spending của ngày hôm nay
+    if (spendingByDate[now]==null){
+      spendingByDate[now]=[]; //initialize nếu null
+    }
+    spendingByDate[now]!.add(newSpending);
 
     return newSpending;
   }
