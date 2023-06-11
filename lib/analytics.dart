@@ -1,3 +1,4 @@
+import 'dart:collection';
 import 'dart:math';
 
 import 'package:d_chart/d_chart.dart';
@@ -8,6 +9,20 @@ import 'package:save_money/main.dart';
 import 'package:mrx_charts/mrx_charts.dart';
 import 'add.dart';
 
+class Stack<T>{
+  List<T> list=[]; //để implement nhanh hơn dùng list
+
+  void add(T t){
+    list.add(t);
+  }
+
+  T pop(){
+    T poppedT=list!.last;
+    list.removeLast(); //bỏ phần từ ở cuối list
+    return poppedT;
+  }
+}
+
 class AnalyticsPage extends StatefulWidget {
   const AnalyticsPage({super.key});
 
@@ -17,6 +32,8 @@ class AnalyticsPage extends StatefulWidget {
 
 class AnalyticsState extends State<AnalyticsPage> {
   int currentSelection = 0; //cho biet dang chon o phan Ngay, Tuan, hay Thang
+
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -66,6 +83,7 @@ class TabPage extends StatefulWidget{
 }
 
 class TabState extends State<TabPage>{
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
