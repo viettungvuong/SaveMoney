@@ -145,7 +145,7 @@ class _LoginPageState extends State<LoginPage> {
                   textInputAction: TextInputAction.done,
                 ),
               ),
-              FutureBuilder<bool>( //bool nay se thuc thi dua vao mot ham Future
+              FutureBuilder<bool>( //oool này sẽ dựa hàm accountExists để tạo widget
                 future: accountExists(userName, password),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
@@ -178,6 +178,7 @@ class _LoginPageState extends State<LoginPage> {
                           }
                         },
                         child: Text(accountExists ? 'Đăng nhập' : 'Đăng ký'),
+                        //do cái accountExists là async nên phải dùng future<bool> để có button này
                       );
                     } else if (snapshot.hasError) {
                       return Text('Error: ${snapshot.error}');
