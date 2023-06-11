@@ -330,3 +330,6 @@ int totalEarnedDay(Map<DateTime,List<Earning>> earningByDate, DateTime date){
   earningByDate[dateStr]!.forEach((earning) => total+=earning.amount??0);
   return total;
 }
+
+Map<DateTime,int> totalSpentByDate={};
+Map<DateTime,int> totalEarnedByDate={};

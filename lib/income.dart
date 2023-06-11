@@ -77,6 +77,8 @@ class _AddPageState extends State<AddEarning> {
     }
     earningByDate[now]!.add(newEarning);
 
+    totalEarnedByDate[now]=totalEarnedDay(earningByDate, now);
+
     return newEarning;
   }
 
@@ -106,8 +108,10 @@ class _AddPageState extends State<AddEarning> {
             earningByDate[date]!.add(newEarning);
           });
           print(amount);
-          spent += amount; //them vao so tien da chi
+          earned += amount; //them vao so tien da chi
         }
+        totalEarnedByDate[convertStringToDate(date)]=totalEarnedDay(earningByDate, convertStringToDate(date));
+        //tính toán số tiền đã chi vào ngày hôm đó
       },
       onError: (e) => print("Lỗi: $e"),
     );
