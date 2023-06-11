@@ -290,7 +290,7 @@ String reformatNumber(int money){
 
   print(money);
 
-  String moneyString=money.toString();
+  String moneyString=(money.abs()).toString();
 
   List<String> strings=[];
 
@@ -312,6 +312,9 @@ String reformatNumber(int money){
   strings = List.from(strings.reversed);
 
   moneyString = strings.join();
+  if (money<0){
+    moneyString="-"+moneyString;
+  }
   return moneyString;
   //no dang xuat nguoc
   //gio ta phai cho no xuat dung chieu

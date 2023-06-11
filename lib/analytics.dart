@@ -164,13 +164,16 @@ Map<DateTime, int> totalSpentByDate={};
 Map<DateTime, int> totalEarnedByDate={};
 
 //hai hàm lấy tổng chi tiêu của từng ngày
-Future<int> calcTotalSpentDay(DateTime date) async {
+int calcTotalSpentDay(DateTime? date)  {
+  if (date==null){
+    return 0;
+  }
   if (totalSpentByDate[date]!=null){
     return totalSpentByDate[date]!;
   }
   int total = 0;
   String collectionName = userId! + "spent";
-  await database
+  database
       ?.collection(collectionName)
       .where('date', isEqualTo: date)
       .get()
@@ -183,17 +186,20 @@ Future<int> calcTotalSpentDay(DateTime date) async {
     },
     onError: (e) => print("Lỗi: $e"),
   );
-  totalSpentByDate[date]=total;
+  totalSpentByDate[date!]=total;
   return total;
 }
 
-Future<int> calcTotalEarnedDay(DateTime date) async {
+int calcTotalEarnedDay(DateTime? date) {
+  if (date==null){
+    return 0;
+  }
   if (totalEarnedByDate[date]!=null){
     return totalEarnedByDate[date]!;
   }
   int total = 0;
   String collectionName = userId! + "earned";
-  await database
+  database
       ?.collection(collectionName)
       .where('date', isEqualTo: date)
       .get()
@@ -206,6 +212,6 @@ Future<int> calcTotalEarnedDay(DateTime date) async {
     },
     onError: (e) => print("Lỗi: $e"),
   );
-  totalEarnedByDate[date]=total; //proxy pattern
+  totalEarnedByDate[date!]=total; //proxy pattern
   return total;
 }
