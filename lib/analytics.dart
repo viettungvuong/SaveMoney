@@ -85,11 +85,14 @@ class TabPage extends StatefulWidget{
 }
 
 class TabState extends State<TabPage>{
-  late Stack<DateTime> stack;
+  late Stack<DateTime> dateStack;
   //late nghĩa là ta sẽ initialize sau
 
   @override
   Widget build(BuildContext context) {
+    for (int i=0; i<=3; i++){
+      dateStack.add(minus(now, 0)); //thêm ngày hôm nay và 3 ngày gần nhất
+    }
     return Scaffold(
       body: ListView(
         children: [
@@ -126,10 +129,10 @@ class TabState extends State<TabPage>{
   }
 }
 
-DateTime minusOne(DateTime date){
-  return date.subtract(Duration(days: 1));
+DateTime minus(DateTime date, int days){
+  return date.subtract(Duration(days: days));
 }
 
-DateTime addOne(DateTime date){
-  return date.add(Duration(days: 1));
+DateTime add(DateTime date, int days){
+  return date.add(Duration(days: days));
 }
