@@ -83,6 +83,10 @@ class _AddPageState extends State<AddSpending> {
     return newSpending;
   }
 
+  List<Spending> getSpendings(DateTime date){
+    
+  }
+
 
   Future<void> filterSpending(List<Spending> list, String date) async {
     setState(() {

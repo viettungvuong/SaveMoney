@@ -98,7 +98,14 @@ class TabState extends State<TabPage>{
   @override
   Widget build(BuildContext context) {
     for (int i=0; i<=3; i++){
-      dateStack.add(minus(now, i)); //thêm ngày hôm nay và 3 ngày gần nhất
+      DateTime current=minus(now,i);
+      dateStack.add(current); //thêm ngày hôm nay và 3 ngày gần nhất
+      if (totalSpentByDate[current]==null){
+        if (spendingByDate[current]==null){
+
+        }
+        totalSpentByDate[current]=calcTotalSpentDay(spendingByDate, current);
+      }
     }
     return Scaffold(
       body: ListView(
