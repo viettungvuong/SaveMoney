@@ -91,13 +91,13 @@ class TabPage extends StatefulWidget{
 }
 
 class TabState extends State<TabPage>{
-  late Stack<DateTime> dateStack;
+  Stack<DateTime> dateStack=new Stack<DateTime>();
   //late nghĩa là ta sẽ initialize sau
 
   @override
   Widget build(BuildContext context) {
     for (int i=0; i<=3; i++){
-      dateStack.add(minus(now, 0)); //thêm ngày hôm nay và 3 ngày gần nhất
+      dateStack.add(minus(now, i)); //thêm ngày hôm nay và 3 ngày gần nhất
     }
     return Scaffold(
       body: ListView(
@@ -111,10 +111,10 @@ class TabState extends State<TabPage>{
                   {
                     'id': 'Bar',
                     'data': [
-                      {'domain': '${convertDateToString(now)}', 'measure': 2},
-                      {'domain': '2021', 'measure': 4},
-                      {'domain': '2022', 'measure': 6},
-                      {'domain': '2023', 'measure': 0.3},
+                      {'domain': '${convertDateToString(dateStack.iterate(0)!)}', 'measure': 2},
+                      {'domain': '${convertDateToString(dateStack.iterate(1)!)}', 'measure': 4},
+                      {'domain': '${convertDateToString(dateStack.iterate(2)!)}', 'measure': 6},
+                      {'domain': '${convertDateToString(dateStack.iterate(3)!)}', 'measure': 0.3},
                     ],
                   },
                 ],
