@@ -105,48 +105,56 @@ class TabState extends State<TabPage> {
           Padding(
             padding: EdgeInsets.all(16),
             child: AspectRatio(
-              aspectRatio: 16 / 9,
-              child: FutureBuilder<int>(
-                future: ,
-              )
-              child: DChartBar(
-                data: [
-                  {
-                    'id': 'Bar',
-                    'data': [
-                      {
-                        'domain':
-                            '${convertDateToString(dateStack.iterate(0)!)}',
-                        'measure': calcTotalSpentDay(dateStack.iterate(0)!),
-                      },
-                      {
-                        'domain':
-                            '${convertDateToString(dateStack.iterate(1)!)}',
-                        'measure': calcTotalSpentDay(dateStack.iterate(1)!),
-                      },
-                      {
-                        'domain':
-                            '${convertDateToString(dateStack.iterate(2)!)}',
-                        'measure': calcTotalSpentDay(dateStack.iterate(2)!),
-                      },
-                      {
-                        'domain':
-                            '${convertDateToString(dateStack.iterate(3)!)}',
-                        'measure': calcTotalSpentDay(dateStack.iterate(3)!),
-                      },
-                    ],
-                  },
-                ],
-                domainLabelPaddingToAxisLine: 16,
-                axisLineTick: 2,
-                axisLinePointTick: 2,
-                axisLinePointWidth: 10,
-                axisLineColor: Colors.green,
-                measureLabelPaddingToAxisLine: 16,
-                barColor: (barData, index, id) => Colors.green,
-                showBarValue: true,
-              ),
-            ),
+                aspectRatio: 16 / 9,
+                child: FutureBuilder<void>(
+                    future: calc4Dates(),
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return CircularProgressIndicator();
+                      } else {
+                        return DChartBar(
+                          data: [
+                            {
+                              'id': 'Bar',
+                              'data': [
+                                {
+                                  'domain':
+                                      '${convertDateToString(dateStack.iterate(0)!)}',
+                                  'measure':
+                                      totalSpentByDate[dateStack.iterate(0)!],
+                                },
+                                {
+                                  'domain':
+                                      '${convertDateToString(dateStack.iterate(1)!)}',
+                                  'measure':
+                                      totalSpentByDate[dateStack.iterate(1)!],
+                                },
+                                {
+                                  'domain':
+                                      '${convertDateToString(dateStack.iterate(2)!)}',
+                                  'measure':
+                                      totalSpentByDate[dateStack.iterate(2)!],
+                                },
+                                {
+                                  'domain':
+                                      '${convertDateToString(dateStack.iterate(3)!)}',
+                                  'measure':
+                                      totalSpentByDate[dateStack.iterate(3)!],
+                                },
+                              ],
+                            },
+                          ],
+                          domainLabelPaddingToAxisLine: 16,
+                          axisLineTick: 2,
+                          axisLinePointTick: 2,
+                          axisLinePointWidth: 10,
+                          axisLineColor: Colors.green,
+                          measureLabelPaddingToAxisLine: 16,
+                          barColor: (barData, index, id) => Colors.green,
+                          showBarValue: true,
+                        );
+                      }
+                    })),
           ),
         ],
       ),
@@ -163,15 +171,15 @@ DateTime add(DateTime date, int days) {
 }
 
 //danh sách spending của các các ngày
-Map<DateTime, int> totalSpentByDate={};
-Map<DateTime, int> totalEarnedByDate={};
+Map<DateTime, int> totalSpentByDate = {};
+Map<DateTime, int> totalEarnedByDate = {};
 
 //hai hàm lấy tổng chi tiêu của từng ngày
 Future<int> calcTotalSpentDay(DateTime? date) async {
-  if (date==null){
+  if (date == null) {
     return 0;
   }
-  if (totalSpentByDate[date]!=null&&totalSpentByDate[date]!=0){
+  if (totalSpentByDate[date] != null && totalSpentByDate[date] != 0) {
     return totalSpentByDate[date]!;
   }
   int total = 0;
@@ -191,15 +199,15 @@ Future<int> calcTotalSpentDay(DateTime? date) async {
     },
     onError: (e) => print("Lỗi: $e"),
   );
-  totalSpentByDate[date!]=total;
+  totalSpentByDate[date!] = total;
   return total;
 }
 
 Future<int> calcTotalEarnedDay(DateTime? date) async {
-  if (date==null){
+  if (date == null) {
     return 0;
   }
-  if (totalEarnedByDate[date]!=null&&totalEarnedByDate[date]!=0){
+  if (totalEarnedByDate[date] != null && totalEarnedByDate[date] != 0) {
     return totalEarnedByDate[date]!;
   }
   int total = 0;
@@ -218,6 +226,10 @@ Future<int> calcTotalEarnedDay(DateTime? date) async {
     },
     onError: (e) => print("Lỗi: $e"),
   );
-  totalEarnedByDate[date!]=total; //proxy pattern
+  totalEarnedByDate[date!] = total; //proxy pattern
   return total;
+}
+
+Future<void> calc4Dates() async {
+  for (int i = 0; i <= 3; i++) await calcTotalSpentDay(minus(now, 0));
 }
