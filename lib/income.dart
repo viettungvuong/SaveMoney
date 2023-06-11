@@ -114,6 +114,10 @@ class _AddPageState extends State<AddEarning> {
 
   @override
   Widget build(BuildContext context) {
+    setState(() {
+      filterEarning(earnings, reformatDate(dateTimeStr));
+    });
+
     return Scaffold(
       body: Center(
         child: Column(
@@ -269,9 +273,9 @@ class _AddPageState extends State<AddEarning> {
 
             Expanded(
               child: ListView.builder(
-                itemCount: temp.length,
+                itemCount: earnings.length,
                 itemBuilder: (context, i) {
-                  return EarningItem(earning: temp[i]);
+                  return EarningItem(earning: earnings[i]);
                 },
               ),
             ),

@@ -114,7 +114,10 @@ class _AddPageState extends State<AddSpending> {
 
   @override
   Widget build(BuildContext context) {
-    List<Spending> temp = spendings;
+    setState(() {
+      filterSpending(spendings, reformatDate(dateTimeStr));
+    });
+
     return Scaffold(
       body: Center(
         child: Column(
@@ -268,9 +271,9 @@ class _AddPageState extends State<AddSpending> {
 
             Expanded(
               child: ListView.builder(
-                itemCount: temp.length,
+                itemCount: spendings.length,
                 itemBuilder: (context, i) {
-                  return SpendingItem(spending: temp[i]);
+                  return SpendingItem(spending: spendings[i]);
                 },
               ),
             ),
