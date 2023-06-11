@@ -10,24 +10,23 @@ import 'package:mrx_charts/mrx_charts.dart';
 import 'package:save_money/spending.dart';
 import 'add.dart';
 
-class Stack<T>{
-  List<T> list=[]; //để implement nhanh hơn dùng list
+class Stack<T> {
+  List<T> list = []; //để implement nhanh hơn dùng list
 
-  void add(T t){
+  void add(T t) {
     list.add(t);
   }
 
-  T? pop(){
-    if (list.isEmpty)
-      return null;
-    T poppedT=list!.last;
+  T? pop() {
+    if (list.isEmpty) return null;
+    T poppedT = list!.last;
     list.removeLast(); //bỏ phần từ ở cuối list
     return poppedT;
   }
 
-  T? iterate(int i){ //lấy phần tử ở vị trí i
-    if (list.length<=i)
-      return null;
+  T? iterate(int i) {
+    //lấy phần tử ở vị trí i
+    if (list.length <= i) return null;
     return list[i];
   }
 }
@@ -41,7 +40,6 @@ class AnalyticsPage extends StatefulWidget {
 
 class AnalyticsState extends State<AnalyticsPage> {
   int currentSelection = 0; //cho biet dang chon o phan Ngay, Tuan, hay Thang
-
 
   @override
   Widget build(BuildContext context) {
@@ -79,8 +77,7 @@ class AnalyticsState extends State<AnalyticsPage> {
   }
 }
 
-class TabPage extends StatefulWidget{
-
+class TabPage extends StatefulWidget {
   //truyen ham tu widget hien tai qua dialog
 
   TabPage(this.tabName, {super.key});
@@ -91,21 +88,16 @@ class TabPage extends StatefulWidget{
   State<TabPage> createState() => TabState();
 }
 
-class TabState extends State<TabPage>{
-  Stack<DateTime> dateStack=new Stack<DateTime>();
+class TabState extends State<TabPage> {
+  Stack<DateTime> dateStack = new Stack<DateTime>();
+
   //late nghĩa là ta sẽ initialize sau
 
   @override
   Widget build(BuildContext context) {
-    for (int i=0; i<=3; i++){
-      DateTime current=minus(now,i);
+    for (int i = 0; i <= 3; i++) {
+      DateTime current = minus(now, i);
       dateStack.add(current); //thêm ngày hôm nay và 3 ngày gần nhất
-      if (totalSpentByDate[current]==null){
-        if (spendingByDate[current]==null){
-
-        }
-        totalSpentByDate[current]=calcTotalSpentDay(spendingByDate, current);
-      }
     }
     return Scaffold(
       body: ListView(
@@ -119,10 +111,26 @@ class TabState extends State<TabPage>{
                   {
                     'id': 'Bar',
                     'data': [
-                      {'domain': '${convertDateToString(dateStack.iterate(0)!)}', 'measure': totalSpentByDate[dateStack.iterate(0)!]},
-                      {'domain': '${convertDateToString(dateStack.iterate(1)!)}', 'measure': totalSpentByDate[dateStack.iterate(1)!]},
-                      {'domain': '${convertDateToString(dateStack.iterate(2)!)}', 'measure': totalSpentByDate[dateStack.iterate(2)!]},
-                      {'domain': '${convertDateToString(dateStack.iterate(3)!)}', 'measure': totalSpentByDate[dateStack.iterate(3)!]},
+                      {
+                        'domain':
+                            '${convertDateToString(dateStack.iterate(0)!)}',
+                        'measure': totalSpentByDate[dateStack.iterate(0)!]
+                      },
+                      {
+                        'domain':
+                            '${convertDateToString(dateStack.iterate(1)!)}',
+                        'measure': totalSpentByDate[dateStack.iterate(1)!]
+                      },
+                      {
+                        'domain':
+                            '${convertDateToString(dateStack.iterate(2)!)}',
+                        'measure': totalSpentByDate[dateStack.iterate(2)!]
+                      },
+                      {
+                        'domain':
+                            '${convertDateToString(dateStack.iterate(3)!)}',
+                        'measure': totalSpentByDate[dateStack.iterate(3)!]
+                      },
                     ],
                   },
                 ],
@@ -143,10 +151,55 @@ class TabState extends State<TabPage>{
   }
 }
 
-DateTime minus(DateTime date, int days){
+DateTime minus(DateTime date, int days) {
   return date.subtract(Duration(days: days));
 }
 
-DateTime add(DateTime date, int days){
+DateTime add(DateTime date, int days) {
   return date.add(Duration(days: days));
+}
+
+//danh sách spending của các các ngày
+Map<DateTime, List<Spending>> spendingByDate = {};
+Map<DateTime, List<Earning>> earningByDate = {};
+
+//hai hàm lấy tổng chi tiêu của từng ngày
+Future<int> calcTotalSpentDay(
+    Map<DateTime, List<Spending>> spendingByDate, DateTime date) async {
+  int total = 0;
+  String collectionName = userId! + "spent";
+  await database
+      ?.collection(collectionName)
+      .where('date', isEqualTo: date)
+      .get()
+      .then(
+    (querySnapshot) {
+      for (var docSnapshot in querySnapshot.docs) {
+        int amount = docSnapshot.data()['amount'];
+        total += amount;
+      }
+    },
+    onError: (e) => print("Lỗi: $e"),
+  );
+  return total;
+}
+
+Future<int> calcTotalEarnedDay(
+    Map<DateTime, List<Earning>> earningByDate, DateTime date) async {
+  int total = 0;
+  String collectionName = userId! + "earned";
+  await database
+      ?.collection(collectionName)
+      .where('date', isEqualTo: date)
+      .get()
+      .then(
+    (querySnapshot) {
+      for (var docSnapshot in querySnapshot.docs) {
+        int amount = docSnapshot.data()['amount'];
+        total += amount;
+      }
+    },
+    onError: (e) => print("Lỗi: $e"),
+  );
+  return total;
 }
