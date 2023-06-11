@@ -101,7 +101,6 @@ class _AddPageState extends State<AddSpending> {
             //thêm luôn vào list
           });
           print(amount);
-          spent += amount; //them vao so tien da chi
         }
 
       },

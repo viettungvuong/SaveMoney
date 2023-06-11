@@ -100,7 +100,6 @@ class _AddPageState extends State<AddEarning> {
             //thêm luôn vào list
           });
           print(amount);
-          earned += amount; //them vao so tien da chi
         }
 
         //tính toán số tiền đã chi vào ngày hôm đó
