@@ -292,7 +292,6 @@ String reformatNumber(int money){
     return "-"+money.toString();
   }
 
-  print(money);
 
   String moneyString=(money.abs()).toString();
 
@@ -303,7 +302,6 @@ String reformatNumber(int money){
     int start=max(i-2,0);
     int end=min(n+1,i+1);
     String s = moneyString.substring(start,end);
-    print(s);
     strings.add(s);
 
     strings.add(',');
@@ -318,7 +316,6 @@ String reformatNumber(int money){
   moneyString = strings.join();
   if (money<0){
     moneyString="-"+moneyString;
-    print(moneyString);
   }
   return moneyString;
   //no dang xuat nguoc

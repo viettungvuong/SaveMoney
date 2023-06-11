@@ -112,11 +112,10 @@ class _AddPageState extends State<AddSpending> {
 
   String dateTimeStr=convertDateToString(now);
 
+
+
   @override
   Widget build(BuildContext context) {
-    setState(() {
-      filterSpending(spendings, reformatDate(dateTimeStr));
-    });
 
     return Scaffold(
       body: Center(

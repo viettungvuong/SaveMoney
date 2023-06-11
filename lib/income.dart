@@ -110,13 +110,10 @@ class _AddPageState extends State<AddEarning> {
     //them await de doi no doc het xong roi moi ket thuc
   }
 
-  String dateTimeStr=convertDateToString(now);
+  String dateTimeStr=convertDateToString(DateTime.now());
 
   @override
   Widget build(BuildContext context) {
-    setState(() {
-      filterEarning(earnings, reformatDate(dateTimeStr));
-    });
 
     return Scaffold(
       body: Center(

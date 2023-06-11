@@ -67,9 +67,7 @@ Future<void> initializeSpendings(List<Spending> spendings) async {
         int amount = docSnapshot.data()['amount'];
         String typeOfSpending = docSnapshot.data()['type'];
         DateTime date = convertStringToDate(docSnapshot.data()['date']!);
-        if (date==now){
-          spendings.add(new Spending(amount, date, type: typeOfSpending));
-        }
+        spendings.add(new Spending(amount, date, type: typeOfSpending));
 
         print(amount);
         spent += amount; //them vao so tien da chi
@@ -81,6 +79,7 @@ Future<void> initializeSpendings(List<Spending> spendings) async {
 }
 
 Future<void> initializeEarnings(List<Earning> earnings) async {
+  print(convertDateToString(now));
   String collectionName = userId! + "earned";
   await database
       ?.collection(collectionName)
@@ -92,9 +91,7 @@ Future<void> initializeEarnings(List<Earning> earnings) async {
         int amount = docSnapshot.data()['amount'];
         String typeOfSpending = docSnapshot.data()['type'];
         DateTime date = convertStringToDate(docSnapshot.data()['date']!);
-        if (date==now){
-          earnings.add(new Earning(amount, date, type: typeOfSpending));
-        }
+        earnings.add(new Earning(amount, date, type: typeOfSpending));
 
         print(amount);
         earned += amount; //them vao so tien da chi
@@ -103,6 +100,7 @@ Future<void> initializeEarnings(List<Earning> earnings) async {
     onError: (e) => print("Lỗi: $e"),
   );
   //them await de doi no doc het xong roi moi ket thuc
+  print(spendings.length);
 }
 
 Future<void> main() async {
@@ -126,7 +124,7 @@ Future<void> main() async {
         //neu co id token thi tien hanh auto login vao man hinh chinh luon
         currentUser = user;
         userId = user.uid;
-        await initializeSpendings(spendings); //doi xong (await)
+        await initializeSpendings(spendings); //đợi xong
         await initializeEarnings(earnings);
         runApp(const MyApp());
       } else {
