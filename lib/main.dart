@@ -126,6 +126,19 @@ Future<void> main() async {
         userId = user.uid;
         await initializeSpendings(spendings); //đợi xong
         await initializeEarnings(earnings);
+
+        await calcTotalSpentDay(now);
+        await calcTotalEarnedDay(now);
+
+        await calcTotalSpentDay(minus(now,1));
+        await calcTotalEarnedDay(minus(now,1));
+
+        await calcTotalSpentDay(minus(now,2));
+        await calcTotalEarnedDay(minus(now,2));
+
+        await calcTotalSpentDay(minus(now,3));
+        await calcTotalEarnedDay(minus(now,3));
+
         runApp(const MyApp());
       } else {
         runApp(const LoginPage());

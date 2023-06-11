@@ -106,6 +106,9 @@ class TabState extends State<TabPage> {
             padding: EdgeInsets.all(16),
             child: AspectRatio(
               aspectRatio: 16 / 9,
+              child: FutureBuilder<int>(
+                future: ,
+              )
               child: DChartBar(
                 data: [
                   {
@@ -164,23 +167,25 @@ Map<DateTime, int> totalSpentByDate={};
 Map<DateTime, int> totalEarnedByDate={};
 
 //hai hàm lấy tổng chi tiêu của từng ngày
-int calcTotalSpentDay(DateTime? date)  {
+Future<int> calcTotalSpentDay(DateTime? date) async {
   if (date==null){
     return 0;
   }
-  if (totalSpentByDate[date]!=null){
+  if (totalSpentByDate[date]!=null&&totalSpentByDate[date]!=0){
     return totalSpentByDate[date]!;
   }
   int total = 0;
   String collectionName = userId! + "spent";
-  database
+  print((convertDateToString(date)));
+  await database
       ?.collection(collectionName)
-      .where('date', isEqualTo: date)
+      .where('date', isEqualTo: convertDateToString(date))
       .get()
       .then(
     (querySnapshot) {
       for (var docSnapshot in querySnapshot.docs) {
         int amount = docSnapshot.data()['amount'];
+        print(amount);
         total += amount;
       }
     },
@@ -190,23 +195,24 @@ int calcTotalSpentDay(DateTime? date)  {
   return total;
 }
 
-int calcTotalEarnedDay(DateTime? date) {
+Future<int> calcTotalEarnedDay(DateTime? date) async {
   if (date==null){
     return 0;
   }
-  if (totalEarnedByDate[date]!=null){
+  if (totalEarnedByDate[date]!=null&&totalEarnedByDate[date]!=0){
     return totalEarnedByDate[date]!;
   }
   int total = 0;
   String collectionName = userId! + "earned";
-  database
+  await database
       ?.collection(collectionName)
-      .where('date', isEqualTo: date)
+      .where('date', isEqualTo: convertDateToString(date))
       .get()
       .then(
     (querySnapshot) {
       for (var docSnapshot in querySnapshot.docs) {
         int amount = docSnapshot.data()['amount'];
+        print(amount);
         total += amount;
       }
     },
