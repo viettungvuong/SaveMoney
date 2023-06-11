@@ -23,6 +23,12 @@ class Stack<T>{
     list.removeLast(); //bỏ phần từ ở cuối list
     return poppedT;
   }
+
+  T? iterate(int i){ //lấy phần tử ở vị trí i
+    if (list.length<=i)
+      return null;
+    return list[i];
+  }
 }
 
 class AnalyticsPage extends StatefulWidget {
