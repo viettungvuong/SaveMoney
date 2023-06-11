@@ -78,7 +78,7 @@ class _AddPageState extends State<AddSpending> {
     }
     spendingByDate[now]!.add(newSpending);
 
-    totalSpentByDate[now]=totalSpentDay(spendingByDate, now);
+    totalSpentByDate[now]=calcTotalSpentDay(spendingByDate, now);
 
     return newSpending;
   }
@@ -111,7 +111,7 @@ class _AddPageState extends State<AddSpending> {
           print(amount);
           spent += amount; //them vao so tien da chi
         }
-        totalSpentByDate[convertStringToDate(date)]=totalSpentDay(spendingByDate, convertStringToDate(date));
+        totalSpentByDate[convertStringToDate(date)]=calcTotalSpentDay(spendingByDate, convertStringToDate(date));
       },
       onError: (e) => print("Lỗi: $e"),
     );
