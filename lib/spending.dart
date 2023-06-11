@@ -285,8 +285,12 @@ class EarningItem extends StatelessWidget {
 }
 
 String reformatNumber(int money){
-  if (money<=100)
+  if (money>=0&&money<=100)
     return money.toString();
+
+  if (money>=-100&&money<100){
+    return "-"+money.toString();
+  }
 
   print(money);
 
@@ -314,6 +318,7 @@ String reformatNumber(int money){
   moneyString = strings.join();
   if (money<0){
     moneyString="-"+moneyString;
+    print(moneyString);
   }
   return moneyString;
   //no dang xuat nguoc
