@@ -97,7 +97,13 @@ class _AddPageState extends State<AddEarning> {
           String typeOfEarning = docSnapshot.data()['type'];
           DateTime date = convertStringToDate(docSnapshot.data()['date']!);
           setState(() {
-            list.add(new Earning(amount, date, type: typeOfEarning));
+            Earning newEarning=new Earning(amount, date, type: typeOfEarning);
+            list.add(newEarning);
+            //thêm luôn vào list
+            if (earningByDate[date]==null){
+              earningByDate[date]=[]; //initialize nếu null
+            }
+            earningByDate[date]!.add(newEarning);
           });
           print(amount);
           spent += amount; //them vao so tien da chi

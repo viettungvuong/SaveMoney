@@ -98,7 +98,13 @@ class _AddPageState extends State<AddSpending> {
           String typeOfSpending = docSnapshot.data()['type'];
           DateTime date = convertStringToDate(docSnapshot.data()['date']!);
           setState(() {
-            list.add(new Spending(amount, date, type: typeOfSpending));
+            Spending newSpending=new Spending(amount, date, type: typeOfSpending);
+            list.add(newSpending);
+            //thêm luôn vào list
+            if (spendingByDate[date]==null){
+              spendingByDate[date]=[]; //initialize nếu null
+            }
+            spendingByDate[date]!.add(newSpending);
           });
           print(amount);
           spent += amount; //them vao so tien da chi
