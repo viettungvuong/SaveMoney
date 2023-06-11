@@ -98,7 +98,10 @@ class _AddPageState extends State<AddSpending> {
         for (var docSnapshot in querySnapshot.docs) {
           int amount = docSnapshot.data()['amount'];
           String typeOfSpending = docSnapshot.data()['type'];
-          DateTime date = convertStringToDate(docSnapshot.data()['date']!);
+          int day=docSnapshot.data()['day']!;
+          int month=docSnapshot.data()['month']!;
+          int year=docSnapshot.data()['year']!;
+          DateTime date =  convertStringToDate(docSnapshot.data()['date']!);
           setState(() {
             Spending newSpending=new Spending(amount, date, type: typeOfSpending);
             list.add(newSpending);

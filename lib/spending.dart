@@ -82,6 +82,7 @@ void addSpendingToDatabase(Spending spending, FirebaseFirestore db){
       "day": spending.date!.day, //ngay
       "month": spending.date!.month,
       "year": spending.date!.year,
+      "date": convertDateToString(now),
   };
 
   db
@@ -100,6 +101,7 @@ void addEarningToDatabase(Earning earning, FirebaseFirestore db){
     "day": earning.date!.day, //ngay
     "month": earning.date!.month,
     "year": earning.date!.year,
+    "date": convertDateToString(now),
   };
 
   db
@@ -335,3 +337,7 @@ int calcTotalEarnedDay(Map<DateTime,List<Earning>> earningByDate, DateTime date)
 
 Map<DateTime,int> totalSpentByDate={};
 Map<DateTime,int> totalEarnedByDate={};
+
+DateTime join(int day, int month, int year){
+  return DateTime(year,month,day);
+}
