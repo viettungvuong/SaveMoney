@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:save_money/income.dart';
 import 'package:save_money/main.dart';
 import 'package:mrx_charts/mrx_charts.dart';
+import 'package:save_money/spending.dart';
 import 'add.dart';
 
 class Stack<T>{
@@ -111,10 +112,10 @@ class TabState extends State<TabPage>{
                   {
                     'id': 'Bar',
                     'data': [
-                      {'domain': '${convertDateToString(dateStack.iterate(0)!)}', 'measure': 2},
-                      {'domain': '${convertDateToString(dateStack.iterate(1)!)}', 'measure': 4},
-                      {'domain': '${convertDateToString(dateStack.iterate(2)!)}', 'measure': 6},
-                      {'domain': '${convertDateToString(dateStack.iterate(3)!)}', 'measure': 0.3},
+                      {'domain': '${convertDateToString(dateStack.iterate(0)!)}', 'measure': totalSpentByDate[dateStack.iterate(0)!]},
+                      {'domain': '${convertDateToString(dateStack.iterate(1)!)}', 'measure': totalSpentByDate[dateStack.iterate(1)!]},
+                      {'domain': '${convertDateToString(dateStack.iterate(2)!)}', 'measure': totalSpentByDate[dateStack.iterate(2)!]},
+                      {'domain': '${convertDateToString(dateStack.iterate(3)!)}', 'measure': totalSpentByDate[dateStack.iterate(3)!]},
                     ],
                   },
                 ],
