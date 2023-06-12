@@ -59,7 +59,6 @@ Future<void> initializeSpendings(List<Spending> spendings) async {
   String collectionName = userId! + "spent";
   await database
       ?.collection(collectionName)
-      .where('date', isEqualTo: convertDateToString(now))
       .get()
       .then(
         (querySnapshot) {
@@ -83,7 +82,6 @@ Future<void> initializeEarnings(List<Earning> earnings) async {
   String collectionName = userId! + "earned";
   await database
       ?.collection(collectionName)
-      .where('date', isEqualTo: convertDateToString(now))
       .get()
       .then(
     (querySnapshot) {
