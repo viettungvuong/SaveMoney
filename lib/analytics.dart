@@ -104,9 +104,9 @@ class TabState extends State<TabPage> {
         children: [
           Padding(
             padding: EdgeInsets.all(16),
-            child: AspectRatio(
-                aspectRatio: 16 / 9,
-                child: FutureBuilder<void>(
+            child: Column(
+              children: [
+                FutureBuilder<void>(
                     future: calc4Dates(),
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.waiting) {
@@ -154,7 +154,9 @@ class TabState extends State<TabPage> {
                           showBarValue: true,
                         );
                       }
-                    })),
+                    })
+              ],
+            ),
           ),
         ],
       ),
