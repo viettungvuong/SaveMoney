@@ -232,6 +232,7 @@ Future<int> calcTotalEarnedDay(DateTime? date) async {
   return total;
 }
 
+//tinh 4 ngay lien tiep
 Future<void> calc4Dates() async {
   for (int i = 0; i <= 3; i++) await calcTotalSpentDay(minus(now, 0));
 }
