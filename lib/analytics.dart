@@ -265,3 +265,13 @@ Future<int> calcTotalEarnedDay(DateTime? date) async {
 Future<void> calc4Dates() async {
   for (int i = 0; i <= 3; i++) await calcTotalSpentDay(minus(now, 0));
 }
+
+void moveToNextDate(DateTime date){
+  if (date==now){
+    return; //nếu là hôm nay thì không cho di chuyển
+  }
+}
+
+void moveToPrevDate(DateTime date){
+
+}
