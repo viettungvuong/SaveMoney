@@ -115,13 +115,15 @@ class TabState extends State<TabPage> {
                         return Column(
                           children: [
                             Row(children: [
-                              Container(
-                                width: 60,
-                                child: ElevatedButton.icon(
-                                  onPressed: () {},
-                                  icon: Icon(Icons.arrow_right),
-                                  label: Text(""),
-                                ),
+                              ElevatedButton.icon(
+                                onPressed: () {},
+                                icon: Icon(Icons.arrow_left),
+                                label: Text(""),
+                              ),
+                              ElevatedButton.icon(
+                                onPressed: () {},
+                                icon: Icon(Icons.arrow_right),
+                                label: Text(""),
                               ),
                             ]),
                             Container(
