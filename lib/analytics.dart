@@ -112,50 +112,68 @@ class TabState extends State<TabPage> {
                       if (snapshot.connectionState == ConnectionState.waiting) {
                         return CircularProgressIndicator();
                       } else {
-                        return Container(
-                          width: 1000,
-                          height: 250,
-                          child: DChartBar(
-                            data: [
-                              {
-                                'id': 'Bar',
-                                'data': [
+                        return Row(
+                          children: [
+
+
+                            Container(
+                              width: 310,
+                              height: 250,
+                              child: DChartBar(
+                                data: [
                                   {
-                                    'domain':
-                                        '${convertDateToString(dateStack.iterate(0)!)}',
-                                    'measure':
-                                        totalSpentByDate[dateStack.iterate(0)!],
-                                  },
-                                  {
-                                    'domain':
-                                        '${convertDateToString(dateStack.iterate(1)!)}',
-                                    'measure':
-                                        totalSpentByDate[dateStack.iterate(1)!],
-                                  },
-                                  {
-                                    'domain':
-                                        '${convertDateToString(dateStack.iterate(2)!)}',
-                                    'measure':
-                                        totalSpentByDate[dateStack.iterate(2)!],
-                                  },
-                                  {
-                                    'domain':
-                                        '${convertDateToString(dateStack.iterate(3)!)}',
-                                    'measure':
-                                        totalSpentByDate[dateStack.iterate(3)!],
+                                    'id': 'Bar',
+                                    'data': [
+                                      {
+                                        'domain':
+                                            '${convertDateToString(dateStack.iterate(0)!)}',
+                                        'measure': totalSpentByDate[
+                                            dateStack.iterate(0)!],
+                                      },
+                                      {
+                                        'domain':
+                                            '${convertDateToString(dateStack.iterate(1)!)}',
+                                        'measure': totalSpentByDate[
+                                            dateStack.iterate(1)!],
+                                      },
+                                      {
+                                        'domain':
+                                            '${convertDateToString(dateStack.iterate(2)!)}',
+                                        'measure': totalSpentByDate[
+                                            dateStack.iterate(2)!],
+                                      },
+                                      {
+                                        'domain':
+                                            '${convertDateToString(dateStack.iterate(3)!)}',
+                                        'measure': totalSpentByDate[
+                                            dateStack.iterate(3)!],
+                                      },
+                                    ],
                                   },
                                 ],
-                              },
-                            ],
-                            domainLabelPaddingToAxisLine: 16,
-                            axisLineTick: 2,
-                            axisLinePointTick: 2,
-                            axisLinePointWidth: 10,
-                            axisLineColor: Colors.green,
-                            measureLabelPaddingToAxisLine: 16,
-                            barColor: (barData, index, id) => Colors.green,
-                            showBarValue: true,
-                          ),
+                                domainLabelPaddingToAxisLine: 16,
+                                axisLineTick: 2,
+                                axisLinePointTick: 2,
+                                axisLinePointWidth: 10,
+                                axisLineColor: Colors.green,
+                                measureLabelPaddingToAxisLine: 16,
+                                barColor: (barData, index, id) => Colors.green,
+                                showBarValue: true,
+                              ),
+                            ),
+
+
+                            Container(
+                              width: 60,
+                              child:  ElevatedButton.icon(
+                                onPressed: (){
+
+                                }
+                                , icon: Icon(Icons.arrow_right), label: Text(""),),
+                            ),
+
+
+                          ],
                         );
                       }
                     })
