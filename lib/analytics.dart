@@ -114,25 +114,27 @@ class TabState extends State<TabPage> {
                       } else {
                         return Column(
                           children: [
-                            Row(children: [
-                              ElevatedButton.icon(
-                                onPressed: () {},
-                                icon: Icon(Icons.arrow_left),
-                                label: Text(""),
-                              ),
-                              Container(
-                                margin: EdgeInsets.only(left: 50, right: 50),
-                                child: Text(
-                                    "${convertDateToString(now)}"
-                                ),
-                              ),
-
-                              ElevatedButton.icon(
-                                onPressed: () {},
-                                icon: Icon(Icons.arrow_right),
-                                label: Text(""),
-                              ),
-                            ]),
+                            Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                //Center Column contents vertically,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  ElevatedButton.icon(
+                                    onPressed: () {},
+                                    icon: Icon(Icons.arrow_left),
+                                    label: Text(""),
+                                  ),
+                                  Container(
+                                    margin:
+                                        EdgeInsets.only(left: 80, right: 80),
+                                    child: Text("${convertDateToString(now)}"),
+                                  ),
+                                  ElevatedButton.icon(
+                                    onPressed: () {},
+                                    icon: Icon(Icons.arrow_right),
+                                    label: Text(""),
+                                  )
+                                ]),
                             Container(
                               width: 500,
                               height: 250,
