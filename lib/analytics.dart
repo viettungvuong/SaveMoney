@@ -112,12 +112,20 @@ class TabState extends State<TabPage> {
                       if (snapshot.connectionState == ConnectionState.waiting) {
                         return CircularProgressIndicator();
                       } else {
-                        return Row(
+                        return Column(
                           children: [
-
-
+                            Row(children: [
+                              Container(
+                                width: 60,
+                                child: ElevatedButton.icon(
+                                  onPressed: () {},
+                                  icon: Icon(Icons.arrow_right),
+                                  label: Text(""),
+                                ),
+                              ),
+                            ]),
                             Container(
-                              width: 310,
+                              width: 500,
                               height: 250,
                               child: DChartBar(
                                 data: [
@@ -161,18 +169,6 @@ class TabState extends State<TabPage> {
                                 showBarValue: true,
                               ),
                             ),
-
-
-                            Container(
-                              width: 60,
-                              child:  ElevatedButton.icon(
-                                onPressed: (){
-
-                                }
-                                , icon: Icon(Icons.arrow_right), label: Text(""),),
-                            ),
-
-
                           ],
                         );
                       }
