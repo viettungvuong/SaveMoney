@@ -45,7 +45,7 @@ class Deque<T> {
     if (list.isEmpty) return null;
 
     T poppedT = list!.first;
-    list.removeAt(0); //bỏ phần từ ở cuối list
+    list.removeAt(0); //bỏ phần từ ở đầu list
     return poppedT;
   }
 
@@ -146,11 +146,19 @@ class TabState extends State<TabPage> {
   //late nghĩa là ta sẽ initialize sau
 
   @override
-  Widget build(BuildContext context) {
+  initState(){
+    super.initState();
+    
     for (int i = 0; i <= 3; i++) {
       DateTime current = minus(now, i);
       dateDeque.addBack(current); //thêm ngày hôm nay và 3 ngày gần nhất
     }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+
+
     return Scaffold(
       body: ListView(
         children: [
