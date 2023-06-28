@@ -94,20 +94,16 @@ class TabState extends State<TabPage> {
   DateTime selectedDate=DateTime.now();
 
   void moveToNextDate(){
-    if (selectedDate==DateTime.now()){
+    if (selectedDate==now){
       return; //nếu là hôm nay thì không cho di chuyển
     }
     else{
-      setState(() {
-        add(selectedDate!!, 1);
-      });
+        selectedDate=add(selectedDate, 1);
     }
   }
 
   void moveToPrevDate(){
-    setState(() {
-      minus(selectedDate!!, 1);
-    });
+      selectedDate=minus(selectedDate, 1);
   }
 
   //late nghĩa là ta sẽ initialize sau
@@ -140,19 +136,26 @@ class TabState extends State<TabPage> {
                                 children: [
                                   ElevatedButton.icon(
                                     onPressed: () {
-                                      moveToNextDate();
+                                      setState(() {
+                                        moveToNextDate();
+                                      });
+
                                     },
                                     icon: Icon(Icons.arrow_left),
                                     label: Text(""),
                                   ),
+
                                   Container(
                                     margin:
                                         EdgeInsets.only(left: 80, right: 80),
-                                    child: Text("${convertDateToString(selectedDate)}"),
+                                    child: Text(convertDateToString(selectedDate)),
                                   ),
+
                                   ElevatedButton.icon(
                                     onPressed: () {
-                                      moveToPrevDate();
+                                      setState(() {
+                                        moveToPrevDate();
+                                      });
                                     },
                                     icon: Icon(Icons.arrow_right),
                                     label: Text(""),
