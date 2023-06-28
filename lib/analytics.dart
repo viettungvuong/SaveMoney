@@ -284,6 +284,7 @@ Future<int> calcTotalSpentDay(DateTime? date) async {
     return totalSpentByDate[date]!;
   }*/
   //bỏ vì có thể dữ liệu đã được cập nhật trên server
+  //nhưng mà sẽ implement cái để tính số tiền ở hàm kia (hàm addSpending)
 
   int total = 0;
   String collectionName = userId! + "spent";
