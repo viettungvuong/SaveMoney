@@ -280,11 +280,11 @@ Future<int> calcTotalSpentDay(DateTime? date, {int amount=0}) async {
     return 0;
   }
 
-  if (totalSpentByDate[date] != null) { //đã có dữ liệu rồi
+  /*if (totalSpentByDate[date] != null) { //đã có dữ liệu rồi
     if (amount!=0) //nếu đang trong chế độ từ addSpending và addEarning
           totalSpentByDate[date]!=totalSpentByDate[date]!+amount;
     return totalSpentByDate[date]!;
-  }
+  }*/
   //bỏ vì có thể dữ liệu đã được cập nhật trên server
   //nhưng mà sẽ implement cái để tính số tiền ở hàm kia (hàm addSpending)
 
@@ -314,11 +314,11 @@ Future<int> calcTotalEarnedDay(DateTime? date, {int amount=0}) async {
     return 0;
   }
 
-  if (totalEarnedByDate[date] != null) {
+  /*if (totalEarnedByDate[date] != null) {
     if (amount!=0)
         totalEarnedByDate[date]!=totalEarnedByDate[date]!+amount;
     return totalEarnedByDate[date]!;
-  }
+  }*/
 
   int total = 0;
   String collectionName = userId! + "earned";

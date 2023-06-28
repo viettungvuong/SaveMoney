@@ -62,10 +62,8 @@ class _AddPageState extends State<AddEarning> {
 
     setState(() {
       earned+=earnedMoney;
-
     });
 
-    calcTotalEarnedDay(now, amount: earnedMoney); //tính toán ngày hôm nay đã thêm bao nhiêu tiền
     addEarningToDatabase(newEarning, database!); //dau ! o cuoi la null check
 
     //bay gio ta phai ket noi voi firebase o day
