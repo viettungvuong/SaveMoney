@@ -14,7 +14,7 @@ import 'add.dart';
 class Deque<T> {
   List<T> list = []; //để implement nhanh hơn dùng list
 
-  void addBehind(T t) {
+  void addBack(T t) {
     list.add(t);
   }
 
@@ -27,11 +27,19 @@ class Deque<T> {
     list.last=temp;
   }
 
-  T? pop() {
+  T? popLast() {
     if (list.isEmpty) return null;
 
     T poppedT = list!.last;
     list.removeLast(); //bỏ phần từ ở cuối list
+    return poppedT;
+  }
+
+  T? popFirst() {
+    if (list.isEmpty) return null;
+
+    T poppedT = list!.first;
+    list.removeAt(0); //bỏ phần từ ở cuối list
     return poppedT;
   }
 
@@ -126,7 +134,7 @@ class TabState extends State<TabPage> {
   Widget build(BuildContext context) {
     for (int i = 0; i <= 3; i++) {
       DateTime current = minus(now, i);
-      dateDeque.addBehind(current); //thêm ngày hôm nay và 3 ngày gần nhất
+      dateDeque.addBack(current); //thêm ngày hôm nay và 3 ngày gần nhất
     }
     return Scaffold(
       body: ListView(
