@@ -14,6 +14,12 @@ import 'add.dart';
 class Deque<T> {
   List<T> list = []; //để implement nhanh hơn dùng list
 
+  void swap(int i, int j){
+    T temp = list[i];
+    list[i]=list[j];
+    list[j]=temp;
+  }
+
   void addBack(T t) {
     list.add(t);
   }
@@ -22,9 +28,9 @@ class Deque<T> {
     list.add(t);
 
     //swap
-    T temp = list[0];
-    list[0]=list.last;
-    list.last=temp;
+    for (int i=list.length-1; i>0; i--){
+      swap(i,i-1);
+    }
   }
 
   T? popLast() {
@@ -109,11 +115,12 @@ class TabPage extends StatefulWidget {
 
 class TabState extends State<TabPage> {
   Deque<DateTime> dateDeque = new Deque<DateTime>();
+  //ở index đầu là ngày hiện tại
 
   DateTime selectedDate=DateTime.now();
 
   void moveToNextDate(Deque<DateTime> deque){
-    if (selectedDate==now){
+    if (convertDateToString(selectedDate)==convertDateToString(DateTime.now())){
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Text("Không thể tăng ngày!"),
       ));
@@ -121,14 +128,18 @@ class TabState extends State<TabPage> {
     }
     else{
         selectedDate=add(selectedDate, 1);
-        deque.addFront(selectedDate);
+
+        //thêm vào trước deque
+        deque.addFront(add(deque.iterate(0)!!,1));
         deque.popLast();
     }
   }
 
   void moveToPrevDate(Deque<DateTime> deque){
       selectedDate=minus(selectedDate, 1);
-      deque.addBack(selectedDate);
+
+      //thêm vào sau deque
+      deque.addBack(minus(deque.iterate(3)!!,1));
       deque.popFirst();
   }
 
