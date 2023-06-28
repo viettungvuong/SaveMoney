@@ -112,7 +112,7 @@ class TabState extends State<TabPage> {
 
   DateTime selectedDate=DateTime.now();
 
-  void moveToNextDate(){
+  void moveToNextDate(Deque<DateTime> deque){
     if (selectedDate==now){
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Text("Không thể tăng ngày!"),
@@ -121,11 +121,15 @@ class TabState extends State<TabPage> {
     }
     else{
         selectedDate=add(selectedDate, 1);
+        deque.addFront(selectedDate);
+        deque.popLast();
     }
   }
 
-  void moveToPrevDate(){
+  void moveToPrevDate(Deque<DateTime> deque){
       selectedDate=minus(selectedDate, 1);
+      deque.addBack(selectedDate);
+      deque.popFirst();
   }
 
   //late nghĩa là ta sẽ initialize sau
@@ -159,7 +163,7 @@ class TabState extends State<TabPage> {
                                   ElevatedButton.icon(
                                     onPressed: () {
                                       setState(() {
-                                        moveToNextDate();
+                                        moveToNextDate(dateDeque);
                                       });
 
                                     },
@@ -176,13 +180,15 @@ class TabState extends State<TabPage> {
                                   ElevatedButton.icon(
                                     onPressed: () {
                                       setState(() {
-                                        moveToPrevDate();
+                                        moveToPrevDate(dateDeque);
                                       });
                                     },
                                     icon: Icon(Icons.arrow_right),
                                     label: Text(""),
                                   )
+
                                 ]),
+
                             Container(
                               width: 500,
                               height: 250,
@@ -193,15 +199,9 @@ class TabState extends State<TabPage> {
                                     'data': [
                                       {
                                         'domain':
-                                            '${convertDateToString(dateDeque.iterate(0)!)}',
+                                            '${convertDateToString(dateDeque.iterate(3)!)}',
                                         'measure': totalSpentByDate[
-                                            dateDeque.iterate(0)!],
-                                      },
-                                      {
-                                        'domain':
-                                            '${convertDateToString(dateDeque.iterate(1)!)}',
-                                        'measure': totalSpentByDate[
-                                            dateDeque.iterate(1)!],
+                                            dateDeque.iterate(3)!],
                                       },
                                       {
                                         'domain':
@@ -211,9 +211,15 @@ class TabState extends State<TabPage> {
                                       },
                                       {
                                         'domain':
-                                            '${convertDateToString(dateDeque.iterate(3)!)}',
+                                            '${convertDateToString(dateDeque.iterate(1)!)}',
                                         'measure': totalSpentByDate[
-                                            dateDeque.iterate(3)!],
+                                            dateDeque.iterate(1)!],
+                                      },
+                                      {
+                                        'domain':
+                                            '${convertDateToString(dateDeque.iterate(0)!)}',
+                                        'measure': totalSpentByDate[
+                                            dateDeque.iterate(0)!],
                                       },
                                     ],
                                   },
