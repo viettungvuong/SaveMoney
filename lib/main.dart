@@ -103,16 +103,17 @@ Future<void> initializeEarnings(List<Earning> earnings) async {
 
 Future<void> main() async {
 
-
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
   database = FirebaseFirestore.instance;
   database!.settings = const Settings(
     persistenceEnabled: true,
     cacheSizeBytes: Settings.CACHE_SIZE_UNLIMITED,
   ); //chỉnh cache cho firebase offline
+
   FirebaseAuth auth = FirebaseAuth.instance;
   User? user = auth.currentUser;
 
@@ -127,20 +128,6 @@ Future<void> main() async {
         //neu co id token thi tien hanh auto login vao man hinh chinh luon
         currentUser = user;
         userId = user.uid;
-        await initializeSpendings(spendings); //đợi xong
-        await initializeEarnings(earnings);
-
-        await calcTotalSpentDay(now);
-        await calcTotalEarnedDay(now);
-
-        await calcTotalSpentDay(minus(now,1));
-        await calcTotalEarnedDay(minus(now,1));
-
-        await calcTotalSpentDay(minus(now,2));
-        await calcTotalEarnedDay(minus(now,2));
-
-        await calcTotalSpentDay(minus(now,3));
-        await calcTotalEarnedDay(minus(now,3));
 
         runApp(const MyApp());
       } else {
@@ -157,6 +144,8 @@ Future<void> main() async {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
+
+
 
   // This widget is the root of your application.
   @override
@@ -251,6 +240,16 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  @override
+  initState(){
+    super.initState();
+    initialize();
+  }
+
+  void initialize() async{
+    await initializeSpendings(spendings); //đợi xong
+    await initializeEarnings(earnings);
+  }
 
   @override
   Widget build(BuildContext context) {
