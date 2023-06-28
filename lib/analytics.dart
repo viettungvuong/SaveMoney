@@ -95,6 +95,9 @@ class TabState extends State<TabPage> {
 
   void moveToNextDate(){
     if (selectedDate==now){
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text("Không thể tăng ngày!"),
+      ));
       return; //nếu là hôm nay thì không cho di chuyển
     }
     else{
