@@ -100,7 +100,7 @@ class TabPage extends StatefulWidget {
 }
 
 class TabState extends State<TabPage> {
-  Stack<DateTime> dateStack = new Stack<DateTime>();
+  Deque<DateTime> dateDeque = new Deque<DateTime>();
 
   DateTime selectedDate=DateTime.now();
 
@@ -126,7 +126,7 @@ class TabState extends State<TabPage> {
   Widget build(BuildContext context) {
     for (int i = 0; i <= 3; i++) {
       DateTime current = minus(now, i);
-      dateStack.add(current); //thêm ngày hôm nay và 3 ngày gần nhất
+      dateDeque.addBehind(current); //thêm ngày hôm nay và 3 ngày gần nhất
     }
     return Scaffold(
       body: ListView(
@@ -185,27 +185,27 @@ class TabState extends State<TabPage> {
                                     'data': [
                                       {
                                         'domain':
-                                            '${convertDateToString(dateStack.iterate(0)!)}',
+                                            '${convertDateToString(dateDeque.iterate(0)!)}',
                                         'measure': totalSpentByDate[
-                                            dateStack.iterate(0)!],
+                                            dateDeque.iterate(0)!],
                                       },
                                       {
                                         'domain':
-                                            '${convertDateToString(dateStack.iterate(1)!)}',
+                                            '${convertDateToString(dateDeque.iterate(1)!)}',
                                         'measure': totalSpentByDate[
-                                            dateStack.iterate(1)!],
+                                            dateDeque.iterate(1)!],
                                       },
                                       {
                                         'domain':
-                                            '${convertDateToString(dateStack.iterate(2)!)}',
+                                            '${convertDateToString(dateDeque.iterate(2)!)}',
                                         'measure': totalSpentByDate[
-                                            dateStack.iterate(2)!],
+                                            dateDeque.iterate(2)!],
                                       },
                                       {
                                         'domain':
-                                            '${convertDateToString(dateStack.iterate(3)!)}',
+                                            '${convertDateToString(dateDeque.iterate(3)!)}',
                                         'measure': totalSpentByDate[
-                                            dateStack.iterate(3)!],
+                                            dateDeque.iterate(3)!],
                                       },
                                     ],
                                   },
