@@ -163,7 +163,7 @@ class TabState extends State<TabPage> {
                                   ElevatedButton.icon(
                                     onPressed: () {
                                       setState(() {
-                                        moveToNextDate(dateDeque);
+                                        moveToPrevDate(dateDeque);
                                       });
 
                                     },
@@ -180,7 +180,7 @@ class TabState extends State<TabPage> {
                                   ElevatedButton.icon(
                                     onPressed: () {
                                       setState(() {
-                                        moveToPrevDate(dateDeque);
+                                        moveToNextDate(dateDeque);
                                       });
                                     },
                                     icon: Icon(Icons.arrow_right),
