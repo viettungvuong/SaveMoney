@@ -219,26 +219,22 @@ class TabState extends State<TabPage> {
                                       {
                                         'domain':
                                             '${convertDateToString(dateDeque.iterate(3)!)}',
-                                        'measure': totalSpentByDate[
-                                            dateDeque.iterate(3)!],
+                                        'measure': totalSpentByDate[convertDateToString(dateDeque.iterate(3)!)],
                                       },
                                       {
                                         'domain':
                                             '${convertDateToString(dateDeque.iterate(2)!)}',
-                                        'measure': totalSpentByDate[
-                                            dateDeque.iterate(2)!],
+                                        'measure': totalSpentByDate[convertDateToString(dateDeque.iterate(2)!)],
                                       },
                                       {
                                         'domain':
                                             '${convertDateToString(dateDeque.iterate(1)!)}',
-                                        'measure': totalSpentByDate[
-                                            dateDeque.iterate(1)!],
+                                        'measure': totalSpentByDate[convertDateToString(dateDeque.iterate(1)!)],
                                       },
                                       {
                                         'domain':
                                             '${convertDateToString(dateDeque.iterate(0)!)}',
-                                        'measure': totalSpentByDate[
-                                            dateDeque.iterate(0)!],
+                                        'measure': totalSpentByDate[convertDateToString(dateDeque.iterate(0)!)],
                                       },
                                     ],
                                   },
@@ -275,17 +271,19 @@ DateTime add(DateTime date, int days) {
 }
 
 //danh sách spending của các các ngày
-Map<DateTime, int> totalSpentByDate = {};
-Map<DateTime, int> totalEarnedByDate = {};
+Map<String, int> totalSpentByDate = {};
+Map<String, int> totalEarnedByDate = {};
 
 //hai hàm lấy tổng chi tiêu của từng ngày
 Future<int> calcTotalSpentDay(DateTime? date) async {
   if (date == null) {
     return 0;
   }
-  if (totalSpentByDate[date] != null && totalSpentByDate[date] != 0) {
+
+  if (totalSpentByDate[date] != null && totalSpentByDate[date] != 0) { //đã có dữ liệu rồi
     return totalSpentByDate[date]!;
   }
+
   int total = 0;
   String collectionName = userId! + "spent";
   print((convertDateToString(date)));
@@ -303,7 +301,7 @@ Future<int> calcTotalSpentDay(DateTime? date) async {
     },
     onError: (e) => print("Lỗi: $e"),
   );
-  totalSpentByDate[date!] = total;
+  totalSpentByDate[convertDateToString(date)] = total;
   return total;
 }
 
@@ -330,12 +328,19 @@ Future<int> calcTotalEarnedDay(DateTime? date) async {
     },
     onError: (e) => print("Lỗi: $e"),
   );
-  totalEarnedByDate[date!] = total; //proxy pattern
+  totalEarnedByDate[convertDateToString(date)] = total; //proxy pattern
   return total;
 }
 
-//tinh 4 ngay lien tiep
+//tinh so tien 4 ngay lien tiep
 Future<void> calc4Dates() async {
-  for (int i = 0; i <= 3; i++) await calcTotalSpentDay(minus(now, 0));
+  for (int i = 0; i <= 3; i++) {
+    DateTime current=minus(now,i);
+    print(current);
+    await calcTotalSpentDay(current);
+    print(totalSpentByDate[current]);
+  }
+  print(now);
+  print(totalSpentByDate[now]);
 }
 
