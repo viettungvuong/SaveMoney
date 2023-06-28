@@ -102,6 +102,11 @@ Future<void> initializeEarnings(List<Earning> earnings) async {
 }
 
 Future<void> main() async {
+  database!.settings = const Settings(
+    persistenceEnabled: true,
+    cacheSizeBytes: Settings.CACHE_SIZE_UNLIMITED,
+  ); //chỉnh cache cho firebase offline
+
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
