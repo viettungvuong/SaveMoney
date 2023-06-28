@@ -63,11 +63,13 @@ class _AddPageState extends State<AddSpending> {
 
     setState(() {
       spent+=spentMoney;
-
     });
+
+    calcTotalSpentDay(now, amount: spentMoney);
 
     addSpendingToDatabase(newSpending, database!); //dau ! o cuoi la null check
     //bay gio ta phai ket noi voi firebase o day
+
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
       content: Text("Thêm thành công"),
     ));

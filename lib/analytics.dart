@@ -275,14 +275,16 @@ Map<DateTime, int> totalSpentByDate = {};
 Map<DateTime, int> totalEarnedByDate = {};
 
 //hai hàm lấy tổng chi tiêu của từng ngày
-Future<int> calcTotalSpentDay(DateTime? date) async {
+Future<int> calcTotalSpentDay(DateTime? date, {int amount=0}) async {
   if (date == null) {
     return 0;
   }
 
-  /*if (totalSpentByDate[date] != null && totalSpentByDate[date] != 0) { //đã có dữ liệu rồi
+  if (totalSpentByDate[date] != null) { //đã có dữ liệu rồi
+    if (amount!=0) //nếu đang trong chế độ từ addSpending và addEarning
+          totalSpentByDate[date]!=totalSpentByDate[date]!+amount;
     return totalSpentByDate[date]!;
-  }*/
+  }
   //bỏ vì có thể dữ liệu đã được cập nhật trên server
   //nhưng mà sẽ implement cái để tính số tiền ở hàm kia (hàm addSpending)
 
@@ -307,14 +309,16 @@ Future<int> calcTotalSpentDay(DateTime? date) async {
   return total;
 }
 
-Future<int> calcTotalEarnedDay(DateTime? date) async {
+Future<int> calcTotalEarnedDay(DateTime? date, {int amount=0}) async {
   if (date == null) {
     return 0;
   }
 
-  /*if (totalEarnedByDate[date] != null && totalEarnedByDate[date] != 0) {
+  if (totalEarnedByDate[date] != null) {
+    if (amount!=0)
+        totalEarnedByDate[date]!=totalEarnedByDate[date]!+amount;
     return totalEarnedByDate[date]!;
-  }*/
+  }
 
   int total = 0;
   String collectionName = userId! + "earned";
