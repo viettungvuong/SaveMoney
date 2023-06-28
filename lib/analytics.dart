@@ -148,7 +148,7 @@ class TabState extends State<TabPage> {
   @override
   initState(){
     super.initState();
-    
+
     for (int i = 0; i <= 3; i++) {
       DateTime current = minus(now, i);
       dateDeque.addBack(current); //thêm ngày hôm nay và 3 ngày gần nhất
