@@ -280,9 +280,10 @@ Future<int> calcTotalSpentDay(DateTime? date) async {
     return 0;
   }
 
-  if (totalSpentByDate[date] != null && totalSpentByDate[date] != 0) { //đã có dữ liệu rồi
+  /*if (totalSpentByDate[date] != null && totalSpentByDate[date] != 0) { //đã có dữ liệu rồi
     return totalSpentByDate[date]!;
-  }
+  }*/
+  //bỏ vì có thể dữ liệu đã được cập nhật trên server
 
   int total = 0;
   String collectionName = userId! + "spent";
@@ -309,9 +310,11 @@ Future<int> calcTotalEarnedDay(DateTime? date) async {
   if (date == null) {
     return 0;
   }
-  if (totalEarnedByDate[date] != null && totalEarnedByDate[date] != 0) {
+
+  /*if (totalEarnedByDate[date] != null && totalEarnedByDate[date] != 0) {
     return totalEarnedByDate[date]!;
-  }
+  }*/
+
   int total = 0;
   String collectionName = userId! + "earned";
   await database
