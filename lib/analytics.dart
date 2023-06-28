@@ -167,7 +167,7 @@ class TabState extends State<TabPage> {
             child: Column(
               children: [
                 FutureBuilder<void>(
-                    future: calc4Dates(), //ham tinh so tien chi tieu cua 4 ngay
+                    future: calc4Dates(dateDeque), //ham tinh so tien chi tieu cua 4 ngay
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.waiting) {
                         return CircularProgressIndicator();
@@ -333,15 +333,13 @@ Future<int> calcTotalEarnedDay(DateTime? date) async {
 }
 
 //tinh so tien 4 ngay lien tiep
-Future<void> calc4Dates() async {
+Future<void> calc4Dates(Deque<DateTime> deque) async {
   for (int i = 0; i <= 3; i++) {
-    DateTime current=minus(DateTime.now(),i);
+    DateTime current=deque.iterate(i)!;
     print(current);
     await calcTotalSpentDay(current);
     print(totalSpentByDate[current]);
   }
-  print(DateTime.now());
-  print(totalSpentByDate[now]);
 }
 //DateTime.now khác format với now
 
