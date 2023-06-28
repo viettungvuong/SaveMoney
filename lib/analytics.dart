@@ -91,6 +91,23 @@ class TabPage extends StatefulWidget {
 class TabState extends State<TabPage> {
   Stack<DateTime> dateStack = new Stack<DateTime>();
 
+  DateTime selectedDate=now;
+
+  void moveToNextDate(){
+    if (selectedDate==now){
+      return; //nếu là hôm nay thì không cho di chuyển
+    }
+    else{
+      setState(() {
+        add(selectedDate, 1);
+      });
+    }
+  }
+
+  void moveToPrevDate(DateTime date){
+
+  }
+
   //late nghĩa là ta sẽ initialize sau
 
   @override
@@ -266,12 +283,3 @@ Future<void> calc4Dates() async {
   for (int i = 0; i <= 3; i++) await calcTotalSpentDay(minus(now, 0));
 }
 
-void moveToNextDate(DateTime date){
-  if (date==now){
-    return; //nếu là hôm nay thì không cho di chuyển
-  }
-}
-
-void moveToPrevDate(DateTime date){
-
-}
