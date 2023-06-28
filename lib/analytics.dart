@@ -105,7 +105,9 @@ class TabState extends State<TabPage> {
   }
 
   void moveToPrevDate(DateTime date){
-
+    setState(() {
+      minus(selectedDate, 1);
+    });
   }
 
   //late nghĩa là ta sẽ initialize sau
