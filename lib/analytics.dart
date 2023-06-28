@@ -91,22 +91,22 @@ class TabPage extends StatefulWidget {
 class TabState extends State<TabPage> {
   Stack<DateTime> dateStack = new Stack<DateTime>();
 
-  DateTime selectedDate=now;
+  DateTime selectedDate=DateTime.now();
 
   void moveToNextDate(){
-    if (selectedDate==now){
+    if (selectedDate==DateTime.now()){
       return; //nếu là hôm nay thì không cho di chuyển
     }
     else{
       setState(() {
-        add(selectedDate, 1);
+        add(selectedDate!!, 1);
       });
     }
   }
 
-  void moveToPrevDate(DateTime date){
+  void moveToPrevDate(){
     setState(() {
-      minus(selectedDate, 1);
+      minus(selectedDate!!, 1);
     });
   }
 
@@ -139,17 +139,21 @@ class TabState extends State<TabPage> {
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   ElevatedButton.icon(
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      moveToNextDate();
+                                    },
                                     icon: Icon(Icons.arrow_left),
                                     label: Text(""),
                                   ),
                                   Container(
                                     margin:
                                         EdgeInsets.only(left: 80, right: 80),
-                                    child: Text("${convertDateToString(now)}"),
+                                    child: Text("${convertDateToString(selectedDate)}"),
                                   ),
                                   ElevatedButton.icon(
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      moveToPrevDate();
+                                    },
                                     icon: Icon(Icons.arrow_right),
                                     label: Text(""),
                                   )
