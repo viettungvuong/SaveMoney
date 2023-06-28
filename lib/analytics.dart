@@ -10,15 +10,26 @@ import 'package:mrx_charts/mrx_charts.dart';
 import 'package:save_money/spending.dart';
 import 'add.dart';
 
-class Stack<T> {
+
+class Deque<T> {
   List<T> list = []; //để implement nhanh hơn dùng list
 
-  void add(T t) {
+  void addBehind(T t) {
     list.add(t);
+  }
+
+  void addFront(T t){
+    list.add(t);
+
+    //swap
+    T temp = list[0];
+    list[0]=list.last;
+    list.last=temp;
   }
 
   T? pop() {
     if (list.isEmpty) return null;
+
     T poppedT = list!.last;
     list.removeLast(); //bỏ phần từ ở cuối list
     return poppedT;
