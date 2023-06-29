@@ -348,8 +348,8 @@ class HomePageState extends State<HomePage>{
   }
 
   Future<void> initialize() async{
-    if (spendings.isEmpty)
-      await initializeSpendings(spendings); //đợi xong
+    if (spendings.isEmpty) //nếu list trống mới load
+      await initializeSpendings(spendings); //đợi xong (await)
 
     if (earnings.isEmpty)
       await initializeEarnings(earnings);
