@@ -258,11 +258,24 @@ class TabState extends State<TabPage> {
                                   children: [
                                     Text(
                                       "Ngày chi tiêu nhiều nhất (trong 7 ngày qua):",
-                                      style: TextStyle(fontWeight: FontWeight.bold),
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
                                     ),
                                     
                                     Text(
-                                      "${convertDateToString(maxSpendingIn7Days())}"
+                                      "${convertDateToString(maxSpendingIn7Days().keys.first)}",
+                                      style: TextStyle(fontSize: 15),
+                                    ),
+
+                                    Text(
+                                      "với số tiền:",
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                                    ),
+
+                                    Text(
+                                      "${reformatNumber(maxSpendingIn7Days().values.first)} VNĐ",
+                                      style: TextStyle(fontSize: 15),
                                     )
                                   ],
                                 ),
@@ -372,7 +385,8 @@ Future<void> calc4Dates(Deque<DateTime> deque) async {
 }
 //DateTime.now khác format với now
 
-DateTime maxSpendingIn7Days(){
+//tính ngày chi tiêu nhiều nhất
+Map<DateTime,int> maxSpendingIn7Days(){
   int currentMax = 0;
   DateTime res=now;
 
@@ -384,5 +398,7 @@ DateTime maxSpendingIn7Days(){
     }
   }
 
-  return res;
+  Map<DateTime,int> map=new Map();
+  map[res]=currentMax;
+  return map;
 }
