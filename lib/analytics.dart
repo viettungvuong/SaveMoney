@@ -368,3 +368,17 @@ Future<void> calc4Dates(Deque<DateTime> deque) async {
 }
 //DateTime.now khác format với now
 
+DateTime maxSpendingIn7Days(){
+  int currentMax = 0;
+  DateTime res=now;
+
+  for (int i=0; i<=7; i++){
+    DateTime currentIterate = minus(now,i);
+    if (totalSpentByDate[currentIterate]!=null&&totalSpentByDate[currentIterate]!>currentMax){
+      currentMax=totalSpentByDate[currentIterate]!;
+      res=currentIterate;
+    }
+  }
+
+  return res;
+}
