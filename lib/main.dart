@@ -348,8 +348,11 @@ class HomePageState extends State<HomePage>{
   }
 
   Future<void> initialize() async{
-    await initializeSpendings(spendings); //đợi xong
-    await initializeEarnings(earnings);
+    if (spendings.isEmpty)
+      await initializeSpendings(spendings); //đợi xong
+
+    if (earnings.isEmpty)
+      await initializeEarnings(earnings);
   }
 
   @override
