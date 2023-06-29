@@ -260,6 +260,10 @@ class TabState extends State<TabPage> {
                                       "Ngày chi tiêu nhiều nhất (trong 7 ngày qua):",
                                       style: TextStyle(fontWeight: FontWeight.bold),
                                     ),
+                                    
+                                    Text(
+                                      "${convertDateToString(maxSpendingIn7Days())}"
+                                    )
                                   ],
                                 ),
                             ),
