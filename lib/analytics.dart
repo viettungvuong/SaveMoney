@@ -174,6 +174,7 @@ class TabState extends State<TabPage> {
                       } else {
                         return Column(
                           children: [
+
                             Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 //Center Column contents vertically,
@@ -249,6 +250,20 @@ class TabState extends State<TabPage> {
                                 showBarValue: true,
                               ),
                             ),
+
+                            Container(
+                              margin: EdgeInsets.all(50),
+                              child:
+                                Column(
+                                  children: [
+                                    Text(
+                                      "Ngày chi tiêu nhiều nhất (trong 7 ngày qua):",
+                                      style: TextStyle(fontWeight: FontWeight.bold),
+                                    ),
+                                  ],
+                                ),
+                            ),
+
                           ],
                         );
                       }
