@@ -240,16 +240,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  @override
-  initState(){
-    super.initState();
-    initialize();
-  }
 
-  void initialize() async{
-    await initializeSpendings(spendings); //đợi xong
-    await initializeEarnings(earnings);
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -356,6 +347,11 @@ class HomePageState extends State<HomePage>{
     });
   }
 
+  Future<void> initialize() async{
+    await initializeSpendings(spendings); //đợi xong
+    await initializeEarnings(earnings);
+  }
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -388,14 +384,24 @@ class HomePageState extends State<HomePage>{
 
             Text('Chênh lệch tháng ${getCurrentMonth()}'),
 
-            Text(
-              '${reformatNumber(getDiff())} VND', //xuat ra chenh lech
-              style: TextStyle(
-                fontSize: 35,
-                fontWeight: FontWeight.bold,
-                color: (getDiff()>0)?Colors.green:Colors.red,
-              ),
+            FutureBuilder<void>(
+              future: initialize(),
+              builder: (context, snapshot){
+                 if (snapshot.connectionState == ConnectionState.waiting) {
+                    return CircularProgressIndicator();
+                 } else {
+                   return Text(
+                     '${reformatNumber(getDiff())} VND', //xuat ra chenh lech
+                     style: TextStyle(
+                       fontSize: 35,
+                       fontWeight: FontWeight.bold,
+                       color: (getDiff()>0)?Colors.green:Colors.red,
+                     ),
+                   );
+                 }
+              },
             ),
+
 
             SizedBox(
               height: 100,
@@ -451,7 +457,7 @@ class SetTarget extends StatefulWidget {
 class _SetTargetState extends State<SetTarget> {
   int? addAmount;
   TextEditingController _textEditingController = TextEditingController();
-  
+
   @override
   Widget build(BuildContext context) {
     return Dialog(
