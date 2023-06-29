@@ -256,27 +256,43 @@ class TabState extends State<TabPage> {
                               child:
                                 Column(
                                   children: [
-                                    Text(
-                                      "Ngày chi tiêu nhiều nhất (trong 7 ngày qua):",
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
-                                    ),
-                                    
-                                    Text(
-                                      "${convertDateToString(maxSpendingIn7Days().keys.first)}",
-                                      style: TextStyle(fontSize: 15),
+                                    Container(
+                                      margin: EdgeInsets.all(20),
+                                      child: Column(
+                                        children: [
+                                          Text(
+                                            "Ngày chi tiêu nhiều nhất (trong 7 ngày qua):",
+                                            textAlign: TextAlign.center,
+                                            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                                          ),
+
+                                          Text(
+                                            "${convertDateToString(maxSpendingIn7Days().keys.first)}",
+                                            style: TextStyle(fontSize: 15),
+                                          ),
+
+                                        ],
+                                      ),
                                     ),
 
-                                    Text(
-                                      "với số tiền:",
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
-                                    ),
+                                    Container(
+                                      margin: EdgeInsets.all(5),
+                                      child: Column(
+                                        children: [
+                                          Text(
+                                            "với số tiền:",
+                                            textAlign: TextAlign.center,
+                                            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                                          ),
 
-                                    Text(
-                                      "${reformatNumber(maxSpendingIn7Days().values.first)} VNĐ",
-                                      style: TextStyle(fontSize: 15),
+                                          Text(
+                                            "${reformatNumber(maxSpendingIn7Days().values.first)} VNĐ",
+                                            style: TextStyle(fontSize: 15),
+                                          ),
+                                        ],
+                                      ),
                                     )
+
                                   ],
                                 ),
                             ),
