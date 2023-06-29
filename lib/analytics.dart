@@ -320,6 +320,7 @@ Future<int> calcTotalEarnedDay(DateTime? date, {int amount=0}) async {
     return totalEarnedByDate[date]!;
   }*/
 
+  
   int total = 0;
   String collectionName = userId! + "earned";
   await database
