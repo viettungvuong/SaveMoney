@@ -422,8 +422,7 @@ Map<DateTime,int> maxSpendingIn7Days(){
 
 //tìm xem chi tiêu cho hạng mục nào nhiều nhất
 String categorySpentMost(){
-  CollectionReference collectionReference=database!.collection("spendings");
-  Query query = collectionReference.orderBy("amount", descending: true)
+  Query query = database.collection("spendings").orderBy("amount", descending: true).where("category", isEqualTo: "Ăn uống");
   //bây giờ query tính tổng các category
   //rồi mới truy ra được cái category nào chi tiêu nhiều nhất
 }
