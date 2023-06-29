@@ -287,6 +287,7 @@ Future<int> calcTotalSpentDay(DateTime? date, {int amount=0}) async {
   }*/
   //bỏ vì có thể dữ liệu đã được cập nhật trên server
   //nhưng mà sẽ implement cái để tính số tiền ở hàm kia (hàm addSpending)
+  //có thể cái cost để rebuild lại widget sau khi cập nhật sẽ tốn kém hơn
 
   int total = 0;
   String collectionName = userId! + "spent";
@@ -320,7 +321,7 @@ Future<int> calcTotalEarnedDay(DateTime? date, {int amount=0}) async {
     return totalEarnedByDate[date]!;
   }*/
 
-  
+
   int total = 0;
   String collectionName = userId! + "earned";
   await database
