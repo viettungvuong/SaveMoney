@@ -1,6 +1,7 @@
 import 'dart:collection';
 import 'dart:math';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:d_chart/d_chart.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -417,4 +418,12 @@ Map<DateTime,int> maxSpendingIn7Days(){
   Map<DateTime,int> map=new Map();
   map[res]=currentMax;
   return map;
+}
+
+//tìm xem chi tiêu cho hạng mục nào nhiều nhất
+String categorySpentMost(){
+  CollectionReference collectionReference=database!.collection("spendings");
+  Query query = collectionReference.orderBy("amount", descending: true)
+  //bây giờ query tính tổng các category
+  //rồi mới truy ra được cái category nào chi tiêu nhiều nhất
 }
