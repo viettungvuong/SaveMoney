@@ -11,26 +11,25 @@ import 'package:mrx_charts/mrx_charts.dart';
 import 'package:save_money/spending.dart';
 import 'add.dart';
 
-
 class Deque<T> {
   List<T> list = []; //để implement nhanh hơn dùng list
 
-  void swap(int i, int j){
+  void swap(int i, int j) {
     T temp = list[i];
-    list[i]=list[j];
-    list[j]=temp;
+    list[i] = list[j];
+    list[j] = temp;
   }
 
   void addBack(T t) {
     list.add(t);
   }
 
-  void addFront(T t){
+  void addFront(T t) {
     list.add(t);
 
     //swap
-    for (int i=list.length-1; i>0; i--){
-      swap(i,i-1);
+    for (int i = list.length - 1; i > 0; i--) {
+      swap(i, i - 1);
     }
   }
 
@@ -116,38 +115,39 @@ class TabPage extends StatefulWidget {
 
 class TabState extends State<TabPage> {
   Deque<DateTime> dateDeque = new Deque<DateTime>();
+
   //ở index đầu là ngày hiện tại
 
-  DateTime selectedDate=DateTime.now();
+  DateTime selectedDate = DateTime.now();
 
-  void moveToNextDate(Deque<DateTime> deque){
-    if (convertDateToString(selectedDate)==convertDateToString(DateTime.now())){
+  void moveToNextDate(Deque<DateTime> deque) {
+    if (convertDateToString(selectedDate) ==
+        convertDateToString(DateTime.now())) {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Text("Không thể tăng ngày!"),
       ));
       return; //nếu là hôm nay thì không cho di chuyển
-    }
-    else{
-        selectedDate=add(selectedDate, 1);
+    } else {
+      selectedDate = add(selectedDate, 1);
 
-        //thêm vào trước deque
-        deque.addFront(add(deque.iterate(0)!!,1));
-        deque.popLast();
+      //thêm vào trước deque
+      deque.addFront(add(deque.iterate(0)!!, 1));
+      deque.popLast();
     }
   }
 
-  void moveToPrevDate(Deque<DateTime> deque){
-      selectedDate=minus(selectedDate, 1);
+  void moveToPrevDate(Deque<DateTime> deque) {
+    selectedDate = minus(selectedDate, 1);
 
-      //thêm vào sau deque
-      deque.addBack(minus(deque.iterate(3)!!,1));
-      deque.popFirst();
+    //thêm vào sau deque
+    deque.addBack(minus(deque.iterate(3)!!, 1));
+    deque.popFirst();
   }
 
   //late nghĩa là ta sẽ initialize sau
 
   @override
-  initState(){
+  initState() {
     super.initState();
 
     for (int i = 0; i <= 3; i++) {
@@ -158,8 +158,6 @@ class TabState extends State<TabPage> {
 
   @override
   Widget build(BuildContext context) {
-
-
     return Scaffold(
       body: ListView(
         children: [
@@ -168,14 +166,14 @@ class TabState extends State<TabPage> {
             child: Column(
               children: [
                 FutureBuilder<void>(
-                    future: calc4Dates(dateDeque), //ham tinh so tien chi tieu cua 4 ngay
+                    future: calc4Dates(dateDeque),
+                    //ham tinh so tien chi tieu cua 4 ngay
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.waiting) {
                         return CircularProgressIndicator();
                       } else {
                         return Column(
                           children: [
-
                             Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 //Center Column contents vertically,
@@ -186,18 +184,16 @@ class TabState extends State<TabPage> {
                                       setState(() {
                                         moveToPrevDate(dateDeque);
                                       });
-
                                     },
                                     icon: Icon(Icons.arrow_left),
                                     label: Text(""),
                                   ),
-
                                   Container(
                                     margin:
                                         EdgeInsets.only(left: 80, right: 80),
-                                    child: Text(convertDateToString(selectedDate)),
+                                    child:
+                                        Text(convertDateToString(selectedDate)),
                                   ),
-
                                   ElevatedButton.icon(
                                     onPressed: () {
                                       setState(() {
@@ -207,9 +203,7 @@ class TabState extends State<TabPage> {
                                     icon: Icon(Icons.arrow_right),
                                     label: Text(""),
                                   )
-
                                 ]),
-
                             Container(
                               width: 500,
                               height: 250,
@@ -221,22 +215,26 @@ class TabState extends State<TabPage> {
                                       {
                                         'domain':
                                             '${convertDateToString(dateDeque.iterate(3)!)}',
-                                        'measure': totalSpentByDate[dateDeque.iterate(3)!],
+                                        'measure': totalSpentByDate[
+                                            dateDeque.iterate(3)!],
                                       },
                                       {
                                         'domain':
                                             '${convertDateToString(dateDeque.iterate(2)!)}',
-                                        'measure': totalSpentByDate[dateDeque.iterate(2)!],
+                                        'measure': totalSpentByDate[
+                                            dateDeque.iterate(2)!],
                                       },
                                       {
                                         'domain':
                                             '${convertDateToString(dateDeque.iterate(1)!)}',
-                                        'measure': totalSpentByDate[dateDeque.iterate(1)!],
+                                        'measure': totalSpentByDate[
+                                            dateDeque.iterate(1)!],
                                       },
                                       {
                                         'domain':
                                             '${convertDateToString(dateDeque.iterate(0)!)}',
-                                        'measure': totalSpentByDate[dateDeque.iterate(0)!],
+                                        'measure': totalSpentByDate[
+                                            dateDeque.iterate(0)!],
                                       },
                                     ],
                                   },
@@ -251,53 +249,49 @@ class TabState extends State<TabPage> {
                                 showBarValue: true,
                               ),
                             ),
-
                             Container(
                               margin: EdgeInsets.all(50),
-                              child:
-                                Column(
-                                  children: [
-                                    Container(
-                                      margin: EdgeInsets.all(20),
-                                      child: Column(
-                                        children: [
-                                          Text(
-                                            "Ngày chi tiêu nhiều nhất (trong 7 ngày qua):",
-                                            textAlign: TextAlign.center,
-                                            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
-                                          ),
-
-                                          Text(
-                                            "${convertDateToString(maxSpendingIn7Days().keys.first)}",
-                                            style: TextStyle(fontSize: 15),
-                                          ),
-
-                                        ],
-                                      ),
+                              child: Column(
+                                children: [
+                                  Container(
+                                    margin: EdgeInsets.all(20),
+                                    child: Column(
+                                      children: [
+                                        Text(
+                                          "Ngày chi tiêu nhiều nhất (trong 7 ngày qua):",
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 15),
+                                        ),
+                                        Text(
+                                          "${convertDateToString(maxSpendingIn7Days().keys.first)}",
+                                          style: TextStyle(fontSize: 15),
+                                        ),
+                                      ],
                                     ),
-
-                                    Container(
-                                      margin: EdgeInsets.all(5),
-                                      child: Column(
-                                        children: [
-                                          Text(
-                                            "với số tiền:",
-                                            textAlign: TextAlign.center,
-                                            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
-                                          ),
-
-                                          Text(
-                                            "${reformatNumber(maxSpendingIn7Days().values.first)} VNĐ",
-                                            style: TextStyle(fontSize: 15),
-                                          ),
-                                        ],
-                                      ),
+                                  ),
+                                  Container(
+                                    margin: EdgeInsets.all(5),
+                                    child: Column(
+                                      children: [
+                                        Text(
+                                          "với số tiền:",
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 15),
+                                        ),
+                                        Text(
+                                          "${reformatNumber(maxSpendingIn7Days().values.first)} VNĐ",
+                                          style: TextStyle(fontSize: 15),
+                                        ),
+                                      ],
                                     ),
-
-                                  ],
-                                ),
+                                  ),
+                                ],
+                              ),
                             ),
-
                           ],
                         );
                       }
@@ -324,7 +318,7 @@ Map<DateTime, int> totalSpentByDate = {};
 Map<DateTime, int> totalEarnedByDate = {};
 
 //hai hàm lấy tổng chi tiêu của từng ngày
-Future<int> calcTotalSpentDay(DateTime? date, {int amount=0}) async {
+Future<int> calcTotalSpentDay(DateTime? date, {int amount = 0}) async {
   if (date == null) {
     return 0;
   }
@@ -359,7 +353,7 @@ Future<int> calcTotalSpentDay(DateTime? date, {int amount=0}) async {
   return total;
 }
 
-Future<int> calcTotalEarnedDay(DateTime? date, {int amount=0}) async {
+Future<int> calcTotalEarnedDay(DateTime? date, {int amount = 0}) async {
   if (date == null) {
     return 0;
   }
@@ -369,7 +363,6 @@ Future<int> calcTotalEarnedDay(DateTime? date, {int amount=0}) async {
         totalEarnedByDate[date]!=totalEarnedByDate[date]!+amount;
     return totalEarnedByDate[date]!;
   }*/
-
 
   int total = 0;
   String collectionName = userId! + "earned";
@@ -394,7 +387,7 @@ Future<int> calcTotalEarnedDay(DateTime? date, {int amount=0}) async {
 //tinh so tien 4 ngay lien tiep
 Future<void> calc4Dates(Deque<DateTime> deque) async {
   for (int i = 0; i <= 3; i++) {
-    DateTime current=deque.iterate(i)!;
+    DateTime current = deque.iterate(i)!;
     print(current);
     await calcTotalSpentDay(current);
     print(totalSpentByDate[current]);
@@ -403,50 +396,60 @@ Future<void> calc4Dates(Deque<DateTime> deque) async {
 //DateTime.now khác format với now
 
 //tính ngày chi tiêu nhiều nhất
-Map<DateTime,int> maxSpendingIn7Days(){
+Map<DateTime, int> maxSpendingIn7Days() {
   int currentMax = 0;
-  DateTime res=now;
+  DateTime res = now;
 
-  for (int i=0; i<=7; i++){
-    DateTime currentIterate = minus(now,i);
-    if (totalSpentByDate[currentIterate]!=null&&totalSpentByDate[currentIterate]!>currentMax){
-      currentMax=totalSpentByDate[currentIterate]!;
-      res=currentIterate;
+  for (int i = 0; i <= 7; i++) {
+    DateTime currentIterate = minus(now, i);
+    if (totalSpentByDate[currentIterate] != null &&
+        totalSpentByDate[currentIterate]! > currentMax) {
+      currentMax = totalSpentByDate[currentIterate]!;
+      res = currentIterate;
     }
   }
 
-  Map<DateTime,int> map=new Map();
-  map[res]=currentMax;
+  Map<DateTime, int> map = new Map();
+  map[res] = currentMax;
   return map;
 }
 
 //tìm xem chi tiêu cho hạng mục nào nhiều nhất
 Future<String> categorySpentMost() async {
   int max = 0;
-  String res="";
+  String res = "";
 
-  int sum=0;
-  for (String category in earningCategories){
-    sum=0;
+  int sum = 0;
+  for (String category in earningCategories) {
+    sum = 0;
     //tìm tất cả spending thuộc category này
-    await database!.collection("spendings").where("type", isEqualTo: category).get()
+    await database!
+        .collection("spendings")
+        .orderBy("date")
+        .where("type", isEqualTo: category)
+        .get()
         .then(
-          (querySnapshot) {
+      (querySnapshot) {
         for (var docSnapshot in querySnapshot.docs) {
           int amount = docSnapshot.data()['amount'];
-          String typeOfSpending = docSnapshot.data()['type'];
-
           sum += amount; //them vao so tien da chi
         }
       },
       onError: (e) => print("Lỗi: $e"),
     );
 
-    if (sum>max){
-      max=sum;
-      res=category;
+    if (sum > max) {
+      max = sum;
+      res = category;
     }
   }
 
   return res;
+}
+
+//ktra xem một ngày có nằm giữa 2 ngày a và b không
+bool isDateBetween(DateTime comp, {required DateTime a, required DateTime b}) {
+  return comp.isAfter(a)&&comp.isBefore(b);
+
+  //tư duy của thuật toán này là kiểm tra xem comp có sau a VÀ comp có trước b
 }

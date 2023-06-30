@@ -78,7 +78,7 @@ Future<void> initializeSpendings(List<Spending> spendings) async {
 }
 
 Future<void> initializeEarnings(List<Earning> earnings) async {
-  print(convertDateToString(now));
+
   String collectionName = userId! + "earned";
   await database
       ?.collection(collectionName)

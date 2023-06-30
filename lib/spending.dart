@@ -87,14 +87,15 @@ void addSpendingToDatabase(Spending spending, FirebaseFirestore db){
 
   db
         .collection(collectionName??"")
-        .add(spendingString).then((documentSnapshot) =>
-        print("Added Data with ID: ${documentSnapshot.id}"));; //them vao firestore database
+        .doc(userId)
+        .collection(convertDateToString(now))
+        .add(spendingString);
     //dung add de no dat ten doc la mot random id
 }
 
 void addEarningToDatabase(Earning earning, FirebaseFirestore db){
   String collectionName;
-  collectionName=userId!+'earned';
+  collectionName=userId!+'earned-'+convertDateToString(now);
   final earningString = {
     "amount": earning.amount,
     "type": earning.type.toString(),
@@ -106,8 +107,9 @@ void addEarningToDatabase(Earning earning, FirebaseFirestore db){
 
   db
       .collection(collectionName??"")
-      .add(earningString).then((documentSnapshot) =>
-      print("Added Data with ID: ${documentSnapshot.id}"));; //them vao firestore database
+      .doc(userId)
+      .collection(convertDateToString(now))
+      .add(earningString); //dùng subcollection
   //dung add de no dat ten doc la mot random id
 }
 
