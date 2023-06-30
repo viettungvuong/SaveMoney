@@ -144,7 +144,7 @@ class TabState extends State<TabPage> {
     deque.popFirst();
   }
 
-  //late nghĩa là ta sẽ initialize sau
+  final Future<String> findCategorySpentMost = categorySpentMost();
 
   @override
   initState() {
@@ -289,6 +289,41 @@ class TabState extends State<TabPage> {
                                       ],
                                     ),
                                   ),
+                                  Container(
+                                    margin: EdgeInsets.all(5),
+                                    child: Column(
+                                      children: [
+                                        Text(
+                                          "Chi tiêu nhiều nhất vào:",
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 15),
+                                        ),
+                                        FutureBuilder<String>(
+                                            future: findCategorySpentMost,
+                                            builder: (context, snapshot) {
+                                              if (snapshot.connectionState ==
+                                                  ConnectionState.waiting) {
+                                                return CircularProgressIndicator();
+                                              }else if (snapshot.hasError){
+                                                return Text(
+                                                  "Error!",
+                                                  style:
+                                                  TextStyle(fontSize: 15),
+                                                );
+                                              }
+                                              else {
+                                                return Text(
+                                                  "${snapshot.data!}",
+                                                  style:
+                                                      TextStyle(fontSize: 15),
+                                                );
+                                              }
+                                            }),
+                                      ],
+                                    ),
+                                  ),
                                 ],
                               ),
                             ),
@@ -419,20 +454,28 @@ Future<String> categorySpentMost() async {
   int max = 0;
   String res = "";
 
+  DateTime days7ago = minus(now, 7);
+
   int sum = 0;
   for (String category in earningCategories) {
+    print("Current category: "+category);
     sum = 0;
     //tìm tất cả spending thuộc category này
     await database!
-        .collection("spendings")
-        .orderBy("day")
-        .orderBy("month")
-        .orderBy("year")
+        .collection(userId!+"spendings")
+        .orderBy("year", descending: true)
+        .orderBy("month", descending: true)
+        .orderBy("day", descending: true)
         .where("type", isEqualTo: category)
         .get()
         .then(
       (querySnapshot) {
         for (var docSnapshot in querySnapshot.docs) {
+          DateTime date = convertStringToDate(docSnapshot.data()['date']);
+          if (date!=now&&date!=days7ago&&!isDateBetween(date, a: days7ago, b: now)) {
+            break; //nếu ngày này không còn trong khoảng 1 tuần thì ngưng
+          }
+
           int amount = docSnapshot.data()['amount'];
           sum += amount; //them vao so tien da chi
         }
@@ -440,18 +483,21 @@ Future<String> categorySpentMost() async {
       onError: (e) => print("Lỗi: $e"),
     );
 
+    print("Total sum: "+sum.toString());
+
     if (sum > max) {
       max = sum;
       res = category;
     }
   }
-
+  print(res);
   return res;
+
 }
 
 //ktra xem một ngày có nằm giữa 2 ngày a và b không
 bool isDateBetween(DateTime comp, {required DateTime a, required DateTime b}) {
-  return comp.isAfter(a)&&comp.isBefore(b);
+  return comp.isAfter(a) && comp.isBefore(b);
 
   //tư duy của thuật toán này là kiểm tra xem comp có sau a VÀ comp có trước b
 }
