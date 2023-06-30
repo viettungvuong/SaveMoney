@@ -56,12 +56,13 @@ DateTime convertStringToDate(String date) {
 
 //cai nay phai dua vao mot thread rieng, doi cai nay xong roi moi mo app
 Future<void> initializeSpendings(List<Spending> spendings) async {
-  String collectionName = userId! + "spent";
+  String collectionName = "spent";
   await database
-      ?.collection(collectionName)
+      ?.collection(collectionName).doc(userId)
       .get()
       .then(
         (querySnapshot) {
+
       for (var docSnapshot in querySnapshot.docs) {
         int amount = docSnapshot.data()['amount'];
         String typeOfSpending = docSnapshot.data()['type'];
@@ -79,7 +80,7 @@ Future<void> initializeSpendings(List<Spending> spendings) async {
 
 Future<void> initializeEarnings(List<Earning> earnings) async {
 
-  String collectionName = userId! + "earned";
+  String collectionName = "earned";
   await database
       ?.collection(collectionName)
       .get()

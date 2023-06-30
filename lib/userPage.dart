@@ -65,10 +65,14 @@ Future<UserCredential?> signup(String email, String password, BuildContext conte
       email: email,
       password: password,
     );
+    final information = <String, String>{
+      "dateStarted": convertDateToString(now),
+    };
+    await database!.collection("users").doc(userId).set(information);
     return credential;
   } on FirebaseAuthException catch (e) {
     if (e.code == 'weak-password') {
-      dialog(context, noti: 'Mật khẩu quá ếu');
+      dialog(context, noti: 'Mật khẩu quá yếu');
     }
   } catch (e) {
     print(e);
