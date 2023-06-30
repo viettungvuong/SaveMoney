@@ -421,8 +421,32 @@ Map<DateTime,int> maxSpendingIn7Days(){
 }
 
 //tìm xem chi tiêu cho hạng mục nào nhiều nhất
-String categorySpentMost(){
-  Query query = database!.collection("spendings").orderBy("amount", descending: true).where("category", isEqualTo: "Ăn uống");
-  //bây giờ query tính tổng các category
-  //rồi mới truy ra được cái category nào chi tiêu nhiều nhất
+Future<String> categorySpentMost() async {
+  int max = 0;
+  String res="";
+
+  int sum=0;
+  for (String category in earningCategories){
+    sum=0;
+    //tìm tất cả spending thuộc category này
+    await database!.collection("spendings").where("type", isEqualTo: category).get()
+        .then(
+          (querySnapshot) {
+        for (var docSnapshot in querySnapshot.docs) {
+          int amount = docSnapshot.data()['amount'];
+          String typeOfSpending = docSnapshot.data()['type'];
+
+          sum += amount; //them vao so tien da chi
+        }
+      },
+      onError: (e) => print("Lỗi: $e"),
+    );
+
+    if (sum>max){
+      max=sum;
+      res=category;
+    }
+  }
+
+
 }
