@@ -426,6 +426,7 @@ Future<String> categorySpentMost() async {
     await database!
         .collection("spendings")
         .orderBy("date")
+        .orderBy("month")
         .where("type", isEqualTo: category)
         .get()
         .then(

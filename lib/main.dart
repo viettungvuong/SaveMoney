@@ -57,7 +57,7 @@ DateTime convertStringToDate(String date) {
 //cai nay phai dua vao mot thread rieng, doi cai nay xong roi moi mo app
 Future<void> initializeSpendings(List<Spending> spendings) async {
   String? dateStartedUsing;
-  await database!.collection("users").doc(userId).get().then(
+  await database?.collection("users").doc(userId).get().then(
       (DocumentSnapshot doc){
         if (doc.exists){
           dateStartedUsing=doc['dateStarted'];
@@ -66,9 +66,9 @@ Future<void> initializeSpendings(List<Spending> spendings) async {
   );
 
 
-  String collectionName = "spent";
+  String collectionName = userId!+"spent";
   await database
-      ?.collection(collectionName).doc(userId)
+      ?.collection(collectionName)
       .get()
       .then(
         (querySnapshot) {
@@ -90,7 +90,7 @@ Future<void> initializeSpendings(List<Spending> spendings) async {
 
 Future<void> initializeEarnings(List<Earning> earnings) async {
 
-  String collectionName = "earned";
+  String collectionName = userId!+"earned";
   await database
       ?.collection(collectionName)
       .get()
