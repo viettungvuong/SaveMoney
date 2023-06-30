@@ -457,12 +457,12 @@ Future<String> categorySpentMost() async {
   DateTime days7ago = minus(now, 7);
 
   int sum = 0;
-  for (String category in earningCategories) {
+  for (String category in spendingCategories) {
     print("Current category: "+category);
     sum = 0;
     //tìm tất cả spending thuộc category này
     await database!
-        .collection(userId!+"spendings")
+        .collection(userId!+"spent")
         .orderBy("year", descending: true)
         .orderBy("month", descending: true)
         .orderBy("day", descending: true)
@@ -471,6 +471,7 @@ Future<String> categorySpentMost() async {
         .then(
       (querySnapshot) {
         for (var docSnapshot in querySnapshot.docs) {
+          print("Lọc" + docSnapshot.data()['type']);
           DateTime date = convertStringToDate(docSnapshot.data()['date']);
           if (date!=now&&date!=days7ago&&!isDateBetween(date, a: days7ago, b: now)) {
             break; //nếu ngày này không còn trong khoảng 1 tuần thì ngưng
