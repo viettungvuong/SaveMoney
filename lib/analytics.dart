@@ -464,10 +464,11 @@ Future<String> categorySpentMost() async {
     sum = 0;
     //tìm tất cả spending thuộc category này
     await database!
-        .collection(userId!+"spent")
+        .collection("spendings")
         .orderBy("year", descending: true)
         .orderBy("month", descending: true)
         .orderBy("day", descending: true)
+        .where("user", isEqualTo: userId)
         .where("type", isEqualTo: category)
         .get()
         .then(
