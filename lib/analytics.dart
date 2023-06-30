@@ -455,7 +455,7 @@ Map<DateTime, int> maxSpendingIn7Days() {
 Future<String> categorySpentMost() async {
   int max = 0;
   String res = "";
-  
+
   DateTime days7ago = minus(now, 7);
 
   int sum = 0;
@@ -476,7 +476,7 @@ Future<String> categorySpentMost() async {
         for (var docSnapshot in querySnapshot.docs) {
           print("Lọc" + docSnapshot.data()['type']);
           DateTime date = convertStringToDate(docSnapshot.data()['date']);
-          if (date!=now&&date!=days7ago&&!isDateBetween(date, a: days7ago, b: now)) {
+          if (!isDateBetween(date, a: days7ago, b: now)) {
             break; //nếu ngày này không còn trong khoảng 1 tuần thì ngưng
           }
 
@@ -500,8 +500,8 @@ Future<String> categorySpentMost() async {
 }
 
 //ktra xem một ngày có nằm giữa 2 ngày a và b không
-bool isDateBetween(DateTime comp, {required DateTime a, required DateTime b}) {
-  return comp.isAfter(a) && comp.isBefore(b);
+bool isDateBetween(DateTime date, {required DateTime a, required DateTime b}) {
+  return date==a||date==b||(date.isAfter(a) && date.isBefore(b));
 
   //tư duy của thuật toán này là kiểm tra xem comp có sau a VÀ comp có trước b
 }
