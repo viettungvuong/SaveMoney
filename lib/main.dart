@@ -56,6 +56,16 @@ DateTime convertStringToDate(String date) {
 
 //cai nay phai dua vao mot thread rieng, doi cai nay xong roi moi mo app
 Future<void> initializeSpendings(List<Spending> spendings) async {
+  String? dateStartedUsing;
+  await database!.collection("users").doc(userId).get().then(
+      (DocumentSnapshot doc){
+        if (doc.exists){
+          dateStartedUsing=doc['dateStarted'];
+        }
+      }
+  );
+
+
   String collectionName = "spent";
   await database
       ?.collection(collectionName).doc(userId)
