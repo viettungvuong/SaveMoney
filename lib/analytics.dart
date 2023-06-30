@@ -455,7 +455,6 @@ Map<DateTime, int> maxSpendingIn7Days() {
 Future<String> categorySpentMost() async {
   int max = 0;
   String res = "";
-
   DateTime days7ago = minus(now, 7);
 
   int sum = 0;
