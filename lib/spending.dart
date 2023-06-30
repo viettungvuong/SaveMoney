@@ -75,7 +75,7 @@ void sortEarning(List<Earning> list){
 
 void addSpendingToDatabase(Spending spending, FirebaseFirestore db){
   String collectionName;
-  collectionName=userId!+'spent';
+  collectionName='spendings';
   final spendingString = {
       "amount": spending.amount,
       "type": spending.type.toString(),
@@ -83,6 +83,7 @@ void addSpendingToDatabase(Spending spending, FirebaseFirestore db){
       "month": spending.date!.month,
       "year": spending.date!.year,
       "date": convertDateToString(now),
+      "user": userId,
   };
 
   db
@@ -94,7 +95,7 @@ void addSpendingToDatabase(Spending spending, FirebaseFirestore db){
 
 void addEarningToDatabase(Earning earning, FirebaseFirestore db){
   String collectionName;
-  collectionName=userId!+'earned-'+convertDateToString(now);
+  collectionName="earnings";
   final earningString = {
     "amount": earning.amount,
     "type": earning.type.toString(),
@@ -102,6 +103,7 @@ void addEarningToDatabase(Earning earning, FirebaseFirestore db){
     "month": earning.date!.month,
     "year": earning.date!.year,
     "date": convertDateToString(now),
+    "user": userId,
   };
 
   db

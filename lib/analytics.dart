@@ -368,10 +368,11 @@ Future<int> calcTotalSpentDay(DateTime? date, {int amount = 0}) async {
   //có thể cái cost để rebuild lại widget sau khi cập nhật sẽ tốn kém hơn
 
   int total = 0;
-  String collectionName = userId! + "spent";
+  String collectionName = "spendings";
   print((convertDateToString(date)));
   await database
       ?.collection(collectionName)
+      .where('user', isEqualTo: userId)
       .where('date', isEqualTo: convertDateToString(date))
       .get()
       .then(
@@ -400,9 +401,10 @@ Future<int> calcTotalEarnedDay(DateTime? date, {int amount = 0}) async {
   }*/
 
   int total = 0;
-  String collectionName = userId! + "earned";
+  String collectionName = "earnings";
   await database
       ?.collection(collectionName)
+      .where('user', isEqualTo: userId)
       .where('date', isEqualTo: convertDateToString(date))
       .get()
       .then(

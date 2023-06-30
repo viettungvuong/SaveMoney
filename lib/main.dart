@@ -67,9 +67,10 @@ Future<void> initializeSpendings(List<Spending> spendings) async {
   );
 
 
-  String collectionName = userId!+"spent";
+  String collectionName = "spendings";
   await database
       ?.collection(collectionName)
+      .where("user",isEqualTo: userId)
       .get()
       .then(
         (querySnapshot) {
@@ -91,9 +92,10 @@ Future<void> initializeSpendings(List<Spending> spendings) async {
 
 Future<void> initializeEarnings(List<Earning> earnings) async {
   earnings.clear(); //clear trước khi initialize
-  String collectionName = userId!+"earned";
+  String collectionName = "earnings";
   await database
       ?.collection(collectionName)
+      .where("user",isEqualTo: userId)
       .get()
       .then(
     (querySnapshot) {

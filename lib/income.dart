@@ -79,10 +79,10 @@ class _AddPageState extends State<AddEarning> {
     setState(() {
       list.clear();
     });
-    String collectionName = userId! + "earned";
+    String collectionName = "earnings";
     await database
         ?.collection(collectionName)
-        .where('date', isEqualTo: date)
+        .where('user', isEqualTo: userId).where('date',isEqualTo: date)
         .get()
         .then(
           (querySnapshot) {
