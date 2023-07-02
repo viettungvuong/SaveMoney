@@ -505,3 +505,8 @@ bool isDateBetween(DateTime date, {required DateTime a, required DateTime b}) {
 
   //tư duy của thuật toán này là kiểm tra xem comp có sau a VÀ comp có trước b
 }
+
+//tìm ngày nào có chi tiêu tăng cao bất thường
+void abnormalSpending(){
+
+}
