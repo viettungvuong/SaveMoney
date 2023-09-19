@@ -119,6 +119,7 @@ Future<void> main() async {
 
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
+    name: 'save-money',
     options: DefaultFirebaseOptions.currentPlatform,
   );
 

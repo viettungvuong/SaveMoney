@@ -659,6 +659,9 @@ PODS:
     - leveldb-library (~> 1.22)
     - nanopb (< 2.30910.0, >= 2.30908.0)
   - Flutter (1.0.0)
+  - FMDB (2.7.5):
+    - FMDB/standard (= 2.7.5)
+  - FMDB/standard (2.7.5)
   - GoogleUtilities/AppDelegateSwizzler (7.11.1):
     - GoogleUtilities/Environment
     - GoogleUtilities/Logger
@@ -739,6 +742,9 @@ PODS:
   - nanopb/decode (2.30909.0)
   - nanopb/encode (2.30909.0)
   - PromisesObjC (2.2.0)
+  - sqflite (0.0.3):
+    - Flutter
+    - FMDB (>= 2.7.5)
 
 DEPENDENCIES:
   - cloud_firestore (from `.symlinks/plugins/cloud_firestore/ios`)
@@ -746,6 +752,7 @@ DEPENDENCIES:
   - firebase_core (from `.symlinks/plugins/firebase_core/ios`)
   - firebase_database (from `.symlinks/plugins/firebase_database/ios`)
   - Flutter (from `Flutter`)
+  - sqflite (from `.symlinks/plugins/sqflite/ios`)
 
 SPEC REPOS:
   trunk:
@@ -758,6 +765,7 @@ SPEC REPOS:
     - FirebaseCoreInternal
     - FirebaseDatabase
     - FirebaseFirestore
+    - FMDB
     - GoogleUtilities
     - "gRPC-C++"
     - gRPC-Core
@@ -778,6 +786,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/firebase_database/ios"
   Flutter:
     :path: Flutter
+  sqflite:
+    :path: ".symlinks/plugins/sqflite/ios"
 
 SPEC CHECKSUMS:
   abseil: ebe5b5529fb05d93a8bdb7951607be08b7fa71bc
@@ -794,6 +804,7 @@ SPEC CHECKSUMS:
   FirebaseDatabase: 0abe52c2b687e05f76e19f94248730187f83d48a
   FirebaseFirestore: 584d0e1b0f7f1666c516c5157ff06e785bd8836f
   Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
+  FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   GoogleUtilities: 9aa0ad5a7bc171f8bae016300bfcfa3fb8425749
   "gRPC-C++": 9675f953ace2b3de7c506039d77be1f2e77a8db2
   gRPC-Core: 943e491cb0d45598b0b0eb9e910c88080369290b
@@ -802,7 +813,8 @@ SPEC CHECKSUMS:
   Libuv-gRPC: 55e51798e14ef436ad9bc45d12d43b77b49df378
   nanopb: b552cce312b6c8484180ef47159bc0f65a1f0431
   PromisesObjC: 09985d6d70fbe7878040aa746d78236e6946d2ef
+  sqflite: 31f7eba61e3074736dff8807a9b41581e4f7f15a
 
 PODFILE CHECKSUM: bfa82e9f310e39822262197f1bddaa473dba93af
 
-COCOAPODS: 1.12.0
+COCOAPODS: 1.12.1

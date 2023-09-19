@@ -17,10 +17,7 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      throw UnsupportedError(
-        'DefaultFirebaseOptions have not been configured for web - '
-        'you can reconfigure this by running the FlutterFire CLI again.',
-      );
+      return web;
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
@@ -28,10 +25,7 @@ class DefaultFirebaseOptions {
       case TargetPlatform.iOS:
         return ios;
       case TargetPlatform.macOS:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for macos - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return macos;
       case TargetPlatform.windows:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for windows - '
@@ -49,21 +43,39 @@ class DefaultFirebaseOptions {
     }
   }
 
+  static const FirebaseOptions web = FirebaseOptions(
+    apiKey: 'AIzaSyA0uKuB5TjyIvoQ6zBFcUSqAcVkDg4yMPc',
+    appId: '1:72339108546:web:0f8326d00680c6c622415b',
+    messagingSenderId: '72339108546',
+    projectId: 'savemoney-c367a',
+    authDomain: 'savemoney-c367a.firebaseapp.com',
+    storageBucket: 'savemoney-c367a.appspot.com',
+    measurementId: 'G-9VQDKLW799',
+  );
+
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyC6PuM6IEdhcKENYRuQRm-JHfrF_ZvRJc0',
-    appId: '1:619244865141:android:99c0038481ecf69d249a3c',
-    messagingSenderId: '619244865141',
-    projectId: 'moneysave-59001',
-    storageBucket: 'moneysave-59001.appspot.com',
+    apiKey: 'AIzaSyD48jywWtVLv4FKHrynojCZFYqe6YQ9Fkc',
+    appId: '1:72339108546:android:a881c4e994737e5f22415b',
+    messagingSenderId: '72339108546',
+    projectId: 'savemoney-c367a',
+    storageBucket: 'savemoney-c367a.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyBqh0erWd1DYQvfFZiKBwfLsIUDAVVUATo',
-    appId: '1:619244865141:ios:30cda7f5f7d3e791249a3c',
-    messagingSenderId: '619244865141',
-    projectId: 'moneysave-59001',
-    storageBucket: 'moneysave-59001.appspot.com',
-    iosClientId: '619244865141-q3h3jhbeqvmdfv7vmra08mp8unftbv6g.apps.googleusercontent.com',
+    apiKey: 'AIzaSyBbeBR1pBmFv6-lzLSMlwMHruqq7M7gHnc',
+    appId: '1:72339108546:ios:e0e5eaccaa1d37b722415b',
+    messagingSenderId: '72339108546',
+    projectId: 'savemoney-c367a',
+    storageBucket: 'savemoney-c367a.appspot.com',
+    iosBundleId: 'com.tung.savemoney.saveMoney',
+  );
+
+  static const FirebaseOptions macos = FirebaseOptions(
+    apiKey: 'AIzaSyBbeBR1pBmFv6-lzLSMlwMHruqq7M7gHnc',
+    appId: '1:72339108546:ios:e0e5eaccaa1d37b722415b',
+    messagingSenderId: '72339108546',
+    projectId: 'savemoney-c367a',
+    storageBucket: 'savemoney-c367a.appspot.com',
     iosBundleId: 'com.tung.savemoney.saveMoney',
   );
 }
