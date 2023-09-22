@@ -203,7 +203,7 @@ class _AddPageState extends State<AddEarning> {
                         } else {
                           double intValue = double.parse(value);
                           if (intValue < 0 || intValue > 100) {
-                            // Limit the value to the range of 0-100
+                            // gioi han 0-100
                             _textEditingController2.text =
                                 intValue.clamp(0, 100).toString();
                           } else {
@@ -218,6 +218,9 @@ class _AddPageState extends State<AddEarning> {
 
             ElevatedButton.icon(
               onPressed: () {
+                if (_textEditingController.text.isEmpty){
+                  return;
+                }
                 Earning newEarning=addEarning(earnedMoney, selectedCategory, earnings,
                     context); //lamda functikon
                 reset(_textEditingController, _textEditingController2,
