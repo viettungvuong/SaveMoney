@@ -174,36 +174,45 @@ class TabState extends State<TabPage> {
                       } else {
                         return Column(
                           children: [
-                            Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                //Center Column contents vertically,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  ElevatedButton.icon(
-                                    onPressed: () {
-                                      setState(() {
-                                        moveToPrevDate(dateDeque);
-                                      });
-                                    },
-                                    icon: Icon(Icons.arrow_left),
-                                    label: Text(""),
-                                  ),
-                                  Container(
-                                    margin:
-                                        EdgeInsets.only(left: 80, right: 80),
-                                    child:
-                                        Text(convertDateToString(selectedDate)),
-                                  ),
-                                  ElevatedButton.icon(
-                                    onPressed: () {
-                                      setState(() {
-                                        moveToNextDate(dateDeque);
-                                      });
-                                    },
-                                    icon: Icon(Icons.arrow_right),
-                                    label: Text(""),
-                                  )
-                                ]),
+                            Container(
+                              width: 400,
+                              child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Flexible(
+                                      child: ElevatedButton.icon(
+                                        onPressed: () {
+                                          setState(() {
+                                            moveToPrevDate(dateDeque); //nút trước
+                                          });
+                                        },
+                                        icon: Icon(Icons.arrow_left),
+                                        label: Text(""),
+                                      ),
+                                    ),
+
+                                    Container(
+                                      margin:
+                                      EdgeInsets.only(left: 80, right: 80),
+                                      child:
+                                      Text(convertDateToString(selectedDate)),
+                                    ),
+
+                                    Flexible(
+                                      child: ElevatedButton.icon(
+                                        onPressed: () {
+                                          setState(() {
+                                            moveToNextDate(dateDeque); //nút trước
+                                          });
+                                        },
+                                        icon: Icon(Icons.arrow_right),
+                                        label: Text(""),
+                                      ),
+                                    ),
+                                  ]),
+                            ),
+
                             Container(
                               width: 500,
                               height: 250,
