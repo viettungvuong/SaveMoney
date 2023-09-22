@@ -146,6 +146,8 @@ class TabState extends State<TabPage> {
 
   final Future<String> findCategorySpentMost = categorySpentMost();
 
+  Map<DateTime,int> maxSpending = maxSpendingIn7Days();
+
   @override
   initState() {
     super.initState();
@@ -264,25 +266,28 @@ class TabState extends State<TabPage> {
                                 children: [
                                   Container(
                                     margin: EdgeInsets.all(20),
-                                    child: Column(
+                                    child: maxSpending.values.first>0?
+                                    Column(
                                       children: [
-                                        Text(
-                                          "Ngày chi tiêu nhiều nhất (trong 7 ngày qua):",
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 15),
-                                        ),
-                                        Text(
-                                          "${convertDateToString(maxSpendingIn7Days().keys.first)}",
-                                          style: TextStyle(fontSize: 15),
-                                        ),
+                                          Text(
+                                            "Ngày chi tiêu nhiều nhất (trong 7 ngày qua):",
+                                            textAlign: TextAlign.center,
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 15),
+                                          ),
+                                          Text(
+                                            "${convertDateToString(maxSpending.keys.first)}",
+                                            style: TextStyle(fontSize: 15),
+                                          ),
                                       ],
-                                    ),
+                                    ):
+                                        Column()
                                   ),
                                   Container(
                                     margin: EdgeInsets.all(5),
-                                    child: Column(
+                                    child: maxSpending.values.first>0?
+                                    Column(
                                       children: [
                                         Text(
                                           "với số tiền:",
@@ -292,11 +297,11 @@ class TabState extends State<TabPage> {
                                               fontSize: 15),
                                         ),
                                         Text(
-                                          "${reformatNumber(maxSpendingIn7Days().values.first)} VNĐ",
+                                          "${reformatNumber(maxSpending.values.first)} VNĐ",
                                           style: TextStyle(fontSize: 15),
                                         ),
                                       ],
-                                    ),
+                                    ):Column()
                                   ),
                                   Container(
                                     margin: EdgeInsets.all(5),
