@@ -5,6 +5,7 @@ import 'package:dropdown_search/dropdown_search.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:save_money/analytics.dart';
 import 'package:save_money/spending.dart';
 import 'package:selection_menu/components_configurations.dart';
@@ -218,7 +219,17 @@ class _AddPageState extends State<AddEarning> {
 
             ElevatedButton.icon(
               onPressed: () {
-                if (_textEditingController.text.isEmpty){
+                if (_textEditingController.text.isEmpty){ //nếu chưa nhập giá tiền
+                  //thêm toast
+                  Fluttertoast.showToast(
+                      msg: "You have not input anything",
+                      toastLength: Toast.LENGTH_SHORT,
+                      gravity: ToastGravity.CENTER,
+                      timeInSecForIosWeb: 1,
+                      backgroundColor: Colors.red,
+                      textColor: Colors.white,
+                      fontSize: 16.0
+                  );
                   return;
                 }
                 Earning newEarning=addEarning(earnedMoney, selectedCategory, earnings,
